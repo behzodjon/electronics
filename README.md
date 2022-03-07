@@ -1,4 +1,17 @@
 # electronics
-# composer install in backend folder
-# yarn or npm  install in frontend folder
-# php artisan db:seed in backend folder
+
+## Installation
+
+You can install :
+in backend folder:
+```bash
+ composer install
+```
+```bash
+php artisan db:seed
+```
+
+in frontend folder:
+```bash
+yarn or npm  install
+```
