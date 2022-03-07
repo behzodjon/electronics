@@ -1,0 +1,24 @@
+<script setup>
+import { useAuth0, AuthState } from "./utils/useAuth0";
+const { login, logout, initAuth } = useAuth0(AuthState);
+
+initAuth();
+</script>
+
+<template>
+  <div v-if="!AuthState.loading">
+    <img alt="Vue logo" src="./assets/logo.png" />
+    <div v-if="!AuthState.isAuthenticated">
+      <button @click="login()" class="btn btn-primary">Login</button>
+    </div>
+
+    <div v-else>
+      <p> Welcome to VueAuth <strong>{{ AuthState.user.name }}</strong></p>
+      <button @click="logout()" class="btn btn-secondary">Logout</button>
+    </div>
+  </div>
+
+  <div v-else>
+    Loading ...
+  </div>
+</template>
