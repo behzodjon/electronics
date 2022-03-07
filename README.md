@@ -2,7 +2,7 @@
 
 ## Installation
 
-You can install :
+
 in backend folder:
 ```bash
  composer install
@@ -10,8 +10,13 @@ in backend folder:
 ```bash
 php artisan db:seed
 ```
-
+```bash
+php artisan serve
+```
 in frontend folder:
 ```bash
 yarn or npm  install
+```
+```bash
+yarn or npm  dev
 ```
