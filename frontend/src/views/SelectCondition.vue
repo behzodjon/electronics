@@ -6,7 +6,7 @@
         as="template"
         v-for="(item, index) in items"
         :key="index"
-        :value="item.id"
+        :value="item.title"
         v-slot="{ checked, active }"
       >
         <div
@@ -56,10 +56,10 @@
     </div>
   </RadioGroup>
 
-  <Great v-if="selected.condition === 'Great Condition'"/>
-  <Used v-if="selected.condition === 'Used Condition'"/>
-  <Dead v-if="selected.condition === 'Dead'"/>
-  <Brand v-if="selected.condition === 'Brand New'"/>
+  <Great v-if="selected === 'Great Condition'"/>
+  <Used v-if="selected === 'Used Condition'"/>
+  <Dead v-if="selected === 'Dead'"/>
+  <Brand v-if="selected === 'Brand New'"/>
 </template>
 
 <script>
@@ -114,7 +114,6 @@ export default {
     axios
       .get(`http://127.0.0.1:8000/api/conditions`)
       .then((response) => {
-        // JSON responses are automatically parsed.
         this.items = response.data;
       })
       .catch((e) => {
