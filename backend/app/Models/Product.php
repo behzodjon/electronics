@@ -18,6 +18,11 @@ class Product extends Model
 
     public function storages()
     {
-        return $this->belongsToMany(Storage::class,'product_storage');
+        return $this->belongsToMany(Storage::class, 'product_storage');
+    }
+
+    public function conditions()
+    {
+        return $this->belongsToMany(Condition::class, 'products_prices');
     }
 }

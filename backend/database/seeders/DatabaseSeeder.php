@@ -7,6 +7,7 @@ use Database\Seeders\ProductSeeder;
 use Database\Seeders\StorageSeeder;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\ConditionSeeder;
+use Database\Seeders\ProductPriceSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             StorageSeeder::class,
             ConditionSeeder::class,
+            ProductPriceSeeder::class,
         ]);
     }
 }

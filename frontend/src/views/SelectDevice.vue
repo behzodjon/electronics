@@ -2,6 +2,7 @@
   <RadioGroup v-model="selected">
     <RadioGroupLabel class="sr-only"> Privacy setting </RadioGroupLabel>
     <div class="-space-y-px bg-white rounded-none">
+      <div v-if="items.length">
       <RadioGroupOption
         as="template"
         v-for="(item, index) in items"
@@ -54,6 +55,10 @@
           </div>
         </div>
       </RadioGroupOption>
+      </div>
+      <div class="text-center" v-else>
+        No data
+      </div>
     </div>
   </RadioGroup>
 </template>

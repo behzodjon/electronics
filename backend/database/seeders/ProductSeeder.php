@@ -26,9 +26,7 @@ class ProductSeeder extends Seeder
             $product = Product::updateOrCreate([
                 'title' => $title,
                 'category_id' => 1,
-                'price' => rand(10, 100),
             ], []);
-
             $product->storages()->sync([1, 2, 4]);
         }
     }
