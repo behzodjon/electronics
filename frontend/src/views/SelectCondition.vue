@@ -64,7 +64,7 @@
 
 <script>
 import { ref } from "vue";
-import axios from 'axios';
+import axiosClient from "../axios";
 
 import {
   RadioGroup,
@@ -111,8 +111,8 @@ export default {
     };
   },
     created() {
-    axios
-      .get(`http://127.0.0.1:8000/api/conditions`)
+    axiosClient
+      .get(`/conditions`)
       .then((response) => {
         this.items = response.data;
       })

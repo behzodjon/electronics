@@ -60,7 +60,8 @@
 
 <script>
 import { ref } from "vue";
-import axios from "axios";
+import axiosClient from "../axios";
+
 
 import {
   RadioGroup,
@@ -96,8 +97,8 @@ export default {
   },
   methods: {
     productStorages(value) {
-      axios
-        .get(`http://127.0.0.1:8000/api/product/${value.id}/storages`)
+     axiosClient
+        .get(`/product/${value.id}/storages`)
         .then((response) => {
           this.$store.commit("setStorageList", response.data);
         })
@@ -108,10 +109,9 @@ export default {
     },
   },
   created() {
-    axios
-      .get(`http://127.0.0.1:8000/api/products`)
+     axiosClient
+      .get(`/products`)
       .then((response) => {
-        // JSON responses are automatically parsed.
         this.items = response.data.data;
       })
       .catch((e) => {
