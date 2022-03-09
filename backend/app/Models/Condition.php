@@ -12,7 +12,7 @@ class Condition extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'products_prices');
+        return $this->belongsToMany(Product::class, 'products_prices')->withPivot('price');;
     }
 
     public function storages()

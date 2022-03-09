@@ -5,9 +5,10 @@
     <div class="-space-y-px bg-white rounded-none">
       <RadioGroupOption
         as="template"
-        v-for="(item, index) in storagesList"
-          :key="index"
+        v-for="(item, index) in storagesList.data"
+        :key="index"
         :value="item.id"
+        @click="getStorageId(item)"
         v-slot="{ checked, active }"
       >
         <div
@@ -69,8 +70,7 @@ import {
 } from "@headlessui/vue";
 import Faqstorage from "./faqstorage/faqstorage.vue";
 
-const settings = [
-];
+const settings = [];
 
 export default {
   components: {
@@ -88,6 +88,11 @@ export default {
       selected,
       name: "SelectStorage",
     };
+  },
+  methods: {
+    getStorageId(value) {
+      this.$store.commit("setStorageId", value.id);
+    },
   },
   computed: {
     storagesList() {

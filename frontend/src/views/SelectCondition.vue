@@ -6,6 +6,7 @@
         as="template"
         v-for="(item, index) in items"
         :key="index"
+        @click="getConditionId(item)"
         :value="item.title"
         v-slot="{ checked, active }"
       >
@@ -56,10 +57,10 @@
     </div>
   </RadioGroup>
 
-  <Great v-if="selected === 'Great Condition'"/>
-  <Used v-if="selected === 'Used Condition'"/>
-  <Dead v-if="selected === 'Dead'"/>
-  <Brand v-if="selected === 'Brand New'"/>
+  <Great v-if="selected === 'Great Condition'" />
+  <Used v-if="selected === 'Used Condition'" />
+  <Dead v-if="selected === 'Dead'" />
+  <Brand v-if="selected === 'Brand New'" />
 </template>
 
 <script>
@@ -94,8 +95,8 @@ export default {
     Great,
     Used,
     Dead,
-    Brand
-},
+    Brand,
+  },
   setup() {
     const selected = ref(settings[0]);
 
@@ -105,12 +106,18 @@ export default {
       name: "SelectCondition",
     };
   },
-    data() {
+
+  methods: {
+    getConditionId(value) {
+      this.$store.commit("setConditionId", value.id);
+    },
+  },
+  data() {
     return {
       items: [],
     };
   },
-    created() {
+  created() {
     axiosClient
       .get(`/conditions`)
       .then((response) => {

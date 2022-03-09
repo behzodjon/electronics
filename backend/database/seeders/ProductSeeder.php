@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Arr;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -27,7 +28,9 @@ class ProductSeeder extends Seeder
                 'title' => $title,
                 'category_id' => 1,
             ], []);
-            $product->storages()->sync([1, 2, 4]);
+            $a = [1, 2, 3, 4, 5, 6, 7];
+            $random_arr = Arr::random($a, 3);
+            $product->storages()->sync($random_arr);
         }
     }
 }

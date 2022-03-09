@@ -32,9 +32,7 @@
       <TabPanel>
         <div class="px-0 py-0 mx-auto bg-gray-100 max-w-7xl sm:px-6 lg:px-6">
           <div class="space-y-12 lg:space-y-0">
-            <div
-              class="relative flex flex-col p-6"
-            >
+            <div class="relative flex flex-col p-6">
               <div class="flex-1">
                 <h3
                   class="text-xl font-bold text-black underline underline-offset-4 decoration-green-500 decoration-wavy"
@@ -49,7 +47,9 @@
                     pricingList[0].frequency
                   }}</span>
                 </p>
-                <p class="mt-6 text-gray-900">{{ pricingList[0].description }}</p>
+                <p class="mt-6 text-gray-900">
+                  {{ pricingList[0].description }}
+                </p>
                 <ul role="list" class="mt-6 space-y-4">
                   <li
                     v-for="feature in pricingList[0].features"
@@ -71,9 +71,7 @@
       <TabPanel
         ><div class="px-0 py-0 mx-auto bg-gray-100 max-w-7xl sm:px-6 lg:px-6">
           <div class="space-y-12 lg:space-y-0">
-            <div
-              class="relative flex flex-col p-6"
-            >
+            <div class="relative flex flex-col p-6">
               <div class="flex-1">
                 <h3
                   class="text-xl font-bold text-gray-900 underline underline-offset-4 decoration-green-500 decoration-wavy"
@@ -92,7 +90,9 @@
                     pricingList[1].frequency
                   }}</span>
                 </p>
-                <p class="mt-6 text-gray-900">{{ pricingList[1].description }}</p>
+                <p class="mt-6 text-gray-900">
+                  {{ pricingList[1].description }}
+                </p>
                 <ul role="list" class="mt-6 space-y-4">
                   <li
                     v-for="feature in pricingList[1].features"
@@ -121,6 +121,7 @@
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/vue";
 import { CheckIcon } from "@heroicons/vue/outline";
 import Faqs from "./faqs.vue";
+import axiosClient from "../axios";
 
 export default {
   components: {
@@ -137,18 +138,37 @@ export default {
       pricing,
     };
   },
+    data() {
+    return {
+      product: null,
+    };
+  },
+  mounted() {
+    axiosClient
+      .get(`/products/${this.productId}/${this.storageId}/${this.conditionId}/price`)
+      .then((response) => {
+        this.product = response.data.data;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  },
+    computed: {
+      productId() {
+        return this.$store.state.productId;
+      },
+      storageId() {
+        return this.$store.state.storageId;
+      },
+      conditionId() {
+        return this.$store.state.conditionId;
+      },
 
-  computed: {
-    productDetails() {
-      return this.$store.state.productItem;
-    },
     pricingList() {
-      let oldPrice = this.productDetails.oldPrice;
-      let newPrice = this.productDetails.newPrice;
       return [
-       {
+        {
           title: "Guranteed Value",
-          price: oldPrice,
+          price: this.product?.oldPrice,
           frequency: "AUD",
           description:
             "Instant cash deposit once we value your device. No waiting around",
@@ -163,8 +183,8 @@ export default {
         },
         {
           title: "Want 10% extra?",
-          oldprice: oldPrice,
-          price: newPrice,
+          oldprice: this.product?.oldPrice,
+          price: this.product?.newPrice,
           frequency: "AUD",
           description:
             "Send us your device and well sell it for you. Deposit in your account within 3-4 weeks",

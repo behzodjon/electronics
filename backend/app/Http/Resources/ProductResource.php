@@ -14,10 +14,14 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
+        $oldPrice = $this->pivot ? $this->pivot->price : null;
+        $newPrice = $oldPrice ? $oldPrice + ($oldPrice * 10 / 100) : null;
+
         return [
             'id' => $this->id,
             'model' => $this->title,
-            'brand' => new CategoryResource($this->whenLoaded('category')),
+            'oldPrice' => $oldPrice,
+            'newPrice' => $newPrice,
             'brand' => new CategoryResource($this->whenLoaded('category')),
         ];
     }

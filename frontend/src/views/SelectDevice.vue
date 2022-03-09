@@ -110,7 +110,7 @@ export default {
         .catch((e) => {
           console.log(e);
         });
-      this.$store.commit("setProductItem", value);
+      this.$store.commit("setProductId", value.id);
     },
   },
   created() {

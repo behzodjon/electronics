@@ -17,15 +17,24 @@ const store = createStore({
     state() {
         return {
             storageList: [],
-            productItem: {}
+            storageId: null,
+            productId: null,
+            conditionId: null
         }
     },
     mutations: {
         setStorageList(state, payload) {
             state.storageList = payload
         },
-        setProductItem(state, payload) {
-            state.productItem = payload
+      
+        setProductId(state, payload) {
+            state.productId = payload
+        },
+        setStorageId(state, payload) {
+            state.storageId = payload
+        },
+        setConditionId(state, payload) {
+            state.conditionId = payload
         }
     },
 
@@ -33,8 +42,14 @@ const store = createStore({
         storagesList(state) {
             return state.storageList
         },
-        productDetails(state) {
-            return state.productItem
+        productId(state) {
+            return state.productId
+        },
+        storageId(state) {
+            return state.storageId
+        },
+        conditionId(state) {
+            return state.conditionId
         }
     }
 })
