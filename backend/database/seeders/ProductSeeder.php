@@ -30,7 +30,7 @@ class ProductSeeder extends Seeder
             ], []);
             $a = [1, 2, 3, 4, 5, 6, 7];
             $random_arr = Arr::random($a, 3);
-            $product->storages()->sync($random_arr);
+             $product->storages()->sync($random_arr);
         }
     }
 }
