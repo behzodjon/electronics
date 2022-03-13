@@ -1,22 +1,22 @@
 
 <template>
-  <div class="bg-gray-100 mt-0 lg:mt-10">
+  <div class="mt-0 bg-gray-100 lg:mt-10">
     <h2 class="sr-only">Our Process</h2>
-    <div class="max-w-7xl mx-auto sm:px-0 lg:px-0 mt-6">
-      <div class="max-w-2xl mx-auto px-4 grid grid-cols-1 gap-y-2 gap-x-2">
+    <div class="mx-auto mt-6 max-w-7xl sm:px-0 lg:px-0">
+      <div class="grid max-w-2xl grid-cols-1 px-4 mx-auto gap-y-2 gap-x-2">
           <h1 class="font-bold text-xl underline decoration-4 decoration-[#00c389] text-center">Here's How It Works.</h1>
-          <p1 class="text-sm lg:text-base text-center mb-2"> See more information in our Terms and Conditions</p1>
-        <div v-for="perk in perks" :key="perk.name" class="flex mr-4 ml-4">
+          <p1 class="mb-2 text-sm text-center lg:text-base"> See more information in our Terms and Conditions</p1>
+        <div v-for="perk in perks" :key="perk.name" class="flex ml-4 mr-4">
           <div class="flex-shrink-0">
             <div class="flow-root">
               <img class="w-16 h-28" :src="perk.imageSrc" alt="" />
             </div>
           </div>
-          <div class="mt-5 mr-4 ml-4">
-            <h3 class="text-sm lg:text-base font-medium text-gray-900">
+          <div class="mt-5 ml-4 mr-4">
+            <h3 class="text-sm font-medium text-gray-900 lg:text-base">
               {{ perk.name }}
             </h3>
-            <p class="mt-2 text-sm lg:text-base text-gray-500">
+            <p class="mt-2 text-sm text-gray-500 lg:text-base">
               {{ perk.description }}
             </p>
           </div>
@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import store from "../store";
+
 const perks = [
   {
     name: 'Select your device, answer some questions.',
@@ -51,6 +53,8 @@ const perks = [
 
 export default {
   setup() {
+        store.dispatch("getProducts");
+
     return {
       perks,
     }

@@ -2,10 +2,10 @@
   <RadioGroup v-model="selected">
     <RadioGroupLabel class="sr-only"> Privacy setting </RadioGroupLabel>
     <div class="-space-y-px bg-white rounded-none">
-      <div v-if="items.length">
+      <div v-if="products.length">
         <RadioGroupOption
           as="template"
-          v-for="(item, index) in items"
+          v-for="(item, index) in products"
           :key="index"
           :value="item.id"
           @click="productStorages(item)"
@@ -14,7 +14,7 @@
           <div
             :class="[
               index === 0 ? 'rounded-none' : '',
-              index === items.length - 1 ? 'rounded-none' : '',
+              index === products.length - 1 ? 'rounded-none' : '',
               checked
                 ? 'bg-green-400 bg-opacity-10 border-1 border-green-800 z-10'
                 : 'border-gray-200',
@@ -63,7 +63,7 @@
 
 <script>
 import { ref } from "vue";
-import axiosClient from "../axios";
+import { computed } from "vue";
 
 import {
   RadioGroup,
@@ -72,6 +72,7 @@ import {
   RadioGroupLabel,
   RadioGroupOption,
 } from "@headlessui/vue";
+import store from "../store";
 
 const settings = [];
 
@@ -85,33 +86,22 @@ export default {
   },
   setup() {
     const selected = ref(settings[0]);
+    const products = computed(() => store.state.products);
 
     return {
       settings,
+      products,
       selected,
       name: "SelectDevice",
     };
   },
-  data() {
-    return {
-      items: [],
-    };
-  },
+
   methods: {
     productStorages(value) {
       this.$store.dispatch("getProductStorages", value);
       this.$store.commit("setProductId", value.id);
     },
   },
-  created() {
-    axiosClient
-      .get(`/products`)
-      .then((response) => {
-        this.items = response.data.data;
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  },
+
 };
 </script>
