@@ -1,4 +1,5 @@
 <template>
+ <div class="animate__animated animate__fadeInRight animate__faster">
   <RadioGroup v-model="selected">
     <RadioGroupLabel class="sr-only"> Privacy setting </RadioGroupLabel>
     <div class="-space-y-px bg-white rounded-none">
@@ -56,6 +57,7 @@
       </RadioGroupOption>
     </div>
   </RadioGroup>
+  </div>
 
   <Great v-if="selected === 'Great Condition'" />
   <Used v-if="selected === 'Used Condition'" />

@@ -66,14 +66,7 @@ export default {
       ],
     };
   },
-  computed: {
-    // getCurrentStep() {
-    //   if (this.$store.state.directOpen) {
-    //     return this.currentStep === 2;
-    //   }
-    //   return this.currentStep;
-    // },
-  },
+
   methods: {
     next() {
       this.currentStep += 1;

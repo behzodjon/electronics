@@ -1,7 +1,7 @@
 <template>
   <RadioGroup v-model="selected">
     <RadioGroupLabel class="sr-only"> Privacy setting </RadioGroupLabel>
-
+  <div class="animate__animated animate__fadeInRight animate__faster">
     <div class="-space-y-px bg-white rounded-none">
       <RadioGroupOption
         as="template"
@@ -55,6 +55,7 @@
           </div>
         </div>
       </RadioGroupOption>
+    </div>
     </div>
   </RadioGroup>
   <Faqstorage />

@@ -27,8 +27,6 @@
 </template>
 
 <script>
-import store from "../store";
-
 const perks = [
   {
     name: 'Select your device, answer some questions.',
@@ -50,9 +48,10 @@ const perks = [
   },
 
 ]
+import store from "../store";
 
 export default {
-  setup() {
+ setup() {
         store.dispatch("getProducts");
 
     return {

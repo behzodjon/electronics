@@ -2,15 +2,9 @@
 <template>
   <button
     @click="openSidebar"
-    class="inline-block px-5 py-2 text-base font-medium border border-transparent rounded-md bg-neutral-900 text-slate-50 hover:bg-neutral-800"
+    class="flex items-center px-4 py-3 text-base font-medium text-white bg-green-900 border-b-4 border-r-4 border-black rounded-md w-fit hover:bg-indigo-700 md:py-4 md:text-sm md:px-6"
   >
-    Sell
-    <div
-      class="absolute w-4 h-4 -mt-1 -mr-1 bg-green-600 rounded-full top-3 right-4 animate-ping lg:invisible"
-    ></div>
-    <div
-      class="absolute w-4 h-4 -mt-1 -mr-1 bg-green-400 rounded-full top-3 right-4 lg:invisible"
-    ></div>
+    Sell Now
   </button>
   <TransitionRoot as="template" :show="open">
     <Dialog
@@ -80,7 +74,6 @@
 
 <script>
 import store from "../store";
-
 import {
   Dialog,
   DialogOverlay,
@@ -102,7 +95,6 @@ export default {
     XIcon,
     wizard,
   },
-
   setup() {
     const open = computed(() => store.state.sideBarOpen);
 
