@@ -10,6 +10,8 @@ const store = createStore({
             storageId: null,
             productId: null,
             conditionId: null,
+            categories: [],
+            categoryProducts: [],
             products: [],
             sideBarOpen: false,
             directOpen: false,
@@ -31,6 +33,12 @@ const store = createStore({
         setConditionId(state, payload) {
             state.conditionId = payload
         },
+        setCategories: (state, categories) => {
+            state.categories = categories.data;
+        },
+        setCategoryProducts: (state, categoryProducts) => {
+            state.categoryProducts = categoryProducts.data;
+        },
         setProducts: (state, products) => {
             state.products = products.data;
         },
@@ -48,26 +56,22 @@ const store = createStore({
         },
     },
 
-    getters: {
-        storagesList(state) {
-            return state.storageList
-        },
-        productId(state) {
-            return state.productId
-        },
-        storageId(state) {
-            return state.storageId
-        },
-        conditionId(state) {
-            return state.conditionId
-        },
-        sideBarState(state) {
-            return state.sideBarOpen
-        }
-    },
+
     actions: {
+        getCategories({ commit }) {
+            return axiosClient.get('/categories').then((res) => {
+                commit("setCategories", res);
+                return res;
+            });
+        },
+        getCategoryProducts({ commit },category) {
+            return axiosClient.get(`/categories/${category.id}/products`).then((res) => {
+                commit("setCategoryProducts", res.data);
+                return res;
+            });
+        },
         getProducts({ commit }) {
-            return axiosClient.get('/products').then((res) => {
+            return axiosClient.get(`/products`).then((res) => {
                 commit("setProducts", res.data);
                 return res;
             });

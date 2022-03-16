@@ -41,6 +41,7 @@ import SelectCondition from "./SelectCondition.vue";
 import Valuation from "./Valuation.vue";
 import { SpeakerphoneIcon, XIcon } from "@heroicons/vue/outline";
 import Understand from "./understandprocess.vue";
+import SelectCategory from './SelectCategory.vue';
 
 export default {
   name: "wizard",
@@ -50,6 +51,9 @@ export default {
       steps: [
         {
           component: Understand,
+        },
+         {
+          component: SelectCategory,
         },
         {
           component: SelectDevice,

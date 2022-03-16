@@ -66,7 +66,7 @@ import store from "../store";
 
 export default {
   setup() {
-    store.dispatch("getProducts");
+    store.dispatch("getCategories");
     store.dispatch("changeSelectedValue", 1);
 
     return {

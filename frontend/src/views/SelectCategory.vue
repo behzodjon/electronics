@@ -3,25 +3,25 @@
     <RadioGroup v-model="selected">
       <RadioGroupLabel class="sr-only"> Privacy setting </RadioGroupLabel>
       <div class="-space-y-px bg-white rounded-none">
-        <div v-if="products.length">
+        <div v-if="categories.length">
           <p
             v-if="!selected && clickedState"
             class="py-2 text-center text-red-500"
           >
-            Please, select a device!
+            Please, select a category!
           </p>
           <RadioGroupOption
             as="template"
-            v-for="(item, index) in products"
+            v-for="(item, index) in categories"
             :key="index"
             :value="item.id"
-            @click="productStorages(item)"
+            @click="categoryProducts(item)"
             v-slot="{ checked, active }"
           >
             <div
               :class="[
                 index === 0 ? 'rounded-none' : '',
-                index === products.length - 1 ? 'rounded-none' : '',
+                index === categories.length - 1 ? 'rounded-none' : '',
                 checked
                   ? 'bg-green-400 bg-opacity-10 border-1 border-green-800 z-10'
                   : 'border-gray-200',
@@ -48,17 +48,9 @@
                     'block text-sm lg:text-base font-medium',
                   ]"
                 >
-                  {{ item.model }}
+                  {{ item.title }}
                 </RadioGroupLabel>
-                <RadioGroupDescription
-                  as="span"
-                  :class="[
-                    checked ? 'text-black' : 'text-gray-500',
-                    'block text-sm',
-                  ]"
-                >
-                  {{ item.brand.title }}
-                </RadioGroupDescription>
+                
               </div>
             </div>
           </RadioGroupOption>
@@ -91,7 +83,7 @@ export default {
 
   setup() {
     //fetching products
-    const products = computed(() => store.state.categoryProducts);
+    const categories = computed(() => store.state.categories);
     const clickedState = computed(() => store.state.clicked);
     const selected = ref(null);
 
@@ -99,18 +91,17 @@ export default {
     store.dispatch("changeClickedValue", false);
 
     //fetching product storages
-    function productStorages(value) {
-      store.dispatch("getProductStorages", value);
-      store.commit("setProductId", value.id);
+    function categoryProducts(value) {
+      store.dispatch("getCategoryProducts", value);
       store.dispatch("changeSelectedValue", selected.value);
     }
 
     return {
-      products,
+      categories,
       selected,
       clickedState,
-      productStorages,
-      name: "SelectDevice",
+      categoryProducts,
+      name: "SelectCategory",
     };
   },
 };
