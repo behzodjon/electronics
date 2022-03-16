@@ -12,7 +12,9 @@ const store = createStore({
             conditionId: null,
             products: [],
             sideBarOpen: false,
-            directOpen: false
+            directOpen: false,
+            selected: null,
+            clicked: false
         }
     },
     mutations: {
@@ -37,6 +39,12 @@ const store = createStore({
         },
         changeDirectOpen: (state, value) => {
             state.directOpen = value;
+        },
+        setSelectedValue: (state, value) => {
+            state.selected = value;
+        },
+        setClickedValue: (state, value) => {
+            state.clicked = value;
         },
     },
 
@@ -76,6 +84,12 @@ const store = createStore({
         },
         setDirectOpen({ commit }, state) {
             commit("changeDirectOpen", state);
+        },
+        changeSelectedValue({ commit }, state) {
+            commit("setSelectedValue", state);
+        },
+        changeClickedValue({ commit }, state) {
+            commit("setClickedValue", state);
         },
     }
 })

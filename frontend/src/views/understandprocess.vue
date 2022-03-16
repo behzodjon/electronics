@@ -4,8 +4,20 @@
     <h2 class="sr-only">Our Process</h2>
     <div class="mx-auto mt-6 max-w-7xl sm:px-0 lg:px-0">
       <div class="grid max-w-2xl grid-cols-1 px-4 mx-auto gap-y-2 gap-x-2">
-          <h1 class="font-bold text-xl underline decoration-4 decoration-[#00c389] text-center">Here's How It Works.</h1>
-          <p1 class="mb-2 text-sm text-center lg:text-base"> See more information in our Terms and Conditions</p1>
+        <h1
+          class="
+            font-bold
+            text-xl
+            underline
+            decoration-4 decoration-[#00c389]
+            text-center
+          "
+        >
+          Here's How It Works.
+        </h1>
+        <p class="mb-2 text-sm text-center lg:text-base">
+          See more information in our Terms and Conditions
+        </p>
         <div v-for="perk in perks" :key="perk.name" class="flex ml-4 mr-4">
           <div class="flex-shrink-0">
             <div class="flow-root">
@@ -29,34 +41,37 @@
 <script>
 const perks = [
   {
-    name: 'Select your device, answer some questions.',
-    imageSrc: 'https://stockx-assets.imgix.net/svg/icons/graph-up.svg?auto=compress,format',
+    name: "Select your device, answer some questions.",
+    imageSrc:
+      "https://stockx-assets.imgix.net/svg/icons/graph-up.svg?auto=compress,format",
     description:
-      'Answer some simple questions about your device to get a valuation.',
+      "Answer some simple questions about your device to get a valuation.",
   },
   {
-    name: 'Accept valuation, ship or dropoff device.',
-    imageSrc: 'https://stockx-assets.imgix.net/svg/icons/shipping-box.svg?auto=compress,format',
+    name: "Accept valuation, ship or dropoff device.",
+    imageSrc:
+      "https://stockx-assets.imgix.net/svg/icons/shipping-box.svg?auto=compress,format",
     description:
-      'Youve got an offer! Choose a option, add to your wallet and select a delivery method.',
+      "Youve got an offer! Choose a option, add to your wallet and select a delivery method.",
   },
   {
-    name: 'Get Paid!',
-    imageSrc: 'https://stockx-assets.imgix.net/svg/icons/cash.svg?auto=compress,format',
+    name: "Get Paid!",
+    imageSrc:
+      "https://stockx-assets.imgix.net/svg/icons/cash.svg?auto=compress,format",
     description:
-      'Once we have your device, we will do our internal testing and pay you according.',
+      "Once we have your device, we will do our internal testing and pay you according.",
   },
-
-]
+];
 import store from "../store";
 
 export default {
- setup() {
-        store.dispatch("getProducts");
+  setup() {
+    store.dispatch("getProducts");
+    store.dispatch("changeSelectedValue", 1);
 
     return {
       perks,
-    }
+    };
   },
-}
+};
 </script>
