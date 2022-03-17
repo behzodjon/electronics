@@ -6,6 +6,10 @@ import axiosClient from "../axios";
 const store = createStore({
     state() {
         return {
+            user: {
+                data: {},
+                token: sessionStorage.getItem("TOKEN"),
+            },
             storageList: [],
             storageId: null,
             productId: null,
@@ -20,6 +24,19 @@ const store = createStore({
         }
     },
     mutations: {
+        logout: (state) => {
+            state.user.token = null;
+            state.user.data = {};
+            sessionStorage.removeItem("TOKEN");
+        },
+        setUser: (state, user) => {
+            state.user.data = user;
+        },
+      
+        setToken: (state, token) => {
+            state.user.token = token;
+            sessionStorage.setItem('TOKEN', token);
+        },
         setStorageList(state, payload) {
             state.storageList = payload
         },
@@ -56,15 +73,46 @@ const store = createStore({
         },
     },
 
-
+    getters: {
+        isAuthenticated: state => !!state.user.token,
+    },
     actions: {
+        logout({commit}) {
+            return axiosClient.post('/logout')
+              .then(response => {
+                commit('logout')
+                return response;
+              })
+          },
+        register({ commit }, user) {
+            return axiosClient.post('/register', user)
+                .then(({ data }) => {
+                    commit('setUser', data.user);
+                    commit('setToken', data.token)
+                    return data;
+                })
+        },
+        login({commit}, user) {
+            return axiosClient.post('/login', user)
+              .then(({data}) => {
+                commit('setUser', data.user);
+                commit('setToken', data.token)
+                return data;
+              })
+          },
+        getUser({ commit }) {
+            return axiosClient.get('/user')
+                .then(res => {
+                    commit('setUser', res.data)
+                })
+        },
         getCategories({ commit }) {
             return axiosClient.get('/categories').then((res) => {
                 commit("setCategories", res);
                 return res;
             });
         },
-        getCategoryProducts({ commit },category) {
+        getCategoryProducts({ commit }, category) {
             return axiosClient.get(`/categories/${category.id}/products`).then((res) => {
                 commit("setCategoryProducts", res.data);
                 return res;

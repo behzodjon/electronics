@@ -13,8 +13,5 @@ class TestController extends Controller
 {
     public function index()
     {
-        $category = Category::whereId(1)->first();
-        $products=$category->products()->with('category')->get();
-        dd($products);
     }
 }
