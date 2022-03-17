@@ -75,28 +75,4 @@
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/vue";
 import SignUpForm from "../components/SignUpForm.vue";
 import LoginForm from "../components/LoginForm.vue";
-import { ref } from "vue";
-import store from "../store";
-import { useRouter } from "vue-router";
-const router = useRouter();
-const user = {
-  name: "",
-  email: "",
-  password: "",
-};
-const errors = ref({});
-function register() {
-  store
-    .dispatch("register", user)
-    .then(() => {
-      router.push({
-        name: "Home",
-      });
-    })
-    .catch((error) => {
-      if (error.response.status === 422) {
-        errors.value = error.response.data.errors;
-      }
-    });
-}
 </script>
