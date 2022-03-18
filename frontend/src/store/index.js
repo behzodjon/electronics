@@ -100,6 +100,10 @@ const store = createStore({
                 return data;
               })
           },
+          loginWithGoogle({commit}) {
+            return axiosClient.get('/google/login')
+              
+          },
         getUser({ commit }) {
             return axiosClient.get('/user')
                 .then(res => {
