@@ -85,6 +85,8 @@ export default {
     const categories = computed(() => store.state.categories);
     const clickedState = computed(() => store.state.clicked);
     const selected = ref(null);
+    store.commit("setLoadingValue", true);
+    setTimeout(() => store.commit("setLoadingValue", false), 500);
 
     store.dispatch("changeSelectedValue", selected.value);
     store.dispatch("changeClickedValue", false);

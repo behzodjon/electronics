@@ -98,6 +98,8 @@ export default {
     store.dispatch("changeSelectedValue", selected.value);
     store.dispatch("changeClickedValue", false);
     store.commit("setSectionTitle", "Select Your Device");
+      store.commit("setLoadingValue", true);
+    setTimeout(() => store.commit("setLoadingValue", false), 500);
 
     //fetching product storages
     function productStorages(value) {

@@ -95,7 +95,8 @@ export default {
     store.dispatch("changeSelectedValue", selected.value);
     store.dispatch("changeClickedValue", false);
     store.commit("setSectionTitle", "Select The Storage");
-
+  store.commit("setLoadingValue", true);
+    setTimeout(() => store.commit("setLoadingValue", false), 500);
     function getStorageId(value) {
       store.commit("setStorageId", value.id);
       store.dispatch("changeSelectedValue", selected.value);

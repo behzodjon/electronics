@@ -69,6 +69,7 @@ export default {
     store.dispatch("getCategories");
     store.dispatch("changeSelectedValue", 1);
     store.commit("setSectionTitle", "How It Works");
+    store.commit("setLoadingValue", false)
 
     return {
       perks,

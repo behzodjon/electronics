@@ -23,7 +23,8 @@ const store = createStore({
             selected: null,
             clicked: false,
             sectionTitle:'',
-            steps:[]
+            steps:[],
+            loading:true
         }
     },
     mutations: {
@@ -79,6 +80,9 @@ const store = createStore({
         },
         setSteps: (state, value) => {
             state.steps = value;
+        },
+        setLoadingValue: (state, value) => {
+            state.loading = value;
         },
     },
     getters: {
