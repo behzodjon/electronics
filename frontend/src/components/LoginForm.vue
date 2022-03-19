@@ -5,81 +5,162 @@
         <div>
           <button
             @click="handleSignIn"
-            class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50"
+            class="
+              inline-flex
+              justify-center
+              w-full
+              p-4
+              text-sm
+              font-medium
+              text-[#0F0F0F]
+              bg-white
+              border border-[#0F0F0F]
+              shadow-sm
+              hover:bg-gray-50
+            "
           >
-            <span class="sr-only"></span>
-            <svg
-              class="w-5 h-5"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"
-              />
-            </svg>
+            <div class="inline-flex space-x-2">
+              <div>
+                <span class="sr-only"></span>
+                <figure>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    x="0px"
+                    y="0px"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 48 48"
+                    style="fill: #000000"
+                  >
+                    <path
+                      fill="#FFC107"
+                      d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
+                    ></path>
+                    <path
+                      fill="#FF3D00"
+                      d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
+                    ></path>
+                    <path
+                      fill="#4CAF50"
+                      d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
+                    ></path>
+                    <path
+                      fill="#1976D2"
+                      d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
+                    ></path>
+                  </svg>
+                </figure>
+              </div>
+              <span> Continue with Google</span>
+            </div>
           </button>
         </div>
       </div>
-      <div class="relative">
+      <div class="relative mt-4">
         <div class="absolute inset-0 flex items-center">
           <div class="w-full border-t border-gray-300" />
         </div>
         <div class="relative flex justify-center text-sm">
-          <span class="px-2 text-gray-500 bg-white">
-            Or continue with Sign in with google{{
-              Vue3GoogleOauth.isInit
-            }}</span
-          >
-
-          <span class="px-2 text-gray-500 bg-white">{{
-            Vue3GoogleOauth.isAuthorized
-          }}</span>
+          <span class="px-2 text-gray-500 uppercase bg-white"> or </span>
         </div>
       </div>
     </div>
     <form class="space-y-6" @submit.prevent="login">
-      <div>
-        <label for="email" class="block text-sm font-medium text-gray-700">
-          Email address
-        </label>
-        <div class="mt-1">
-          <input
-            id="email"
-            v-model="user.email"
-            name="email"
-            type="email"
-            autocomplete="email"
-            required=""
-            class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          />
-        </div>
+      <div class="relative">
+        <input
+          id="email"
+          name="email"
+          v-model="user.email"
+          type="text"
+          required
+          placeholder="Email"
+          class="
+            w-full
+            text-gray-900
+            placeholder-transparent
+            h-14
+            peer
+            focus:outline-none
+            border border-[#e5e7ea]
+            focus:border-transparent focus:ring-black
+          "
+        />
+        <label
+          for="email"
+          class="
+            absolute
+            left-0
+            -top-0.5
+            pt-1
+            px-[0.75rem]
+            text-gray-400 text-[10px]
+            transition-all
+            peer-placeholder-shown:text-base
+            peer-placeholder-shown:text-gray-400
+            peer-placeholder-shown:top-4
+            peer-placeholder-shown:pt-0
+            peer-focus:-top-0.5
+            peer-focus:text-gray-400
+            peer-focus:text-[10px]
+            peer-focus:pt-1
+          "
+          >Email address</label
+        >
       </div>
 
-      <div>
-        <label for="password" class="block text-sm font-medium text-gray-700">
+      <div class="relative">
+        <input
+          id="password"
+          v-model="user.password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required
+          placeholder="Password"
+          class="
+            w-full
+            text-gray-900
+            placeholder-transparent
+            h-14
+            peer
+            focus:outline-none
+            border border-[#e5e7ea]
+            focus:border-transparent focus:ring-black
+          "
+        />
+        <label
+          for="password"
+          class="
+            absolute
+            left-0
+            -top-0.5
+            pt-1
+            px-[0.75rem]
+            text-gray-400 text-[10px]
+            transition-all
+            peer-placeholder-shown:text-base
+            peer-placeholder-shown:text-gray-400
+            peer-placeholder-shown:top-4
+            peer-placeholder-shown:pt-0
+            peer-focus:-top-0.5
+            peer-focus:text-gray-400
+            peer-focus:text-[10px]
+            peer-focus:pt-1
+          "
+        >
           Password
         </label>
-        <div class="mt-1">
-          <input
-            id="password"
-            v-model="user.password"
-            name="password"
-            type="password"
-            autocomplete="current-password"
-            required=""
-            class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          />
-        </div>
+        <a href="#" class="text-[#0F0F0F] text-xs block text-right mt-2">Forgot password</a>
       </div>
 
       <div>
         <button
           type="submit"
-          class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          class="flex justify-center w-full px-4 py-4 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Sign In
         </button>
+        <p class="text-xs  text-[#949494] mt-2">By logging in, you agree to the <a href="#" class="text-black">Terms of Service</a>  and <a href="#" class="text-black">Privacy Policy</a> </p>
       </div>
     </form>
   </div>
@@ -88,7 +169,6 @@
 
 <script>
 import { inject } from "vue";
-
 import store from "../store";
 import { useRouter } from "vue-router";
 export default {
@@ -125,10 +205,11 @@ export default {
         if (!googleUser) {
           return null;
         }
-        await this.$store.dispatch("loginWithGoogle");
-
-        // let user= googleUser.getBasicProfile().getEmail();
-        //  console.log(user)
+        await this.$store.dispatch(
+          "loginWithGoogle",
+          googleUser.getAuthResponse().access_token
+        );
+        this.$router.push({ name: "Home" });
       } catch (error) {
         console.log(error);
         return null;

@@ -75,16 +75,16 @@ class AuthController extends Controller
         ]);
     }
 
-    public function google()
-    {
-        return  Socialite::driver('google')->stateless()->redirect();
-    }
+    // public function google()
+    // {
+    //     return  Socialite::driver('google')->stateless()->redirect();
+    // }
 
-    public function googleRedirect()
+    public function googleRedirect($token)
     {
 
         try {
-            $user = Socialite::driver('google')->stateless()->user();
+            $user = Socialite::driver('google')->stateless()->userFromToken($token);
             info("ada");
             // Check Users Email If Already There
             $isUser = User::where('email', $user->getEmail())->first();

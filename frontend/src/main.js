@@ -6,7 +6,7 @@ import './index.css'
 import 'animate.css';
 import gAuthPlugin from 'vue3-google-oauth2';
 
-let gauthClientId = "1018488221461-d1juciool7ovdreve07speb6o1veqpml.apps.googleusercontent.com";
+let gauthClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 
 

@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 import axiosClient from "../axios";
 
 
+
 // Create a new store instance.
 const store = createStore({
     state() {
@@ -100,8 +101,13 @@ const store = createStore({
                 return data;
               })
           },
-          loginWithGoogle({commit}) {
-            return axiosClient.get('/google/login')
+          loginWithGoogle({commit},token) {
+            return axiosClient.get(`/google/callback/${token}`)
+            .then(({data}) => {
+                commit('setUser', data.user);
+                commit('setToken', data.token)
+                return data;
+              })
               
           },
         getUser({ commit }) {

@@ -32,7 +32,7 @@
                   border-b-2 border-solid
                 "
               >
-                Sign Up
+                Sign In
               </button>
             </Tab>
 
@@ -53,18 +53,17 @@
                   border-b-2 border-solid
                 "
               >
-                Sign In
+                Sign Up
               </button>
             </Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
-              <SignUpForm />
+              <LoginForm />
             </TabPanel>
             <TabPanel>
-              <LoginForm />
-              </TabPanel
-            >
+              <SignUpForm />
+            </TabPanel>
           </TabPanels>
         </TabGroup>
       </div>

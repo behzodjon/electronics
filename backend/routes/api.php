@@ -25,8 +25,9 @@ Route::get('/test', [TestController::class, 'index']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/google/login', [AuthController::class, 'google']);
-Route::get('/google/callback', [AuthController::class, 'googleRedirect']);
+    // Route::get('/google/login', [AuthController::class, 'google']);
+
+Route::get('/google/callback/{token}', [AuthController::class, 'googleRedirect']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
