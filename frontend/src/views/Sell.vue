@@ -43,11 +43,13 @@
               >
                 <div class="py-4 px-4 bg-[#00633F] sm:px-6">
                   <div class="flex items-center justify-between">
+                    <div>
                     <DialogTitle
                       class="text-xl font-bold text-center text-white"
                     >
                       {{sectionTitle}}
                     </DialogTitle>
+                    </div>
                     <div class="flex items-center ml-3 h-7">
                       <button
                         type="button"
@@ -59,6 +61,8 @@
                       </button>
                     </div>
                   </div>
+                    <Circles class="mt-2"/>
+
                 </div>
                 <div class="relative flex-1 mt-0">
                   <wizard></wizard>
@@ -75,6 +79,7 @@
 
 <script>
 import store from "../store";
+import { computed } from "vue";
 import {
   Dialog,
   DialogOverlay,
@@ -84,7 +89,7 @@ import {
 } from "@headlessui/vue";
 import { XIcon } from "@heroicons/vue/outline";
 import wizard from "./wizard.vue";
-import { computed } from "vue";
+import Circles from '../components/common/Circles.vue';
 
 export default {
   components: {
@@ -95,6 +100,7 @@ export default {
     TransitionRoot,
     XIcon,
     wizard,
+    Circles,
   },
   setup() {
     const open = computed(() => store.state.sideBarOpen);

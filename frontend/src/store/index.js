@@ -22,7 +22,8 @@ const store = createStore({
             directOpen: false,
             selected: null,
             clicked: false,
-            sectionTitle:''
+            sectionTitle:'',
+            steps:[]
         }
     },
     mutations: {
@@ -75,6 +76,9 @@ const store = createStore({
         },
         setSectionTitle: (state, value) => {
             state.sectionTitle = value;
+        },
+        setSteps: (state, value) => {
+            state.steps = value;
         },
     },
     getters: {
