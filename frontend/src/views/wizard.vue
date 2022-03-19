@@ -89,7 +89,7 @@ export default {
   },
   created() {
     if (this.$store.state.directOpen) {
-      this.currentStep = 2;
+      this.currentStep = 3;
     }
   },
 

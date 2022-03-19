@@ -50,7 +50,6 @@
                 >
                   {{ item.title }}
                 </RadioGroupLabel>
-                
               </div>
             </div>
           </RadioGroupOption>
@@ -89,6 +88,8 @@ export default {
 
     store.dispatch("changeSelectedValue", selected.value);
     store.dispatch("changeClickedValue", false);
+
+    store.commit("setSectionTitle", "Select category");
 
     //fetching product storages
     function categoryProducts(value) {

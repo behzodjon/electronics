@@ -122,7 +122,7 @@ import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/vue";
 import { CheckIcon } from "@heroicons/vue/outline";
 import Faqs from "./faqs.vue";
 import axiosClient from "../axios";
-
+import store from "../store";
 export default {
   components: {
     TabGroup,
@@ -134,6 +134,8 @@ export default {
     Faqs,
   },
   setup() {
+        store.commit("setSectionTitle", "Valuation");
+
     return {
       pricing,
     };

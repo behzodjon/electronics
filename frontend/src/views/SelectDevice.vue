@@ -97,6 +97,7 @@ export default {
 
     store.dispatch("changeSelectedValue", selected.value);
     store.dispatch("changeClickedValue", false);
+    store.commit("setSectionTitle", "Select Your Device");
 
     //fetching product storages
     function productStorages(value) {

@@ -21,7 +21,8 @@ const store = createStore({
             sideBarOpen: false,
             directOpen: false,
             selected: null,
-            clicked: false
+            clicked: false,
+            sectionTitle:''
         }
     },
     mutations: {
@@ -72,8 +73,10 @@ const store = createStore({
         setClickedValue: (state, value) => {
             state.clicked = value;
         },
+        setSectionTitle: (state, value) => {
+            state.sectionTitle = value;
+        },
     },
-
     getters: {
         isAuthenticated: state => !!state.user.token,
     },

@@ -105,6 +105,8 @@ export default {
 
     store.dispatch("changeSelectedValue", selected.value);
     store.dispatch("changeClickedValue", false);
+    store.commit("setSectionTitle", "Select Your Condition");
+
     function getConditionId(value) {
       store.commit("setConditionId", value.id);
       store.dispatch("changeSelectedValue", selected.value);

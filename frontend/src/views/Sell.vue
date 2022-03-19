@@ -1,5 +1,5 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
 <template>
+<div>
   <button
     @click="openSidebar"
     class="flex items-center px-4 py-3 text-base font-medium text-white bg-green-900 border-b-4 border-r-4 border-black rounded-md w-fit hover:bg-indigo-700 md:py-4 md:text-sm md:px-6"
@@ -46,7 +46,7 @@
                     <DialogTitle
                       class="text-xl font-bold text-center text-white"
                     >
-                      Select Your Device
+                      {{sectionTitle}}
                     </DialogTitle>
                     <div class="flex items-center ml-3 h-7">
                       <button
@@ -70,6 +70,7 @@
       </div>
     </Dialog>
   </TransitionRoot>
+  </div>
 </template>
 
 <script>
@@ -97,6 +98,7 @@ export default {
   },
   setup() {
     const open = computed(() => store.state.sideBarOpen);
+    const sectionTitle = computed(() => store.state.sectionTitle);
 
     function openSidebar() {
       store.dispatch("getSideBarState", true);
@@ -107,6 +109,7 @@ export default {
     }
     return {
       open,
+      sectionTitle,
       closeSidebar,
       openSidebar,
     };
