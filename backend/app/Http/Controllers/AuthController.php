@@ -76,13 +76,13 @@ class AuthController extends Controller
     {
 
         try {
-            $user = Socialite::driver('google')->stateless()->userFromToken($token);
-            // Log::info(print_r($user, true));
+            $user = Socialite::driver('google')->scopes(['read:user', 'public_repo'])->userFromToken($token);
 
             // Check Users Email If Already There
             $isUser = User::where('email', $user->getEmail())->first();
             if (!$isUser) {
-                $name = $user->getName() ?? "Test";
+                $name = $user->getName() ?? "Test user";
+                
                 $saveUser = User::updateOrCreate([
                     'google_id' => $user->getId(),
                 ], [

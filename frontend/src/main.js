@@ -14,5 +14,5 @@ let gauthClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 const app = createApp(App)
 app.use(router)
 app.use(store)
-app.use(gAuthPlugin, { clientId: gauthClientId, scope: 'email', prompt: 'consent', fetch_basic_profile: false })
+app.use(gAuthPlugin, { clientId: gauthClientId, scope: 'email', prompt: 'consent', fetch_basic_profile: true })
 app.mount('#app')

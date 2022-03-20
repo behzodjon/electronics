@@ -275,7 +275,7 @@
             'pointer-events-none opacity-40': !acceptPrivacy,
           }"
           type="submit"
-          class="flex justify-center w-full px-4 py-4 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          class="flex justify-center w-full px-4 py-4 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Sign Up
         </button>
@@ -293,7 +293,7 @@ import { useRouter } from "vue-router";
 import Alert from "../components/common/Alert.vue";
 
 export default {
-    components: { Alert },
+  components: { Alert },
 
   setup() {
     const router = useRouter();
