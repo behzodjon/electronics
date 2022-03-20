@@ -1,7 +1,7 @@
 <template>
   <RadioGroup v-model="selected">
     <RadioGroupLabel class="sr-only"> Privacy setting </RadioGroupLabel>
-    <div class="animate__animated animate__fadeInRight animate__faster">
+    <div class="animate__animated animate__lightSpeedInRight">
       <div class="-space-y-px bg-white rounded-none">
         <p
           v-if="!selected && clickedState"

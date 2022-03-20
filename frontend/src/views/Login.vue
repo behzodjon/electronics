@@ -1,14 +1,11 @@
 <template>
   <div class="flex flex-col justify-center min-h-full py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <img
-        class="w-auto h-12 mx-auto"
-        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-        alt="Workflow"
-      />
+    <router-link :to="{ name: 'Home' }">
       <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900">
-        Electronics
+     The Ultimate Electronic BuyBack Marketplace.
       </h2>
+      </router-link>
     </div>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">

@@ -66,6 +66,16 @@
       </div>
     </div>
     <form class="space-y-6" @submit.prevent="register">
+      <Alert
+        v-if="Object.keys(errors).length"
+        class="flex-col items-stretch text-sm"
+      >
+        <div v-for="(field, i) of Object.keys(errors)" :key="i">
+          <div v-for="(error, ind) of errors[field] || []" :key="ind">
+            * {{ error }}
+          </div>
+        </div>
+      </Alert>
       <div class="relative">
         <input
           id="name"
@@ -235,32 +245,37 @@
         >
           Password confirmation
         </label>
+        <p class="text-[#010101] text-xs mt-4">
+          At least 8 characters, 1 uppercase letter, 1 number & 1 symbol
+        </p>
       </div>
-
       <div class="flex items-center justify-between">
         <div class="flex items-center">
           <input
-            id="remember-me"
-            name="remember-me"
+            id="check"
+            name="privacy"
             type="checkbox"
-            class="w-4 h-4 text-indigo-600 border-gray-300 rounded  focus:ring-indigo-500"
+            v-model="acceptPrivacy"
+            class="w-4 h-4 text-black border-gray-300 rounded focus:ring-black"
           />
-          <label for="remember-me" class="block ml-2 text-sm text-gray-900">
-            Remember me
+          <label for="check" class="block ml-2 text-sm text-gray-900">
+            <p class="text-xs text-[#949494] mt-2">
+              By signing up, you agree to the
+              <a href="#" class="text-black">Terms of Service</a> and
+              <a href="#" class="text-black">Privacy Policy</a>
+            </p>
           </label>
-        </div>
-
-        <div class="text-sm">
-          <a href="#" class="font-medium text-[#0F0F0F] text-xs">
-            Forgot your password?
-          </a>
         </div>
       </div>
 
       <div>
         <button
+          :disabled="!acceptPrivacy"
+          :class="{
+            'pointer-events-none opacity-40': !acceptPrivacy,
+          }"
           type="submit"
-          class="flex justify-center w-full px-4 py-4 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          class="flex justify-center w-full px-4 py-4 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Sign Up
         </button>
@@ -275,7 +290,11 @@ import { inject } from "vue";
 
 import store from "../store";
 import { useRouter } from "vue-router";
+import Alert from "../components/common/Alert.vue";
+
 export default {
+    components: { Alert },
+
   setup() {
     const router = useRouter();
     const user = {
@@ -286,6 +305,9 @@ export default {
     const Vue3GoogleOauth = inject("Vue3GoogleOauth");
 
     const errors = ref({});
+
+    const acceptPrivacy = ref(false);
+
     function register() {
       store
         .dispatch("register", user)
@@ -302,7 +324,9 @@ export default {
     }
     return {
       register,
+      acceptPrivacy,
       user,
+      errors,
       Vue3GoogleOauth,
     };
   },

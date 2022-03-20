@@ -1,5 +1,6 @@
 <template>
-  <TabGroup>
+<div class="animate__animated animate__lightSpeedInRight">
+  <TabGroup >
     <TabList
       class="relative z-0 flex bg-gray-200 divide-x divide-gray-300 rounded-none "
     >
@@ -39,7 +40,7 @@
                 >
                   {{ pricingList[0].title }}
                 </h3>
-                <p class="flex items-baseline mt-4 text-black">
+                <p class="flex items-baseline mt-4 text-black animate__animated animate__fadeIn ">
                   <span class="text-4xl font-extrabold tracking-tight"
                     >${{ pricingList[0].price }}</span
                   >
@@ -78,7 +79,7 @@
                 >
                   {{ pricingList[1].title }}
                 </h3>
-                <p class="flex items-baseline mt-4 text-gray-900">
+                <p class="flex items-baseline mt-4 text-gray-900 animate__animated animate__fadeIn ">
                   <span
                     class="mr-4 text-3xl font-bold tracking-tight line-through"
                     >${{ pricingList[1].oldprice }}</span
@@ -115,6 +116,7 @@
     </TabPanels>
   </TabGroup>
   <faqs></faqs>
+  </div>
 </template>
 
 <script>

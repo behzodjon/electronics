@@ -1,5 +1,5 @@
 <template>
-  <div class="animate__animated animate__fadeInRight animate__faster">
+  <div class="animate__animated animate__lightSpeedInRight">
     <RadioGroup v-model="selected">
       <RadioGroupLabel class="sr-only"> Privacy setting </RadioGroupLabel>
       <div class="-space-y-px bg-white rounded-none">

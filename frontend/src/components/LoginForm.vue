@@ -66,6 +66,44 @@
       </div>
     </div>
     <form class="space-y-6" @submit.prevent="login">
+      <Alert v-if="errors">
+        <div class="flex flex-col">
+        <div v-for="(v, k) in errors" :key="k">
+          <p v-for="error in v" :key="error" class="text-sm">
+          * {{ error }}
+          </p>
+        </div>
+        </div>
+        <span
+          @click="errors = null"
+          class="
+            w-8
+            h-8
+            flex
+            items-center
+            justify-center
+            rounded-full
+            transition-colors
+            cursor-pointer
+            hover:bg-[rgba(0,0,0,0.2)]
+          "
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </span>
+      </Alert>
       <div class="relative">
         <input
           id="email"
@@ -150,17 +188,23 @@
         >
           Password
         </label>
-        <a href="#" class="text-[#0F0F0F] text-xs block text-right mt-2">Forgot password</a>
+        <a href="#" class="text-[#0F0F0F] text-xs block text-right mt-2"
+          >Forgot password</a
+        >
       </div>
 
       <div>
         <button
           type="submit"
-          class="flex justify-center w-full px-4 py-4 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          class="flex justify-center w-full px-4 py-4 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-transparent"
         >
           Sign In
         </button>
-        <p class="text-xs  text-[#949494] mt-2">By logging in, you agree to the <a href="#" class="text-black">Terms of Service</a>  and <a href="#" class="text-black">Privacy Policy</a> </p>
+        <p class="text-xs text-[#949494] mt-2">
+          By logging in, you agree to the
+          <a href="#" class="text-black">Terms of Service</a> and
+          <a href="#" class="text-black">Privacy Policy</a>
+        </p>
       </div>
     </form>
   </div>
@@ -170,8 +214,12 @@
 <script>
 import { inject } from "vue";
 import store from "../store";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
+import Alert from "../components/common/Alert.vue";
+
 export default {
+  components: { Alert },
   setup() {
     const router = useRouter();
     const user = {
@@ -179,6 +227,7 @@ export default {
       password: "",
     };
     const Vue3GoogleOauth = inject("Vue3GoogleOauth");
+    let errors = ref(null);
 
     function login() {
       store
@@ -188,13 +237,14 @@ export default {
             name: "Home",
           });
         })
-        .catch((error) => {
-          errorMsg.value = error.response.data.error;
+        .catch((err) => {
+          errors.value = err.response.data.errors;
         });
     }
     return {
       login,
       user,
+      errors,
       Vue3GoogleOauth,
     };
   },

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
@@ -41,15 +42,10 @@ class AuthController extends Controller
     {
         $credentials = $request->validate([
             'email' => 'required|email|string|exists:users,email',
-            'password' => [
-                'required',
-            ],
-            'remember' => 'boolean'
+            'password' => 'required|password',
         ]);
-        $remember = $credentials['remember'] ?? false;
-        unset($credentials['remember']);
 
-        if (!Auth::attempt($credentials, $remember)) {
+        if (!Auth::attempt($credentials)) {
             return response([
                 'error' => 'The Provided credentials are not correct'
             ], 422);
@@ -75,27 +71,24 @@ class AuthController extends Controller
         ]);
     }
 
-    // public function google()
-    // {
-    //     return  Socialite::driver('google')->stateless()->redirect();
-    // }
 
     public function googleRedirect($token)
     {
 
         try {
             $user = Socialite::driver('google')->stateless()->userFromToken($token);
-            info("ada");
+            // Log::info(print_r($user, true));
+
             // Check Users Email If Already There
             $isUser = User::where('email', $user->getEmail())->first();
             if (!$isUser) {
-
+                $name = $user->getName() ?? "Test";
                 $saveUser = User::updateOrCreate([
                     'google_id' => $user->getId(),
                 ], [
-                    'name' => $user->getName(),
+                    'name' => $name,
                     'email' => $user->getEmail(),
-                    'password' => Hash::make($user->getName() . '@' . $user->getId())
+                    'password' => Hash::make($name . '@' . $user->getId())
                 ]);
             } else {
                 $saveUser = User::where('email',  $user->getEmail())->update([
