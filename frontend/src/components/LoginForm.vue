@@ -125,23 +125,7 @@
         />
         <label
           for="email"
-          class="
-            absolute
-            left-0
-            -top-0.5
-            pt-1
-            px-[0.75rem]
-            text-gray-400 text-[10px]
-            transition-all
-            peer-placeholder-shown:text-base
-            peer-placeholder-shown:text-gray-400
-            peer-placeholder-shown:top-4
-            peer-placeholder-shown:pt-0
-            peer-focus:-top-0.5
-            peer-focus:text-gray-400
-            peer-focus:text-[10px]
-            peer-focus:pt-1
-          "
+          class=" form-label"
           >Email address</label
         >
       </div>
@@ -168,23 +152,7 @@
         />
         <label
           for="password"
-          class="
-            absolute
-            left-0
-            -top-0.5
-            pt-1
-            px-[0.75rem]
-            text-gray-400 text-[10px]
-            transition-all
-            peer-placeholder-shown:text-base
-            peer-placeholder-shown:text-gray-400
-            peer-placeholder-shown:top-4
-            peer-placeholder-shown:pt-0
-            peer-focus:-top-0.5
-            peer-focus:text-gray-400
-            peer-focus:text-[10px]
-            peer-focus:pt-1
-          "
+          class=" form-label"
         >
           Password
         </label>

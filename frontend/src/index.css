@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .form-label {
+      @apply absolute left-0   px-[0.75rem]  text-gray-400 text-xs transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-4 peer-focus:top-[3px] peer-focus:text-gray-400 peer-focus:text-xs top-[3px];
+    }
+  }

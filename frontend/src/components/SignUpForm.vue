@@ -97,24 +97,8 @@
           "
         />
         <label
-          for="email"
-          class="
-            absolute
-            left-0
-            -top-0.5
-            pt-1
-            px-[0.75rem]
-            text-gray-400 text-[10px]
-            transition-all
-            peer-placeholder-shown:text-base
-            peer-placeholder-shown:text-gray-400
-            peer-placeholder-shown:top-4
-            peer-placeholder-shown:pt-0
-            peer-focus:-top-0.5
-            peer-focus:text-gray-400
-            peer-focus:text-[10px]
-            peer-focus:pt-1
-          "
+          for="name"
+         class="form-label"
           >Full name</label
         >
       </div>
@@ -139,23 +123,8 @@
         />
         <label
           for="email"
-          class="
-            absolute
-            left-0
-            -top-0.5
-            pt-1
-            px-[0.75rem]
-            text-gray-400 text-[10px]
-            transition-all
-            peer-placeholder-shown:text-base
-            peer-placeholder-shown:text-gray-400
-            peer-placeholder-shown:top-4
-            peer-placeholder-shown:pt-0
-            peer-focus:-top-0.5
-            peer-focus:text-gray-400
-            peer-focus:text-[10px]
-            peer-focus:pt-1
-          "
+                  class="form-label"
+
           >Email address</label
         >
       </div>
@@ -182,23 +151,7 @@
         />
         <label
           for="password"
-          class="
-            absolute
-            left-0
-            -top-0.5
-            pt-1
-            px-[0.75rem]
-            text-gray-400 text-[10px]
-            transition-all
-            peer-placeholder-shown:text-base
-            peer-placeholder-shown:text-gray-400
-            peer-placeholder-shown:top-4
-            peer-placeholder-shown:pt-0
-            peer-focus:-top-0.5
-            peer-focus:text-gray-400
-            peer-focus:text-[10px]
-            peer-focus:pt-1
-          "
+          class=" form-label"
         >
           Password
         </label>
@@ -225,23 +178,7 @@
         />
         <label
           for="password_confirmation"
-          class="
-            absolute
-            left-0
-            -top-0.5
-            pt-1
-            px-[0.75rem]
-            text-gray-400 text-[10px]
-            transition-all
-            peer-placeholder-shown:text-base
-            peer-placeholder-shown:text-gray-400
-            peer-placeholder-shown:top-4
-            peer-placeholder-shown:pt-0
-            peer-focus:-top-0.5
-            peer-focus:text-gray-400
-            peer-focus:text-[10px]
-            peer-focus:pt-1
-          "
+          class=" form-label"
         >
           Password confirmation
         </label>
@@ -275,7 +212,7 @@
             'pointer-events-none opacity-40': !acceptPrivacy,
           }"
           type="submit"
-          class="flex justify-center w-full px-4 py-4 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          class="flex justify-center w-full px-4 py-4 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Sign Up
         </button>
