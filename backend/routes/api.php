@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConditionController;
 use App\Http\Controllers\ProductPriceController;
 use App\Http\Controllers\ProductStorageController;
+use App\Http\Controllers\RestorePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,8 @@ Route::get('/test', [TestController::class, 'index']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-    // Route::get('/google/login', [AuthController::class, 'google']);
+Route::post('send-code', [RestorePasswordController::class, 'sendActivationCode']);
+Route::post('set-new-password', [RestorePasswordController::class, 'setNewPassword']);
 
 Route::get('/google/callback/{token}', [AuthController::class, 'googleRedirect']);
 

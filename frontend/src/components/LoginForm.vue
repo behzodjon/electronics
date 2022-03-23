@@ -156,9 +156,9 @@
         >
           Password
         </label>
-        <a href="#" class="text-[#0F0F0F] text-xs block text-right mt-2"
-          >Forgot password</a
-        >
+         <router-link :to="{ name: 'RestorePassword' }" class="text-[#0F0F0F] text-xs block text-right mt-2"
+          >Forgot password  </router-link>
+        
       </div>
 
       <div>

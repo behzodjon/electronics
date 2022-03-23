@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import Sell from '../views/Sell.vue'
+import RestorePassword from '../views/restore-password.vue'
 import store from "../store";
 
 const routes = [
@@ -29,7 +30,8 @@ const routes = [
 //   },
   { path: '/', name: 'Home', component: Home, },
   { path: '/login', name: 'Login', component:Login },
-  { path: '/Signup', name: 'Signup', component: Signup },
+  { path: '/signup', name: 'Signup', component: Signup },
+  { path: '/restore-password', name: 'RestorePassword', component:RestorePassword },
   { path: '/Sell', name: 'Sell', component: Sell },
 
 ];

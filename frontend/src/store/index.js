@@ -22,9 +22,13 @@ const store = createStore({
             directOpen: false,
             selected: null,
             clicked: false,
-            sectionTitle:'',
-            steps:[],
-            loading:true
+            sectionTitle: '',
+            steps: [],
+            loading: true,
+            restorePassword: {
+                email: null,
+                mode: null,
+            }
         }
     },
     mutations: {
@@ -36,7 +40,7 @@ const store = createStore({
         setUser: (state, user) => {
             state.user.data = user;
         },
-      
+
         setToken: (state, token) => {
             state.user.token = token;
             sessionStorage.setItem('TOKEN', token);
@@ -84,43 +88,68 @@ const store = createStore({
         setLoadingValue: (state, value) => {
             state.loading = value;
         },
+        setRestorePasswordEmail(state, email) {
+            state.restorePassword.email = email
+        },
+        setRestorePasswordMode(state, mode) {
+            state.restorePassword.mode = mode
+        },
+        resetRestorePassword(state) {
+            state.restorePassword = {
+                email: null,
+                mode: null,
+            }
+        }
+
     },
     getters: {
         isAuthenticated: state => !!state.user.token,
     },
     actions: {
-        logout({commit}) {
+        logout({ commit }) {
             return axiosClient.post('/logout')
-              .then(response => {
-                commit('logout')
-                return response;
-              })
-          },
+                .then(response => {
+                    commit('logout')
+                    return response;
+                })
+        },
         register({ commit }, user) {
             return axiosClient.post('/register', user)
+                .then(({ data }) => {
+                    return data;
+                })
+        },
+        login({ commit }, user) {
+            return axiosClient.post('/login', user)
                 .then(({ data }) => {
                     commit('setUser', data.user);
                     commit('setToken', data.token)
                     return data;
                 })
         },
-        login({commit}, user) {
-            return axiosClient.post('/login', user)
-              .then(({data}) => {
-                commit('setUser', data.user);
-                commit('setToken', data.token)
-                return data;
-              })
-          },
-          loginWithGoogle({commit},token) {
+        sendCode({ commit }, payload) {
+            return axiosClient.post('/send-code', payload)
+                .then(({ data }) => {
+                    commit('setRestorePasswordMode', 'code');
+                    commit('setRestorePasswordEmail', payload);
+                    return data;
+                })
+        },
+        setNewPassword({ commit }, payload) {
+            return axiosClient.post('/set-new-password', payload)
+                .then(() => {
+                    commit('resetRestorePassword');
+                })
+        },
+        loginWithGoogle({ commit }, token) {
             return axiosClient.get(`/google/callback/${token}`)
-            .then(({data}) => {
-                commit('setUser', data.user);
-                commit('setToken', data.token)
-                return data;
-              })
-              
-          },
+                .then(({ data }) => {
+                    commit('setUser', data.user);
+                    commit('setToken', data.token)
+                    return data;
+                })
+
+        },
         getUser({ commit }) {
             return axiosClient.get('/user')
                 .then(res => {
