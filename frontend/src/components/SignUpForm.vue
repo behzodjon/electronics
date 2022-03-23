@@ -96,11 +96,7 @@
             focus:border-transparent focus:ring-black
           "
         />
-        <label
-          for="name"
-         class="form-label"
-          >Full name</label
-        >
+        <label for="name" class="form-label">Full name</label>
       </div>
       <div class="relative">
         <input
@@ -121,12 +117,7 @@
             focus:border-transparent focus:ring-black
           "
         />
-        <label
-          for="email"
-                  class="form-label"
-
-          >Email address</label
-        >
+        <label for="email" class="form-label">Email address</label>
       </div>
 
       <div class="relative">
@@ -149,12 +140,7 @@
             focus:border-transparent focus:ring-black
           "
         />
-        <label
-          for="password"
-          class=" form-label"
-        >
-          Password
-        </label>
+        <label for="password" class="form-label"> Password </label>
       </div>
       <div class="relative">
         <input
@@ -176,10 +162,7 @@
             focus:border-transparent focus:ring-black
           "
         />
-        <label
-          for="password_confirmation"
-          class=" form-label"
-        >
+        <label for="password_confirmation" class="form-label">
           Password confirmation
         </label>
         <p class="text-[#010101] text-xs mt-4">
@@ -207,13 +190,34 @@
 
       <div>
         <button
-          :disabled="!acceptPrivacy"
+          :disabled="!acceptPrivacy || loading"
           :class="{
-            'pointer-events-none opacity-40': !acceptPrivacy,
+            'pointer-events-none opacity-40': !acceptPrivacy || loading,
           }"
           type="submit"
-          class="flex justify-center w-full px-4 py-4 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          class="flex justify-center w-full px-4 py-4 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
+          <svg
+            v-if="loading"
+            class="w-5 h-5 mr-3 -ml-1 text-white animate-spin"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
           Sign Up
         </button>
       </div>
@@ -242,18 +246,25 @@ export default {
     const Vue3GoogleOauth = inject("Vue3GoogleOauth");
 
     const errors = ref({});
+    const loading = ref(false);
 
     const acceptPrivacy = ref(false);
 
     function register() {
+      loading.value = true;
+
       store
         .dispatch("register", user)
         .then(() => {
+          loading.value = false;
+
           router.push({
             name: "Home",
           });
         })
         .catch((error) => {
+          loading.value = false;
+
           if (error.response.status === 422) {
             errors.value = error.response.data.errors;
           }
@@ -261,6 +272,7 @@ export default {
     }
     return {
       register,
+      loading,
       acceptPrivacy,
       user,
       errors,

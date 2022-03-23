@@ -68,11 +68,9 @@
     <form class="space-y-6" @submit.prevent="login">
       <Alert v-if="errors">
         <div class="flex flex-col">
-        <div v-for="(v, k) in errors" :key="k">
-          <p v-for="error in v" :key="error" class="text-sm">
-          * {{ error }}
-          </p>
-        </div>
+          <div v-for="(v, k) in errors" :key="k">
+            <p v-for="error in v" :key="error" class="text-sm">* {{ error }}</p>
+          </div>
         </div>
         <span
           @click="errors = null"
@@ -123,11 +121,7 @@
             focus:border-transparent focus:ring-black
           "
         />
-        <label
-          for="email"
-          class=" form-label"
-          >Email address</label
-        >
+        <label for="email" class="form-label">Email address</label>
       </div>
 
       <div class="relative">
@@ -150,22 +144,45 @@
             focus:border-transparent focus:ring-black
           "
         />
-        <label
-          for="password"
-          class=" form-label"
-        >
-          Password
-        </label>
-         <router-link :to="{ name: 'RestorePassword' }" class="text-[#0F0F0F] text-xs block text-right mt-2"
-          >Forgot password  </router-link>
-        
+        <label for="password" class="form-label"> Password </label>
+        <router-link
+          :to="{ name: 'RestorePassword' }"
+          class="text-[#0F0F0F] text-xs block text-right mt-2"
+          >Forgot password
+        </router-link>
       </div>
 
       <div>
         <button
+          :disabled="loading"
+          :class="{
+            'cursor-not-allowed': loading,
+            'hover:bg-gray-400': loading,
+          }"
           type="submit"
           class="flex justify-center w-full px-4 py-4 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-transparent"
         >
+          <svg
+            v-if="loading"
+            class="w-5 h-5 mr-3 -ml-1 text-white animate-spin"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
           Sign In
         </button>
         <p class="text-xs text-[#949494] mt-2">
@@ -196,21 +213,28 @@ export default {
     };
     const Vue3GoogleOauth = inject("Vue3GoogleOauth");
     let errors = ref(null);
+    const loading = ref(false);
 
     function login() {
+      loading.value = true;
+
       store
         .dispatch("login", user)
         .then(() => {
+          loading.value = false;
+
           router.push({
             name: "Home",
           });
         })
         .catch((err) => {
+          loading.value = false;
           errors.value = err.response.data.errors;
         });
     }
     return {
       login,
+      loading,
       user,
       errors,
       Vue3GoogleOauth,

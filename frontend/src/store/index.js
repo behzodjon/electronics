@@ -14,6 +14,7 @@ const store = createStore({
             storageList: [],
             storageId: null,
             productId: null,
+            categoryId: null,
             conditionId: null,
             categories: [],
             categoryProducts: [],
@@ -48,9 +49,11 @@ const store = createStore({
         setStorageList(state, payload) {
             state.storageList = payload
         },
-
         setProductId(state, payload) {
             state.productId = payload
+        },
+        setCategoryId(state, payload) {
+            state.categoryId = payload
         },
         setStorageId(state, payload) {
             state.storageId = payload
@@ -116,6 +119,8 @@ const store = createStore({
         register({ commit }, user) {
             return axiosClient.post('/register', user)
                 .then(({ data }) => {
+                    commit('setUser', data.user);
+                    commit('setToken', data.token)
                     return data;
                 })
         },
@@ -175,8 +180,7 @@ const store = createStore({
             });
         },
         getProductStorages({ commit }, value) {
-            return axiosClient.get(`/product/${value.id}/storages`).then((res) => {
-                commit("setProductId", value.id);
+            return axiosClient.get(`/product/${value}/storages`).then((res) => {
                 commit("setStorageList", res.data);
                 return res;
             });

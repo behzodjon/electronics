@@ -1,7 +1,8 @@
 <template>
+<div >
   <RadioGroup v-model="selected">
     <RadioGroupLabel class="sr-only"> Privacy setting </RadioGroupLabel>
-    <div class="animate__animated animate__lightSpeedInRight">
+    <div v-if="storagesList.data" class="animate__animated animate__lightSpeedInRight">
       <div class="-space-y-px bg-white rounded-none">
         <p
           v-if="!selected && clickedState"
@@ -63,14 +64,20 @@
         </RadioGroupOption>
       </div>
     </div>
+      <div v-else class="flex justify-center mt-8">
+      <DeviceFormSpinner class="w-10 h-10" />
+    </div>
   </RadioGroup>
   <Faqstorage />
+ 
+  </div>
 </template>
 
 <script>
 import { ref } from "vue";
 import { computed } from "vue";
 import store from "../store";
+import DeviceFormSpinner from "../components/common/DeviceFormSpinner.vue";
 
 import {
   RadioGroup,
@@ -87,16 +94,18 @@ export default {
     RadioGroupLabel,
     RadioGroupOption,
     Faqstorage,
+    DeviceFormSpinner
   },
   setup() {
     const selected = ref(null);
     const clickedState = computed(() => store.state.clicked);
+    const productId = computed(() => store.state.productId);
 
     store.dispatch("changeSelectedValue", selected.value);
     store.dispatch("changeClickedValue", false);
     store.commit("setSectionTitle", "Select The Storage");
-  store.commit("setLoadingValue", true);
-    setTimeout(() => store.commit("setLoadingValue", false), 500);
+    store.dispatch("getProductStorages", productId.value);
+
     function getStorageId(value) {
       store.commit("setStorageId", value.id);
       store.dispatch("changeSelectedValue", selected.value);
@@ -104,6 +113,7 @@ export default {
     return {
       selected,
       clickedState,
+      productId,
       getStorageId,
       name: "SelectStorage",
     };

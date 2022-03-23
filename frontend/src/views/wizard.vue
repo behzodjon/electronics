@@ -15,22 +15,13 @@
               Prev
             </button>
             <button
-              :disabled="loading"
-              :class="{
-                'cursor-not-allowed': loading,
-                'hover:bg-gray-600 hover:border-gray-600': loading,
-              }"
+           
               v-if="currentStep < steps.length - 1"
               v-on:click="next"
               class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white border border-black rounded-md shadow-sm bg-neutral-800 hover:bg-black"
             >
-              <span v-if="loading"> Loading... </span>
-              <span v-else> Next </span>
-              <div
-                v-if="loading"
-                style="border-top-color: transparent"
-                class="w-4 h-4 ml-2 border-2 border-white border-dotted rounded-full animate-spin"
-              ></div>
+              <span > Next </span>
+           
             </button>
             <button
               v-else
@@ -91,9 +82,7 @@ export default {
     selected() {
       return this.$store.state.selected;
     },
-    loading() {
-      return this.$store.state.loading;
-    },
+  
   },
   methods: {
     next() {

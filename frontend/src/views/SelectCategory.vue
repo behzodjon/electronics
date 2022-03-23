@@ -1,5 +1,6 @@
 <template>
-  <div class="animate__animated animate__lightSpeedInRight ">
+<div>
+  <div v-if="categories.length" class="animate__animated animate__lightSpeedInRight">
     <RadioGroup v-model="selected">
       <RadioGroupLabel class="sr-only"> Privacy setting </RadioGroupLabel>
       <div class="-space-y-px bg-white rounded-none">
@@ -58,12 +59,18 @@
       </div>
     </RadioGroup>
   </div>
+   <div v-else class="flex justify-center mt-8">
+      <DeviceFormSpinner class="w-10 h-10" />
+    </div>
+  </div>
 </template>
 
 <script>
 import { ref } from "vue";
 import store from "../store";
 import { computed } from "vue";
+import DeviceFormSpinner from "../components/common/DeviceFormSpinner.vue";
+
 import {
   RadioGroup,
   RadioGroupDescription,
@@ -78,6 +85,7 @@ export default {
     RadioGroupLabel,
     RadioGroupOption,
     DialogTitle,
+    DeviceFormSpinner
   },
 
   setup() {
@@ -85,8 +93,7 @@ export default {
     const categories = computed(() => store.state.categories);
     const clickedState = computed(() => store.state.clicked);
     const selected = ref(null);
-    store.commit("setLoadingValue", true);
-    setTimeout(() => store.commit("setLoadingValue", false), 500);
+    store.dispatch("getCategories");
 
     store.dispatch("changeSelectedValue", selected.value);
     store.dispatch("changeClickedValue", false);
@@ -95,7 +102,8 @@ export default {
 
     //fetching product storages
     function categoryProducts(value) {
-      store.dispatch("getCategoryProducts", value);
+      store.commit("setCategoryId", value);
+
       store.dispatch("changeSelectedValue", selected.value);
     }
 
