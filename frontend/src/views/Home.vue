@@ -99,7 +99,7 @@
                 <div class="flex-col flex-none p-4">
                   <img
                     class="flex-shrink-0 mx-auto rounded-none w-28 h-28"
-                    src="https://www.reliancedigital.in/medias/iPhone-11-64GB-White-491901639-i-5-1200Wx1200H?context=bWFzdGVyfGltYWdlc3w4MzU5OHxpbWFnZS9qcGVnfGltYWdlcy9oY2EvaDM2Lzk0MjE5MDI1NDQ5MjYuanBnfGQxNzZkZGFlYzgyNGFkZGM0OTU1ODA2OGEzMjI3NzJmMzQ4MzJiY2M4MmIwMGEyMzkxZjEyYjEzZWY2NGM4MWQ"
+                    :src="product.image"
                     alt=""
                   />
                   <h3 class="mt-2 text-sm font-medium text-gray-900">

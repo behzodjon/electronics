@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div v-if="pricing" class="animate__animated animate__lightSpeedInRight">
+  <div v-if="product" class="animate__animated animate__lightSpeedInRight">
     <TabGroup>
       <TabList
         class="relative z-0 flex bg-gray-200 divide-x divide-gray-300 rounded-none "

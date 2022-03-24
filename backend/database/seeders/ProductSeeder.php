@@ -17,20 +17,19 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        $titles = [
-            'iPhone6', 'iPhone6S', 'iPhone6S Plus', 'iPhone7', 'iPhone7 Plus', 'iPhone8', 'iPhone8 Plus', 'iPhone X',
-            'iPhone SE 2020', 'iPhone XS', 'iPhone XS Max', 'iPhone11', 'iPhone11 Pro', 'iPhone12', 'iPhone12 Mini',
-            'iPhone12 Pro', 'iPhone12 Pro Max', 'iPhone12 Pro Max', 'iPhone13'
-        ];
+        $products = Product::factory()
+            ->count(13)
+            ->create();
+        // $titles = [
+        //     'iPhone6', 'iPhone6S', 'iPhone6S Plus', 'iPhone7', 'iPhone7 Plus', 'iPhone8', 'iPhone8 Plus', 'iPhone X',
+        //     'iPhone SE 2020', 'iPhone XS', 'iPhone XS Max', 'iPhone11', 'iPhone11 Pro', 'iPhone12', 'iPhone12 Mini',
+        //     'iPhone12 Pro', 'iPhone12 Pro Max', 'iPhone12 Pro Max', 'iPhone13'
+        // ];
 
-        foreach ($titles as $title) {
-            $product = Product::updateOrCreate([
-                'title' => $title,
-                'category_id' => 1,
-            ], []);
+        foreach ($products as $product) {
             $a = [1, 2, 3, 4, 5, 6, 7];
             $random_arr = Arr::random($a, 3);
-             $product->storages()->sync($random_arr);
+            $product->storages()->sync($random_arr);
         }
     }
 }
