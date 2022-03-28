@@ -4,7 +4,9 @@ import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import Sell from '../views/Sell.vue'
 import RestorePassword from '../views/restore-password.vue'
-import store from "../store";
+import store from "../store"; 
+import checkout from "../views/checkout/cartwithproducts.vue"
+import billinformation from "../views/checkout/billinformation.vue"
 
 const routes = [
 
@@ -33,6 +35,8 @@ const routes = [
   { path: '/signup', name: 'Signup', component: Signup },
   { path: '/restore-password', name: 'RestorePassword', component:RestorePassword },
   { path: '/Sell', name: 'Sell', component: Sell },
+  { path: '/checkout', name: 'Checkout', component: checkout },
+  { path: '/cart-info', name: 'Cartinfo', component: billinformation },
 
 ];
 

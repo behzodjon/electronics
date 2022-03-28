@@ -50,8 +50,9 @@
             h-14
             peer
             focus:outline-none
-            border border-[#e5e7ea]
-            focus:border-transparent focus:ring-black
+            rounded-lg
+            border-2 border-[#EAEAEB]
+            focus:border-transparent focus:ring-[#0BADA2]
           "
         />
         <label for="email" class="form-label">Email address</label>

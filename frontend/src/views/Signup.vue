@@ -3,7 +3,7 @@
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <router-link :to="{ name: 'Home' }">
         <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900">
-          The Ultimate Electronic BuyBack Marketplace.
+          The Ultimate Electronic ByBack Marketplace.
         </h2>
       </router-link>
     </div>

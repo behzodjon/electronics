@@ -2,7 +2,7 @@
 <div>
   <button
     @click="openSidebar"
-    class="flex items-center px-4 py-3 text-base font-medium text-white bg-green-900 border-b-4 border-r-4 border-black rounded-md w-fit hover:bg-indigo-700 md:py-4 md:text-sm md:px-6"
+    class="flex items-center px-4 py-3 text-xl font-medium text-white bg-[#0C0D0D] rounded-md w-fit hover:bg-indigo-700 md:py-3 md:text-sm md:px-4"
   >
     Sell Now
   </button>
@@ -23,7 +23,7 @@
           leave-to="opacity-0"
         >
           <DialogOverlay
-            class="absolute inset-0 transition-opacity bg-gray-500 bg-opacity-75 "
+            class="absolute inset-0 transition-opacity bg-white0 bg-opacity-75 "
           />
         </TransitionChild>
 
@@ -39,7 +39,7 @@
           >
             <div class="w-screen max-w-md">
               <div
-                class="flex flex-col h-full overflow-y-scroll bg-gray-100 shadow-xl "
+                class="flex flex-col h-full overflow-y-scroll bg-white shadow-xl "
               >
                 <div class="py-4 px-4 bg-[#00633F] sm:px-6">
                   <div class="flex items-center justify-between">

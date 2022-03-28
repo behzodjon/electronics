@@ -1,6 +1,5 @@
-
 <template>
-  <header class="bg-neutral-900">
+  <header class="bg-[#0C0D0D]">
     <nav class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8" aria-label="Top">
       <div class="flex items-center justify-between w-full py-6 lg:border-none">
         <div class="flex items-center">
@@ -22,7 +21,7 @@
               {{ link.name }}
             </a>
           </div>
-          <div v-if="isLoggedIn" class="hidden ml-10 space-x-8 lg:block">
+          <div v-if="isLoggedIn" class="ml-10 space-x-8 lg:block">
             <router-link to="#" class="font-semibold text-white text-md"
               >{{user.name}}</router-link
             >
@@ -30,18 +29,21 @@
               >Logout</router-link
             >
           </div>
-          <div v-else class="hidden ml-10 space-x-8 lg:block">
-            <router-link to="/Login" class="font-semibold text-white text-md"
-              >Login</router-link
-            >
-            <router-link to="/Signup" class="font-semibold text-white text-md"
-              >Sign Up</router-link
+          <div v-else class="ml-10 space-x-4 lg:block">
+            <router-link to="/Login" class="text-white text-md font-baseline border rounded-full hover:border-2 px-4 pt-1 pb-2"
+              >Login/Signup</router-link
+            > 
+              <router-link to="/checkout" class="text-white text-md font-baseline border rounded-full hover:border-2 px-4 pt-1 pb-2"
+              >Checkout</router-link
             >
           </div>
+
+
         </div>
       </div>
     </nav>
   </header>
+
 </template>
 
 <script>
@@ -78,4 +80,7 @@ export default {
     };
   },
 };
+
+
 </script>
+

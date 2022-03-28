@@ -16,7 +16,8 @@
               bg-white
               border border-[#0F0F0F]
               shadow-sm
-              hover:bg-gray-50
+              rounded-lg
+              hover:bg-white
             "
           >
             <div class="inline-flex space-x-2">
@@ -117,8 +118,9 @@
             h-14
             peer
             focus:outline-none
-            border border-[#e5e7ea]
-            focus:border-transparent focus:ring-black
+            rounded-lg
+            border-2 border-[#EAEAEB]
+            focus:border-transparent focus:ring-[#0BADA2]
           "
         />
         <label for="email" class="form-label">Email address</label>
@@ -140,8 +142,9 @@
             h-14
             peer
             focus:outline-none
-            border border-[#e5e7ea]
-            focus:border-transparent focus:ring-black
+            rounded-lg
+            border-2 border-[#EAEAEB]
+            focus:border-transparent focus:ring-[#0BADA2]
           "
         />
         <label for="password" class="form-label"> Password </label>

@@ -10,8 +10,8 @@
     <div v-if="loading" class="flex justify-center mt-8">
       <Spinner class="w-10 h-10" />
     </div>
-    <div v-else class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-      <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
+    <div v-else class="mt-8 sm:mx-auto w-full sm:max-w-md">
+      <div class="px-4 py-8 bg-white rounded-lg sm:px-10 border-[#D5D6D7] border">
         <TabGroup>
           <TabList class="flex p-1 space-x-1 rounded-xl">
             <Tab as="template" v-slot="{ selected }">
@@ -40,7 +40,7 @@
                 :class="[
                   selected
                     ? 'border-black text-black'
-                    : 'border-[#e0e0e0] text-[#616161]',
+                    : 'border-[#EAEAEB] text-[#616161]',
                 ]"
                 class="
                   w-full

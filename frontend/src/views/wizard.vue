@@ -1,7 +1,7 @@
 <template>
   <div>
     <component :is="steps[currentStep].component" />
-    <div class="fixed bottom-0 w-full bg-gray-100 border-t-2 border-gray-300">
+    <div class="fixed bottom-0 w-full bg-white border-t-2 border-gray-300">
       <div class="w-full px-4 pt-0 pb-2 mx-auto lg:pt-2 lg:pb-4">
         <div class="flex items-center justify-start">
           <div

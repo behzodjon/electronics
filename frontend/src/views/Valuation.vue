@@ -32,7 +32,7 @@
       </TabList>
       <TabPanels>
         <TabPanel>
-          <div class="px-0 py-0 mx-auto bg-gray-100 max-w-7xl sm:px-6 lg:px-6">
+          <div class="px-0 py-0 mx-auto bg-white max-w-7xl sm:px-6 lg:px-6">
             <div class="space-y-12 lg:space-y-0">
               <div class="relative flex flex-col p-6">
                 <div class="flex-1">
@@ -73,7 +73,7 @@
           </div>
         </TabPanel>
         <TabPanel
-          ><div class="px-0 py-0 mx-auto bg-gray-100 max-w-7xl sm:px-6 lg:px-6">
+          ><div class="px-0 py-0 mx-auto bg-white max-w-7xl sm:px-6 lg:px-6">
             <div class="space-y-12 lg:space-y-0">
               <div class="relative flex flex-col p-6">
                 <div class="flex-1">

@@ -1,6 +1,6 @@
 
 <template>
-  <div class="mt-0 bg-gray-100 lg:mt-10">
+  <div class="mt-0 bg-white lg:mt-10">
     <h2 class="sr-only">Our Process</h2>
     <div class="mx-auto mt-6 max-w-7xl sm:px-0 lg:px-0">
       <div class="grid max-w-2xl grid-cols-1 px-4 mx-auto gap-y-2 gap-x-2">
