@@ -12,10 +12,6 @@ const store = createStore({
                 token: sessionStorage.getItem("TOKEN"),
             },
             storageList: [],
-            storageId: null,
-            productId: null,
-            categoryId: null,
-            conditionId: null,
             categories: [],
             categoryProducts: [],
             products: [],
@@ -29,6 +25,13 @@ const store = createStore({
             restorePassword: {
                 email: null,
                 mode: null,
+            },
+            formData: {
+                categoryId: null,
+                productId: null,
+                storageId: null,
+                conditionId: null,
+                price:null
             }
         }
     },
@@ -49,17 +52,17 @@ const store = createStore({
         setStorageList(state, payload) {
             state.storageList = payload
         },
-        setProductId(state, payload) {
-            state.productId = payload
+        setProductId(state, value) {
+            state.formData.productId = value
         },
-        setCategoryId(state, payload) {
-            state.categoryId = payload
+        setCategoryId(state, value) {
+            state.formData.categoryId = value
         },
-        setStorageId(state, payload) {
-            state.storageId = payload
+        setStorageId(state, value) {
+            state.formData.storageId = value
         },
-        setConditionId(state, payload) {
-            state.conditionId = payload
+        setConditionId(state, value) {
+            state.formData.conditionId = value
         },
         setCategories: (state, categories) => {
             state.categories = categories.data;
@@ -102,8 +105,8 @@ const store = createStore({
                 email: null,
                 mode: null,
             }
-        }
-
+        },
+     
     },
     getters: {
         isAuthenticated: state => !!state.user.token,
@@ -167,8 +170,8 @@ const store = createStore({
                 return res;
             });
         },
-        getCategoryProducts({ commit }, category) {
-            return axiosClient.get(`/categories/${category.id}/products`).then((res) => {
+        getCategoryProducts({ commit }, categoryId) {
+            return axiosClient.get(`/categories/${categoryId}/products`).then((res) => {
                 commit("setCategoryProducts", res.data);
                 return res;
             });
@@ -191,11 +194,12 @@ const store = createStore({
         setDirectOpen({ commit }, state) {
             commit("changeDirectOpen", state);
         },
-        changeSelectedValue({ commit }, state) {
-            commit("setSelectedValue", state);
+        changeSelectedValue({ commit }, value) {
+            commit("setSelectedValue", value);
         },
-        changeClickedValue({ commit }, state) {
-            commit("setClickedValue", state);
+     
+        changeClickedValue({ commit }, value) {
+            commit("setClickedValue", value);
         },
     }
 })

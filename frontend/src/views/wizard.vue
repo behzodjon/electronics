@@ -15,7 +15,6 @@
               Prev
             </button>
             <button
-           
               v-if="currentStep < steps.length - 1"
               v-on:click="next"
               class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white border border-black rounded-md shadow-sm bg-neutral-800 hover:bg-black"
@@ -23,12 +22,7 @@
               <span > Next </span>
            
             </button>
-            <button
-              v-else
-              class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white border border-black rounded-md shadow-sm bg-neutral-800 hover:bg-black"
-            >
-              Get Paid!
-            </button>
+           
           </div>
         </div>
       </div>

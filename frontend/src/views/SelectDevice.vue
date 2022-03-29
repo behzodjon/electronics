@@ -103,7 +103,7 @@ export default {
   setup() {
     //fetching products
     const products = computed(() => store.state.categoryProducts);
-    const categoryId = computed(() => store.state.categoryId);
+    const categoryId = computed(() => store.state.formData.categoryId);
     const clickedState = computed(() => store.state.clicked);
     const selected = ref(null);
 

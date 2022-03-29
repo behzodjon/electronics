@@ -1,128 +1,115 @@
 <template>
-<div>
-  <div v-if="product" class="animate__animated animate__lightSpeedInRight">
-    <TabGroup>
-      <TabList
-        class="relative z-0 flex bg-gray-200 divide-x divide-gray-300 rounded-none "
-      >
-        <Tab v-slot="{ selected }">
-          <button
-            class="flex-1 px-1 py-4 text-base font-medium border-b-2 whitespace-nowrap"
-            :class="[
-              selected
-                ? 'bg-gray-200 border-b-2 border-green-500 text-black'
-                : 'bg-gray-200 text-black ',
-            ]"
-          >
-            Option 1
-          </button>
-        </Tab>
-        <Tab v-slot="{ selected }">
-          <button
-            class="flex-1 px-1 py-4 text-base font-medium border-b-2 whitespace-nowrap"
-            :class="[
-              selected
-                ? 'bg-gray-200 border-b-2 border-green-500 text-black'
-                : 'bg-gray-200 text-black',
-            ]"
-          >
-            Option 2
-          </button>
-        </Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>
-          <div class="px-0 py-0 mx-auto bg-white max-w-7xl sm:px-6 lg:px-6">
-            <div class="space-y-12 lg:space-y-0">
-              <div class="relative flex flex-col p-6">
-                <div class="flex-1">
-                  <h3
-                    class="text-xl font-bold text-black underline underline-offset-4 decoration-green-500 decoration-wavy"
-                  >
-                    {{ pricingList[0].title }}
-                  </h3>
-                  <p
-                    class="flex items-baseline mt-4 text-black animate__animated animate__fadeIn"
-                  >
-                    <span class="text-4xl font-extrabold tracking-tight"
-                      >${{ pricingList[0].price }}</span
+  <div>
+    <div v-if="product" class="animate__animated animate__lightSpeedInRight">
+      <TabGroup>
+        <TabList class="relative z-0 flex bg-gray-200 divide-x divide-gray-300 rounded-none">
+          <Tab v-slot="{ selected }">
+            <button
+              class="flex-1 px-1 py-4 text-base font-medium border-b-2 whitespace-nowrap"
+              :class="[
+                selected
+                  ? 'bg-gray-200 border-b-2 border-green-500 text-black'
+                  : 'bg-gray-200 text-black ',
+              ]"
+            >Option 1</button>
+          </Tab>
+          <Tab v-slot="{ selected }">
+            <button
+              class="flex-1 px-1 py-4 text-base font-medium border-b-2 whitespace-nowrap"
+              :class="[
+                selected
+                  ? 'bg-gray-200 border-b-2 border-green-500 text-black'
+                  : 'bg-gray-200 text-black',
+              ]"
+            >Option 2</button>
+          </Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <div class="px-0 py-0 mx-auto bg-white max-w-7xl sm:px-6 lg:px-6">
+              <div class="space-y-12 lg:space-y-0">
+                <div class="relative flex flex-col p-6">
+                  <div class="flex-1">
+                    <h3
+                      class="text-xl font-bold text-black underline underline-offset-4 decoration-green-500 decoration-wavy"
+                    >{{ pricingList[0].title }}</h3>
+                    <p
+                      class="flex items-baseline mt-4 text-black animate__animated animate__fadeIn"
                     >
-                    <span class="ml-1 text-xl font-semibold">{{
-                      pricingList[0].frequency
-                    }}</span>
-                  </p>
-                  <p class="mt-6 text-gray-900">
-                    {{ pricingList[0].description }}
-                  </p>
-                  <ul role="list" class="mt-6 space-y-4">
-                    <li
-                      v-for="feature in pricingList[0].features"
-                      :key="feature"
-                      class="flex"
-                    >
-                      <CheckIcon
-                        class="flex-shrink-0 w-6 h-6 text-green-500"
-                        aria-hidden="true"
-                      />
-                      <span class="ml-2 text-black">{{ feature }}</span>
-                    </li>
-                  </ul>
+                      <span
+                        class="text-4xl font-extrabold tracking-tight"
+                      >${{ pricingList[0].price }}</span>
+                      <span class="ml-1 text-xl font-semibold">
+                        {{
+                          pricingList[0].frequency
+                        }}
+                      </span>
+                    </p>
+                    <p class="mt-6 text-gray-900">{{ pricingList[0].description }}</p>
+                    <ul role="list" class="mt-6 space-y-4">
+                      <li v-for="feature in pricingList[0].features" :key="feature" class="flex">
+                        <CheckIcon class="flex-shrink-0 w-6 h-6 text-green-500" aria-hidden="true" />
+                        <span class="ml-2 text-black">{{ feature }}</span>
+                      </li>
+                    </ul>
+                    <div class="flex justify-center mt-4">
+                      <button
+                        @click="$router.push('/checkout')"
+                        class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white border border-black rounded-md shadow-sm bg-neutral-800 hover:bg-black"
+                      >Accept offer</button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </TabPanel>
-        <TabPanel
-          ><div class="px-0 py-0 mx-auto bg-white max-w-7xl sm:px-6 lg:px-6">
-            <div class="space-y-12 lg:space-y-0">
-              <div class="relative flex flex-col p-6">
-                <div class="flex-1">
-                  <h3
-                    class="text-xl font-bold text-gray-900 underline underline-offset-4 decoration-green-500 decoration-wavy"
-                  >
-                    {{ pricingList[1].title }}
-                  </h3>
-                  <p
-                    class="flex items-baseline mt-4 text-gray-900 animate__animated animate__fadeIn"
-                  >
-                    <span
-                      class="mr-4 text-3xl font-bold tracking-tight line-through "
-                      >${{ pricingList[1].oldprice }}</span
+          </TabPanel>
+          <TabPanel>
+            <div class="px-0 py-0 mx-auto bg-white max-w-7xl sm:px-6 lg:px-6">
+              <div class="space-y-12 lg:space-y-0">
+                <div class="relative flex flex-col p-6">
+                  <div class="flex-1">
+                    <h3
+                      class="text-xl font-bold text-gray-900 underline underline-offset-4 decoration-green-500 decoration-wavy"
+                    >{{ pricingList[1].title }}</h3>
+                    <p
+                      class="flex items-baseline mt-4 text-gray-900 animate__animated animate__fadeIn"
                     >
-                    <span class="text-4xl font-extrabold tracking-tight"
-                      >${{ pricingList[1].price }}</span
-                    >
-                    <span class="ml-1 text-xl font-semibold">{{
-                      pricingList[1].frequency
-                    }}</span>
-                  </p>
-                  <p class="mt-6 text-gray-900">
-                    {{ pricingList[1].description }}
-                  </p>
-                  <ul role="list" class="mt-6 space-y-4">
-                    <li
-                      v-for="feature in pricingList[1].features"
-                      :key="feature"
-                      class="flex"
-                    >
-                      <CheckIcon
-                        class="flex-shrink-0 w-6 h-6 text-green-500"
-                        aria-hidden="true"
-                      />
-                      <span class="ml-2 text-gray-900">{{ feature }}</span>
-                    </li>
-                  </ul>
+                      <span
+                        class="mr-4 text-3xl font-bold tracking-tight line-through"
+                      >${{ pricingList[1].oldprice }}</span>
+                      <span
+                        class="text-4xl font-extrabold tracking-tight"
+                      >${{ pricingList[1].price }}</span>
+                      <span class="ml-1 text-xl font-semibold">
+                        {{
+                          pricingList[1].frequency
+                        }}
+                      </span>
+                    </p>
+                    <p class="mt-6 text-gray-900">{{ pricingList[1].description }}</p>
+                    <ul role="list" class="mt-6 space-y-4">
+                      <li v-for="feature in pricingList[1].features" :key="feature" class="flex">
+                        <CheckIcon class="flex-shrink-0 w-6 h-6 text-green-500" aria-hidden="true" />
+                        <span class="ml-2 text-gray-900">{{ feature }}</span>
+                      </li>
+                    </ul>
+                    <div class="flex justify-center mt-4">
+                      <button
+                        @click="$router.push('/checkout')"
+                        class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white border border-black rounded-md shadow-sm bg-neutral-800 hover:bg-black"
+                      >Accept offer</button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </TabPanel>
-        <TabPanel>Content 3</TabPanel>
-      </TabPanels>
-    </TabGroup>
-    <faqs></faqs>
-  </div>
-   <div v-else class="flex justify-center mt-8">
+          </TabPanel>
+          <TabPanel>Content 3</TabPanel>
+        </TabPanels>
+      </TabGroup>
+      <faqs></faqs>
+    </div>
+    <div v-else class="flex justify-center mt-8">
       <Spinner class="w-10 h-10" />
     </div>
   </div>
@@ -172,13 +159,13 @@ export default {
   },
   computed: {
     productId() {
-      return this.$store.state.productId;
+      return this.$store.state.formData.productId;
     },
     storageId() {
-      return this.$store.state.storageId;
+      return this.$store.state.formData.storageId;
     },
     conditionId() {
-      return this.$store.state.conditionId;
+      return this.$store.state.formData.conditionId;
     },
 
     pricingList() {

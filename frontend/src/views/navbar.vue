@@ -3,14 +3,14 @@
     <nav class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8" aria-label="Top">
       <div class="flex items-center justify-between w-full py-6 lg:border-none">
         <div class="flex items-center">
-          <a href="#">
+          <router-link to="/">
             <span class="sr-only">Nav</span>
             <img
               class="h-5"
               src="https://d1eh9yux7w8iql.cloudfront.net/front/public/statics/pastrami/img/logo_animated_bm.gif"
               alt=""
             />
-          </a>
+          </router-link >
           <div class="hidden ml-10 space-x-8 lg:block">
             <a
               v-for="link in navigation"
@@ -30,10 +30,10 @@
             >
           </div>
           <div v-else class="ml-10 space-x-4 lg:block">
-            <router-link to="/Login" class="text-white text-md font-baseline border rounded-full hover:border-2 px-4 pt-1 pb-2"
+            <router-link to="/Login" class="px-4 pt-1 pb-2 text-white border rounded-full text-md font-baseline hover:border-2"
               >Login/Signup</router-link
             > 
-              <router-link to="/checkout" class="text-white text-md font-baseline border rounded-full hover:border-2 px-4 pt-1 pb-2"
+              <router-link to="/checkout" class="px-4 pt-1 pb-2 text-white border rounded-full text-md font-baseline hover:border-2"
               >Checkout</router-link
             >
           </div>

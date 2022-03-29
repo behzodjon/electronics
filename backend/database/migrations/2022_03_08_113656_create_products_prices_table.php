@@ -18,7 +18,7 @@ class CreateProductsPricesTable extends Migration
             $table->integer('product_id');
             $table->integer('storage_id');
             $table->integer('condition_id');
-            $table->float('price')->nullable();
+            $table->integer('price')->nullable();
         });
     }
 

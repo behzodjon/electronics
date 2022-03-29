@@ -102,8 +102,7 @@ export default {
 
     //fetching product storages
     function categoryProducts(value) {
-      store.commit("setCategoryId", value);
-
+      store.commit("setCategoryId", value.id);
       store.dispatch("changeSelectedValue", selected.value);
     }
 
