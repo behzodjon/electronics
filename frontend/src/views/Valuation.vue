@@ -54,7 +54,7 @@
                     </ul>
                     <div class="flex justify-center mt-4">
                       <button
-                        @click="$router.push('/checkout')"
+                        @click="acceptOffer(pricingList[0].price)"
                         class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white border border-black rounded-md shadow-sm bg-neutral-800 hover:bg-black"
                       >Accept offer</button>
                     </div>
@@ -95,7 +95,7 @@
                     </ul>
                     <div class="flex justify-center mt-4">
                       <button
-                        @click="$router.push('/checkout')"
+                        @click="acceptOffer(pricingList[1].price)"
                         class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white border border-black rounded-md shadow-sm bg-neutral-800 hover:bg-black"
                       >Accept offer</button>
                     </div>
@@ -136,14 +136,23 @@ export default {
   },
   setup() {
     store.commit("setSectionTitle", "Valuation");
+    function acceptOffer() {
+
+    }
     return {
-      pricing,
     };
   },
   data() {
     return {
       product: null,
     };
+  },
+  methods: {
+    acceptOffer(price) {
+      this.$store.commit("setPriceValue", price);
+      this.$store.dispatch('storeCartData',this.formData)
+      this.$router.push('/checkout')
+    }
   },
   mounted() {
     axiosClient
@@ -158,6 +167,9 @@ export default {
       });
   },
   computed: {
+    formData(){
+      return this.$store.state.formData;
+    },
     productId() {
       return this.$store.state.formData.productId;
     },
@@ -206,41 +218,4 @@ export default {
   },
 };
 
-const pricing = {
-  option1: [
-    {
-      title: "Guranteed Value",
-      price: 239,
-      frequency: "AUD",
-      description:
-        "Instant cash deposit once we value your device. No waiting around",
-      features: [
-        "Free shipping label",
-        "Free Pickup (Perth Only)",
-        "Valid for 14 days",
-        "Cash deposit within 4-5 hours",
-        "Free return if counter-offer is rejected",
-      ],
-      cta: "Monthly billing",
-    },
-  ],
-  option2: [
-    {
-      title: "Want 10% extra?",
-      oldprice: 239,
-      price: 263,
-      frequency: "AUD",
-      description:
-        "Send us your device and well sell it for you. Deposit in your account within 3-4 weeks",
-      features: [
-        "Free shipping label",
-        "Free Pickup (Perth Only)",
-        "3-4 weeks time frame",
-        "Cash deposit within 4-5 hours",
-        "Free return if counter-offer is rejected",
-      ],
-      cta: "Monthly billing",
-    },
-  ],
-};
 </script>

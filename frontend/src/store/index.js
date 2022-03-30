@@ -31,7 +31,7 @@ const store = createStore({
                 productId: null,
                 storageId: null,
                 conditionId: null,
-                price:null
+                price: null
             }
         }
     },
@@ -63,6 +63,9 @@ const store = createStore({
         },
         setConditionId(state, value) {
             state.formData.conditionId = value
+        },
+        setPriceValue(state, value) {
+            state.formData.price = value
         },
         setCategories: (state, categories) => {
             state.categories = categories.data;
@@ -106,7 +109,7 @@ const store = createStore({
                 mode: null,
             }
         },
-     
+
     },
     getters: {
         isAuthenticated: state => !!state.user.token,
@@ -188,6 +191,11 @@ const store = createStore({
                 return res;
             });
         },
+        storeCartData({ commit }, data) {
+            return axiosClient.post(`/cart/store`, data).then((res) => {
+                return res;
+            });
+        },
         getSideBarState({ commit }, state) {
             commit("changeSideBarState", state);
         },
@@ -197,7 +205,7 @@ const store = createStore({
         changeSelectedValue({ commit }, value) {
             commit("setSelectedValue", value);
         },
-     
+
         changeClickedValue({ commit }, value) {
             commit("setClickedValue", value);
         },
