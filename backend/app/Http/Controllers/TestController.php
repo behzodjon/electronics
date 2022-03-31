@@ -14,7 +14,10 @@ class TestController extends Controller
 {
     public function index()
     {
-        $cartData = Cart::content();
-        dd($cartData);
+        $clientKey = request()->header('Client-Key');
+
+        $userId = auth('sanctum')->id() ?? auth()->id();
+        $sessionId = $clientKey ?? session()->getId();
+        dd($sessionId);
     }
 }
