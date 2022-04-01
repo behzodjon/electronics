@@ -222,7 +222,7 @@ export default {
       loading.value = true;
 
       store
-        .dispatch("login", user)
+        .dispatch("user/login", user)
         .then(() => {
           loading.value = false;
 

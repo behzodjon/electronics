@@ -113,7 +113,7 @@ function submitLogin() {
   loading.value = true;
 
   store
-    .dispatch("sendCode", form)
+    .dispatch("user/sendCode", form)
     .then(() => {
       loading.value = false;
     })

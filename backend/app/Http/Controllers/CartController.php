@@ -8,11 +8,9 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function show(Request $request)
+    public function show($sessionId)
     {
-        $sessionId = $request->get('sessionId');
-        
-        $cart = Cart::whereSessionId($sessionId)->first();
+        $cart = Cart::whereSessionId($sessionId)->with('cartItems')->first();
 
         return new CartResource($cart);
     }

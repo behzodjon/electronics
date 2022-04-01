@@ -200,7 +200,7 @@
             'pointer-events-none opacity-40': !acceptPrivacy || loading,
           }"
           type="submit"
-          class="flex justify-center w-full px-4 py-4 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          class="flex justify-center w-full px-4 py-4 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           <svg
             v-if="loading"
@@ -259,7 +259,7 @@ export default {
       loading.value = true;
 
       store
-        .dispatch("register", user)
+        .dispatch("user/register", user)
         .then(() => {
           loading.value = false;
 

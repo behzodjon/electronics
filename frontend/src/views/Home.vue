@@ -154,7 +154,7 @@ export default {
 
     store.dispatch("getProducts");
     if (isLoggedIn.value) {
-      store.dispatch("getUser");
+      store.dispatch("user/getUser");
     }
 
     function openDevice(value) {
@@ -163,9 +163,7 @@ export default {
       store.dispatch("setDirectOpen", open.value);
       store.dispatch("getProductStorages", value);
     }
-    store.dispatch("fetchCart");
-
-
+    store.dispatch('cart/fetchCart');
 
     return {
       user,

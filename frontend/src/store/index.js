@@ -1,16 +1,18 @@
 import { createStore } from "vuex";
 import axiosClient from "../axios";
+import cart from './modules/cart';
+import user from './modules/user';
 
 
 
 // Create a new store instance.
 const store = createStore({
+    modules: {
+        cart,
+        user
+    },
     state() {
         return {
-            user: {
-                data: {},
-                token: sessionStorage.getItem("TOKEN"),
-            },
             storageList: [],
             categories: [],
             categoryProducts: [],
@@ -22,10 +24,6 @@ const store = createStore({
             sectionTitle: '',
             steps: [],
             loading: true,
-            restorePassword: {
-                email: null,
-                mode: null,
-            },
             formData: {
                 categoryId: null,
                 productId: null,
@@ -33,29 +31,9 @@ const store = createStore({
                 conditionId: null,
                 price: null
             },
-            cart: {
-                session_id: null,
-                data: []
-            }
         }
     },
     mutations: {
-        SET_CART_DATA(state, { session_id }) {
-            state.cart.session_id = session_id
-        },
-        logout: (state) => {
-            state.user.token = null;
-            state.user.data = {};
-            sessionStorage.removeItem("TOKEN");
-        },
-        setUser: (state, user) => {
-            state.user.data = user;
-        },
-
-        setToken: (state, token) => {
-            state.user.token = token;
-            sessionStorage.setItem('TOKEN', token);
-        },
         setStorageList(state, payload) {
             state.storageList = payload
         },
@@ -104,90 +82,8 @@ const store = createStore({
         setLoadingValue: (state, value) => {
             state.loading = value;
         },
-        setRestorePasswordEmail(state, email) {
-            state.restorePassword.email = email
-        },
-        setRestorePasswordMode(state, mode) {
-            state.restorePassword.mode = mode
-        },
-        resetRestorePassword(state) {
-            state.restorePassword = {
-                email: null,
-                mode: null,
-            }
-        },
-
-    },
-    getters: {
-        isAuthenticated: state => !!state.user.token,
     },
     actions: {
-        async fetchCart({ commit, state }) {
-            try {
-                const sessionId = localStorage.getItem('cart_sessionId')
-                if (sessionId) {
-                    const cart = await axiosClient.get(`/cart`,{se})
-                    commit('SET_CART_DATA', cart)
-                }
-                const cart = await axiosClient.post('/cart/store')
-                localStorage.setItem('cart_sessionId', cart.data.session_id)
-                commit('SET_CART_DATA', cart.data)
-            } catch (err) {
-                //
-            }
-        },
-        logout({ commit }) {
-            return axiosClient.post('/logout')
-                .then(response => {
-                    commit('logout')
-                    return response;
-                })
-        },
-        register({ commit }, user) {
-            return axiosClient.post('/register', user)
-                .then(({ data }) => {
-                    commit('setUser', data.user);
-                    commit('setToken', data.token)
-                    return data;
-                })
-        },
-        login({ commit }, user) {
-            return axiosClient.post('/login', user)
-                .then(({ data }) => {
-                    commit('setUser', data.user);
-                    commit('setToken', data.token)
-                    return data;
-                })
-        },
-        sendCode({ commit }, payload) {
-            return axiosClient.post('/send-code', payload)
-                .then(({ data }) => {
-                    commit('setRestorePasswordMode', 'code');
-                    commit('setRestorePasswordEmail', payload);
-                    return data;
-                })
-        },
-        setNewPassword({ commit }, payload) {
-            return axiosClient.post('/set-new-password', payload)
-                .then(() => {
-                    commit('resetRestorePassword');
-                })
-        },
-        loginWithGoogle({ commit }, token) {
-            return axiosClient.get(`/google/callback/${token}`)
-                .then(({ data }) => {
-                    commit('setUser', data.user);
-                    commit('setToken', data.token)
-                    return data;
-                })
-
-        },
-        getUser({ commit }) {
-            return axiosClient.get('/user')
-                .then(res => {
-                    commit('setUser', res.data)
-                })
-        },
         getCategories({ commit }) {
             return axiosClient.get('/categories').then((res) => {
                 commit("setCategories", res);
@@ -209,11 +105,6 @@ const store = createStore({
         getProductStorages({ commit }, value) {
             return axiosClient.get(`/product/${value}/storages`).then((res) => {
                 commit("setStorageList", res.data);
-                return res;
-            });
-        },
-        storeCartData({ commit }, data) {
-            return axiosClient.post(`/cart/store`, data).then((res) => {
                 return res;
             });
         },

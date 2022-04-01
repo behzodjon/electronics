@@ -136,7 +136,7 @@ const email = computed(() => store.state.restorePassword.email.login);
 
 function submitPassword() {
   store
-    .dispatch("setNewPassword", {
+    .dispatch("user/setNewPassword", {
       ...form,
       email:email.value,
     })

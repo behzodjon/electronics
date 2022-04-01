@@ -9,7 +9,7 @@
 
         <div class="my-4 text-2xl text-center text-[#010101]">Reset Password</div>
             <router-link :to="{ name: 'Login' }">
-        <h2 class="mt-6 text-md font-baseline text-left text-gray-900">
+        <h2 class="mt-6 text-left text-gray-900 text-md font-baseline">
           Back to Log in / Sign Up
         </h2>
       </router-link>
@@ -36,8 +36,8 @@ import NewPasswordForm from "../components/restore/NewPasswordForm.vue";
 import store from "../store";
 import { computed } from "vue";
 
-store.commit("setRestorePasswordMode", "login");
-store.commit("setRestorePasswordEmail", null);
+store.commit("user/setRestorePasswordMode", "login");
+store.commit("user/setRestorePasswordEmail", null);
 
-const mode = computed(() => store.state.restorePassword.mode);
+const mode = computed(() => store.user.state.restorePassword.mode);
 </script>
