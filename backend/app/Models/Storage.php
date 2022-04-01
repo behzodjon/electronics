@@ -19,4 +19,15 @@ class Storage extends Model
     {
         return $this->belongsToMany(Condition::class, 'products_prices');
     }
+
+
+    /**
+     * @return HasMany
+     */
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
+
+
 }

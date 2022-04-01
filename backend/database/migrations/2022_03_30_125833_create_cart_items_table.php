@@ -15,13 +15,12 @@ class CreateCartItemsTable extends Migration
     {
         Schema::create('cart_items', function (Blueprint $table) {
             $table->id();
-            $table->string('attributes_hash');
             $table->float('price')->default(0);
-            $table->foreignId('cart_id')->constrained()->onDelete('cascade')->nullable();
-            $table->foreignId('category_id')->constrained()->onDelete('cascade')->nullable();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade')->nullable();
-            $table->foreignId('storage_id')->constrained()->onDelete('cascade')->nullable();
-            $table->foreignId('condition_id')->constrained()->onDelete('cascade')->nullable();
+            $table->foreignId('cart_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('product_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('storage_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('condition_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

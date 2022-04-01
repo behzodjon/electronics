@@ -19,4 +19,13 @@ class Condition extends Model
     {
         return $this->belongsToMany(Storage::class, 'products_prices')->withPivot('price');
     }
+
+
+    /**
+     * @return HasMany
+     */
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 }

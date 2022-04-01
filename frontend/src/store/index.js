@@ -32,10 +32,17 @@ const store = createStore({
                 storageId: null,
                 conditionId: null,
                 price: null
+            },
+            cart: {
+                session_id: null,
+                data: []
             }
         }
     },
     mutations: {
+        SET_CART_DATA(state, { session_id }) {
+            state.cart.session_id = session_id
+        },
         logout: (state) => {
             state.user.token = null;
             state.user.data = {};
@@ -115,6 +122,20 @@ const store = createStore({
         isAuthenticated: state => !!state.user.token,
     },
     actions: {
+        async fetchCart({ commit, state }) {
+            try {
+                const sessionId = localStorage.getItem('cart_sessionId')
+                if (sessionId) {
+                    const cart = await axiosClient.get(`/cart`,{se})
+                    commit('SET_CART_DATA', cart)
+                }
+                const cart = await axiosClient.post('/cart/store')
+                localStorage.setItem('cart_sessionId', cart.data.session_id)
+                commit('SET_CART_DATA', cart.data)
+            } catch (err) {
+                //
+            }
+        },
         logout({ commit }) {
             return axiosClient.post('/logout')
                 .then(response => {

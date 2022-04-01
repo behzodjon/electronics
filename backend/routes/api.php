@@ -45,5 +45,5 @@ Route::get('/products', [ProductController::class, 'index']);
 Route::get('/conditions', [ConditionController::class, 'index']);
 Route::get('/product/{product}/storages', [ProductStorageController::class, 'index']);
 Route::get('/products/{product}/{storage}/{condition}/price', [ProductPriceController::class, 'show']);
-Route::get('/cart', [CartController::class, 'index']);
+Route::get('/cart', [CartController::class, 'show']);
 Route::post('/cart/store', [CartController::class, 'store']);

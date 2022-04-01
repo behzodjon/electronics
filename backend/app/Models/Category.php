@@ -14,4 +14,12 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    /**
+     * @return HasMany
+     */
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 }
