@@ -136,9 +136,6 @@ export default {
   },
   setup() {
     store.commit("setSectionTitle", "Valuation");
-    function acceptOffer() {
-
-    }
     return {
     };
   },
@@ -150,7 +147,8 @@ export default {
   methods: {
     acceptOffer(price) {
       this.$store.commit("setPriceValue", price);
-      this.$store.dispatch('storeCartData',this.formData)
+      const sessionId = localStorage.getItem('cart_sessionId')
+      this.$store.dispatch('storeCartData', { ...this.formData, sessionId })
       this.$router.push('/checkout')
     }
   },
@@ -167,17 +165,17 @@ export default {
       });
   },
   computed: {
-    formData(){
+    formData() {
       return this.$store.state.formData;
     },
     productId() {
-      return this.$store.state.formData.productId;
+      return this.$store.state.formData.product_id;
     },
     storageId() {
-      return this.$store.state.formData.storageId;
+      return this.$store.state.formData.storage_id;
     },
     conditionId() {
-      return this.$store.state.formData.conditionId;
+      return this.$store.state.formData.condition_id;
     },
 
     pricingList() {

@@ -99,7 +99,7 @@ export default {
   setup() {
     const selected = ref(null);
     const clickedState = computed(() => store.state.clicked);
-    const productId = computed(() => store.state.formData.productId);
+    const productId = computed(() => store.state.formData.product_id);
 
     store.dispatch("changeSelectedValue", selected.value);
     store.dispatch("changeClickedValue", false);

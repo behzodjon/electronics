@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConditionController;
 use App\Http\Controllers\ProductPriceController;
@@ -47,3 +48,5 @@ Route::get('/product/{product}/storages', [ProductStorageController::class, 'ind
 Route::get('/products/{product}/{storage}/{condition}/price', [ProductPriceController::class, 'show']);
 Route::get('/cart/{sessionId}', [CartController::class, 'show']);
 Route::post('/cart/store', [CartController::class, 'store']);
+Route::post('/cartItems/store', [CartItemController::class, 'store']);
+Route::post('/cartItems/{cartItem:id}', [CartItemController::class, 'destroy']);

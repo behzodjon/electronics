@@ -25,10 +25,10 @@ const store = createStore({
             steps: [],
             loading: true,
             formData: {
-                categoryId: null,
-                productId: null,
-                storageId: null,
-                conditionId: null,
+                category_id: null,
+                product_id: null,
+                storage_id: null,
+                condition_id: null,
                 price: null
             },
         }
@@ -38,16 +38,16 @@ const store = createStore({
             state.storageList = payload
         },
         setProductId(state, value) {
-            state.formData.productId = value
+            state.formData.product_id = value
         },
         setCategoryId(state, value) {
-            state.formData.categoryId = value
+            state.formData.category_id = value
         },
         setStorageId(state, value) {
-            state.formData.storageId = value
+            state.formData.storage_id = value
         },
         setConditionId(state, value) {
-            state.formData.conditionId = value
+            state.formData.condition_id = value
         },
         setPriceValue(state, value) {
             state.formData.price = value
@@ -120,6 +120,14 @@ const store = createStore({
 
         changeClickedValue({ commit }, value) {
             commit("setClickedValue", value);
+        },
+
+        async storeCartData({ commit }, data) {
+            try {
+                await axiosClient.post('/cartItems/store', data)
+            } catch (err) {
+                //
+            }
         },
     }
 })

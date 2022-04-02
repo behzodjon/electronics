@@ -28,7 +28,13 @@ const actions = {
                 localStorage.setItem('cart_sessionId', cart.data.session_id)
                 commit('SET_DATA', cart.data)
             }
-
+        } catch (err) {
+            //
+        }
+    },
+    async deleteItem({ commit },item) {
+        try {
+            await axiosClient.post(`/cartItems/${item.id}`)
         } catch (err) {
             //
         }
@@ -39,4 +45,4 @@ export default {
     state,
     actions,
     mutations
-  }
+}
