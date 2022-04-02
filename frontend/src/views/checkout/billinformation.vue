@@ -1,29 +1,9 @@
 <template>
-<div class="max-h-100">
-  <div class="bg-[#F9F9F9]">
-    <header class="relative bg-[#F9F9F9] border-b border-[#EAEAEB] text-sm lg:text-base font-medium text-gray-700">
-      <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <div class="relative flex justify-end sm:justify-center">
-
-          <nav aria-label="Progress" class="">
-            <ol role="list" class="flex space-x-4">
-              <li v-for="(step, stepIdx) in steps" :key="step.name" class="flex items-center">
-                <a v-if="step.status === 'current'" :href="step.href" aria-current="page" class="text-[#0BADA2]">{{ step.name }}</a>
-                <a v-else :href="step.href">{{ step.name }}</a>
-                <ChevronRightIcon v-if="stepIdx !== steps.length - 1" class="w-5 h-5 text-gray-300 ml-2" aria-hidden="true" />
-              </li>
-            </ol>
-          </nav>
-
-        </div>
-      </div>
-    </header>
-
-  <div class="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto mt-6 ">
+  <div class="max-w-5xl px-4 mx-auto mt-6 sm:px-6 lg:px-8 ">
     <div class="sm:flex sm:items-center">
       <div class="sm:flex-auto">
-        <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">Just A Few Questions!</h1>
-        <p class="mt-2 text-md text-gray-700 pb-6">Please fill in the below questions. Once complete, click next.</p>
+        <h1 class="text-2xl font-bold text-gray-900 lg:text-3xl">Just A Few Questions!</h1>
+        <p class="pb-6 mt-2 text-gray-700 text-md">Please fill in the below questions. Once complete, click next.</p>
       </div>
 
     </div>
@@ -83,74 +63,23 @@
 
 
   </div>
-  </div>
-  <div class="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pb-10 mt-6">
-      <div class="sm:flex sm:items-center">
-      <div class="sm:flex-auto">
-      <div class="mt-4 sm:mt-0 sm:ml-0 sm:flex-none space-x-4">
-      <button type="button" class=" rounded-md border border-transparent bg-[#0C0D0D] px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-[#0C0D0D] focus:outline-none focus:ring-2 focus:ring-[#0C0D0D] focus:ring-offset-2 sm:w-auto">Next Step</button>
-      </div>
-      </div>
-    </div>
-    </div>
-    </div>
+ 
 </template>
 
 <script>
-const steps = [
-  { name: 'Wallet', href: '#', status: 'past' },
-  { name: 'Billing Information', href: '#', status: 'current' },
-  { name: 'Payment Method', href: '#', status: 'upcoming' },
-  { name: 'Delivery Method', href: '#', status: 'upcoming' },
-  { name: 'Confirmation', href: '#', status: 'upcoming' },
-]
-
-
-const plans = [
-  {
-    id: 1,
-    name: 'Apple',
-    memory: 'iPhone X',
-    cpu: '256GB',
-    storage: 'Great Condition',
-    price: '$240',
-    isCurrent: false,
-  },
-    {
-    id: 2,
-    name: 'Apple',
-    memory: 'iPhone X',
-    cpu: '256GB',
-    storage: 'Great Condition',
-    price: '$240',
-    isCurrent: false,
-  },
-
-
-  // More plans...
-]
+import { ChevronRightIcon, ChevronUpIcon } from '@heroicons/vue/solid'
 
 export default {
   components: {
-    Popover,
-    PopoverButton,
-    PopoverOverlay,
-    PopoverPanel,
-    TransitionChild,
-    TransitionRoot,
     ChevronRightIcon,
     ChevronUpIcon,
   },
   setup() {
     return {
-      plans,
-      steps,
     }
   },
 }
 
-import { ChevronRightIcon, ChevronUpIcon } from '@heroicons/vue/solid'
-import { Popover, PopoverButton, PopoverOverlay, PopoverPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 </script>
 
 

@@ -149,7 +149,7 @@ export default {
     const store = useStore();
 
     const products = computed(() => store.state.products);
-    const isLoggedIn = computed(() => store.getters.isAuthenticated);
+    const isLoggedIn = computed(() => store.getters['user/isAuthenticated']);
     const user = computed(() => store.state.user.data);
 
     store.dispatch("getProducts");

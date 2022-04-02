@@ -251,10 +251,10 @@ export default {
           return null;
         }
         await this.$store.dispatch(
-          "loginWithGoogle",
+          "user/loginWithGoogle",
           googleUser.getAuthResponse().access_token
         );
-        this.$router.push({ name: "Home" });
+        this.$router.push(this.$route.query.redirect || '/');
       } catch (error) {
         console.log(error);
         return null;
