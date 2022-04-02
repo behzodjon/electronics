@@ -39,5 +39,5 @@ import { computed } from "vue";
 store.commit("user/setRestorePasswordMode", "login");
 store.commit("user/setRestorePasswordEmail", null);
 
-const mode = computed(() => store.user.state.restorePassword.mode);
+const mode = computed(() => store.state.user.restorePassword.mode);
 </script>

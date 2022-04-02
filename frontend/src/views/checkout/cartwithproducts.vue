@@ -91,8 +91,8 @@
                 <td
                   :class="[index === 0 ? '' : 'border-t border-[#EAEAEB]', 'px-3 py-3.5 text-sm text-black']"
                 >
-                  <div class="sm:hidden">{{ item.price }}</div>
-                  <div class="hidden sm:block">{{ item.price }}</div>
+                  <div class="sm:hidden">{{ item.price }}$</div>
+                  <div class="hidden sm:block">{{ item.price }}$</div>
                 </td>
                 <td
                   :class="[index === 0 ? '' : 'border-t border-transparent', 'relative py-3.5 pl-3 pr-4 sm:pr-6 text-right text-sm font-medium']"
