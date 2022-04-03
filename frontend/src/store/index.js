@@ -17,6 +17,7 @@ const store = createStore({
             categories: [],
             categoryProducts: [],
             products: [],
+            countries: [],
             sideBarOpen: false,
             directOpen: false,
             selected: null,
@@ -61,6 +62,9 @@ const store = createStore({
         setProducts: (state, products) => {
             state.products = products.data;
         },
+        setCountries: (state, countries) => {
+            state.countries = countries.data;
+        },
         changeSideBarState: (state, value) => {
             state.sideBarOpen = value;
         },
@@ -87,6 +91,12 @@ const store = createStore({
         getCategories({ commit }) {
             return axiosClient.get('/categories').then((res) => {
                 commit("setCategories", res);
+                return res;
+            });
+        },
+        getCountries({ commit }) {
+            return axiosClient.get('/countries').then((res) => {
+                commit("setCountries", res);
                 return res;
             });
         },

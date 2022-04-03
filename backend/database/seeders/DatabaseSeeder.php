@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             StorageSeeder::class,
             ConditionSeeder::class,
             ProductPriceSeeder::class,
+            CountriesTableSeeder::class
         ]);
     }
 }
