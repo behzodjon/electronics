@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="mt-6 -mx-4 bg-white ring-1 ring-gray-300 sm:-mx-6 md:mx-0 md:rounded-lg">
-      <table class="min-w-full divide-y divide-[#EAEAEB]">
+      <table v-if="items.length" class="min-w-full divide-y divide-[#EAEAEB]">
         <thead>
           <tr>
             <th
@@ -34,7 +34,7 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           <tr v-for="(item, index) in items" :key="index">
             <td
               :class="[index === 0 ? '' : 'border-t border-transparent', 'relative py-4 pl-4 sm:pl-6 pr-3 text-sm']"
@@ -78,6 +78,7 @@
           </tr>
         </tbody>
       </table>
+      <div class="flex justify-center py-4" v-else>No data...</div>
     </div>
   </div>
 </template>
@@ -85,7 +86,6 @@
 <script>
 import { useStore } from "vuex";
 import { computed } from "vue";
-import { useRouter } from "vue-router";
 import { ChevronRightIcon, ChevronUpIcon } from '@heroicons/vue/solid'
 
 
@@ -96,24 +96,9 @@ export default {
   },
   setup() {
     const store = useStore();
-    const router = useRouter();
     const items = computed(() => store.state.cart.items);
-    const isLoggedIn = computed(() => store.getters['user/isAuthenticated']);
-
     store.dispatch('cart/fetchCart');
-
-    function nextStep() {
-      if (!isLoggedIn.value) {
-        router.push({
-          name: "Login", query: { redirect: '/cart-info' }
-        });
-      } else {
-        router.push({
-          name: "Cartinfo",
-        });
-      }
-
-    }
+    
     function deleteItem(item) {
       if (confirm("Are you sure to delete this item?")) {
         store.dispatch('cart/deleteItem', item).then(() => {
@@ -124,8 +109,6 @@ export default {
     return {
       items,
       deleteItem,
-      nextStep,
-      isLoggedIn
     }
   },
 }

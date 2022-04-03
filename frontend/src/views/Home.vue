@@ -149,13 +149,9 @@ export default {
     const store = useStore();
 
     const products = computed(() => store.state.products);
-    const isLoggedIn = computed(() => store.getters['user/isAuthenticated']);
-    const user = computed(() => store.state.user.data);
 
     store.dispatch("getProducts");
-    if (isLoggedIn.value) {
-      store.dispatch("user/getUser");
-    }
+   
 
     function openDevice(value) {
       open.value = true;
@@ -163,11 +159,8 @@ export default {
       store.dispatch("setDirectOpen", open.value);
       store.dispatch("getProductStorages", value);
     }
-    store.dispatch('cart/fetchCart');
 
     return {
-      user,
-      isLoggedIn,
       products,
       navigation,
       XIcon,

@@ -8,8 +8,8 @@ import user from './modules/user';
 // Create a new store instance.
 const store = createStore({
     modules: {
-        cart,
-        user
+        user,
+        cart
     },
     state() {
         return {

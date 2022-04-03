@@ -14,7 +14,8 @@ class TestController extends Controller
 {
     public function index()
     {
-       $data= new Cart();
-        dd($data);
+        $oldCart = Cart::whereSessionId("IC8HZ7JHT3LU4fM1CzB1FboBnzZ53hH7Y59MJl9E")->first()->user_id ?? null;
+
+        dd( auth()->id());
     }
 }

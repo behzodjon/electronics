@@ -30,12 +30,13 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('send-code', [RestorePasswordController::class, 'sendActivationCode']);
 Route::post('set-new-password', [RestorePasswordController::class, 'setNewPassword']);
-Route::get('/google/callback/{token}', [AuthController::class, 'googleRedirect']);
+Route::post('/google/callback', [AuthController::class, 'googleRedirect']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    Route::get('/cart/show', [CartController::class, 'showByUser']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
@@ -46,7 +47,7 @@ Route::get('/products', [ProductController::class, 'index']);
 Route::get('/conditions', [ConditionController::class, 'index']);
 Route::get('/product/{product}/storages', [ProductStorageController::class, 'index']);
 Route::get('/products/{product}/{storage}/{condition}/price', [ProductPriceController::class, 'show']);
-Route::get('/cart/{sessionId}', [CartController::class, 'show']);
+Route::get('/cart/{sessionId}', [CartController::class, 'showBySession']);
 Route::post('/cart/store', [CartController::class, 'store']);
 Route::post('/cartItems/store', [CartItemController::class, 'store']);
 Route::post('/cartItems/{cartItem:id}', [CartItemController::class, 'destroy']);

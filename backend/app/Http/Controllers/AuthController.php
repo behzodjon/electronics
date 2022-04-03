@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -32,6 +33,18 @@ class AuthController extends Controller
         ]);
         $token = $user->createToken('main')->plainTextToken;
 
+
+        $oldCart = Cart::whereSessionId($request->sessionId)->first() ?? null;
+        if (is_null($oldCart->user_id)) {
+            $oldCart->user_id = $user->id;
+            $oldCart->save();
+        } else {
+            Cart::create([
+                'user_id'    => $user->id,
+                'session_id' => session()->getId(),
+            ]);;
+        }
+
         return response([
             'user' => $user,
             'token' => $token
@@ -53,6 +66,16 @@ class AuthController extends Controller
         $user = Auth::user();
         $token = $user->createToken('main')->plainTextToken;
 
+
+        $oldCart = Cart::whereSessionId($request->sessionId)->first() ?? null;
+        if (is_null($oldCart->user_id)) {
+            $oldCart->user_id = $user->id;
+            $oldCart->save();
+        } else {
+            Cart::createCart();
+        }
+
+
         return response([
             'user' => $user,
             'token' => $token
@@ -72,17 +95,16 @@ class AuthController extends Controller
     }
 
 
-    public function googleRedirect($token)
+    public function googleRedirect(Request $request)
     {
-
         try {
-            $user = Socialite::driver('google')->scopes(['read:user', 'public_repo'])->userFromToken($token);
+            $user = Socialite::driver('google')->scopes(['read:user', 'public_repo'])->userFromToken($request->token);
 
             // Check Users Email If Already There
             $isUser = User::where('email', $user->getEmail())->first();
             if (!$isUser) {
                 $name = $user->getName() ?? "Test user";
-                
+
                 $saveUser = User::updateOrCreate([
                     'google_id' => $user->getId(),
                 ], [
@@ -100,6 +122,15 @@ class AuthController extends Controller
 
             $user = Auth::loginUsingId($saveUser->id);
             $token = $user->createToken('main')->plainTextToken;
+
+            $oldCart = Cart::whereSessionId($request->sessionId)->first() ?? null;
+            if (is_null($oldCart->user_id)) {
+                $oldCart->user_id = $user->id;
+                $oldCart->save();
+            } else {
+                Cart::createCart();
+            }
+
 
             return response([
                 'success' => true,

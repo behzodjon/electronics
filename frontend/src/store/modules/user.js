@@ -13,6 +13,7 @@ const state = {
 }
 const getters = {
     isAuthenticated: state => !!state.token,
+    userData: state => state.data,
 }
 const mutations = {
     logout: (state) => {
@@ -55,27 +56,38 @@ const actions = {
                 return response;
             })
     },
-    register({ commit }, user) {
-        return axiosClient.post('/register', user)
+    register({ commit,dispatch }, user) {
+        const sessionId = localStorage.getItem('cart_sessionId')
+
+        return axiosClient.post('/register', { ...user, sessionId })
             .then(({ data }) => {
                 commit('setUser', data.user);
                 commit('setToken', data.token)
+                dispatch('cart/fetchCart', data.user, { root:true })
+
                 return data;
             })
     },
-    login({ commit }, user) {
-        return axiosClient.post('/login', user)
+    login({ commit,dispatch }, user) {
+        const sessionId = localStorage.getItem('cart_sessionId')
+
+        return axiosClient.post('/login', { ...user, sessionId })
             .then(({ data }) => {
                 commit('setUser', data.user);
                 commit('setToken', data.token)
+                dispatch('cart/fetchCart', data.user, { root:true })
+
                 return data;
             })
     },
-    loginWithGoogle({ commit }, token) {
-        return axiosClient.get(`/google/callback/${token}`)
+    loginWithGoogle({ commit,dispatch }, token) {
+        const sessionId = localStorage.getItem('cart_sessionId')
+
+        return axiosClient.post(`/google/callback`,{token, sessionId })
             .then(({ data }) => {
                 commit('setUser', data.user);
                 commit('setToken', data.token)
+                dispatch('cart/fetchCart', data.user, { root:true })
                 return data;
             })
     },
