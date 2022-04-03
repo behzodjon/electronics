@@ -149,6 +149,8 @@ export default {
       this.$store.commit("setPriceValue", price);
       const sessionId = localStorage.getItem('cart_sessionId')
       this.$store.dispatch('storeCartData', { ...this.formData, sessionId })
+      this.$store.dispatch("getSideBarState", false);
+
       this.$router.push('/checkout')
     }
   },

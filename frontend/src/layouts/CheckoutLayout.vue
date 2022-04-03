@@ -41,15 +41,22 @@
         <div class="max-w-5xl px-4 pb-10 mx-auto mt-6 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto">
-                    <div class="mt-4 space-x-4 sm:mt-0 sm:ml-0 sm:flex-none">
-                        <button
-                            @click="nextStep"
-                            class="rounded-md border border-transparent bg-[#0C0D0D] px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-[#0C0D0D] focus:outline-none focus:ring-2 focus:ring-[#0C0D0D] focus:ring-offset-2 sm:w-auto"
-                        >Next Step</button>
-                        <button
-                            type="button"
-                            class="px-4 py-2 text-sm font-medium text-black underline border border-transparent rounded-md focus:outline-none focus:ring-offset-2 sm:w-auto"
-                        >Add Another Device</button>
+                    <div class="mt-4 space-x-4 sm:mt-0 sm:ml-0 sm:flex">
+                        <div class="shrink-0">
+                            <button
+                                @click="nextStep"
+                                class="rounded-md border border-transparent bg-[#0C0D0D] px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-[#0C0D0D] focus:outline-none focus:ring-2 focus:ring-[#0C0D0D] focus:ring-offset-2"
+                            >Next Step</button>
+                        </div>
+                        <Sell class="w-full">
+                            <template v-slot:sell="{ openSidebar }">
+                                <button
+                                    @click="openSidebar"
+                                    type="button"
+                                    class="px-4 py-2 text-sm font-medium text-black underline border border-transparent rounded-md focus:outline-none focus:ring-offset-2 sm:w-auto"
+                                >Add Another Device</button>
+                            </template>
+                        </Sell>
                     </div>
                 </div>
             </div>
@@ -63,6 +70,7 @@ import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { ChevronRightIcon, ChevronUpIcon } from '@heroicons/vue/solid'
 import { Popover, PopoverButton, PopoverOverlay, PopoverPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import Sell from "../views/Sell.vue";
 
 const steps = [
     { name: 'Wallet', href: '#', status: 'current' },
@@ -82,6 +90,8 @@ export default {
         TransitionRoot,
         ChevronRightIcon,
         ChevronUpIcon,
+        Sell,
+
     },
     setup() {
         const isLoggedIn = computed(() => store.getters['user/isAuthenticated']);

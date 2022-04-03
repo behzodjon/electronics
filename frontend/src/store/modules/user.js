@@ -49,14 +49,16 @@ const actions = {
                 commit('setUser', res.data)
             })
     },
-    logout({ commit, rootState }) {
+    logout({ commit, rootState,dispatch }) {
         return axiosClient.post('/logout')
             .then(response => {
                 commit('logout')
                 rootState.cart.items = []
                 rootState.cart.session_id = null
                 rootState.cart.user_id = null
-                localStorage.setItem('cart_sessionId', null)
+                localStorage.setItem('cart_sessionId', '')
+                dispatch('cart/fetchCart', null, { root: true })
+
                 return response;
             })
     },

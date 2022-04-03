@@ -122,9 +122,12 @@ const store = createStore({
             commit("setClickedValue", value);
         },
 
-        async storeCartData({ commit }, data) {
+        async storeCartData({ commit, dispatch }, data) {
             try {
                 await axiosClient.post('/cartItems/store', data)
+                await dispatch('cart/fetchCart', null, { root: true })
+                commit("changeSideBarState", state);
+
             } catch (err) {
                 //
             }

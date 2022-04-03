@@ -97,7 +97,6 @@ export default {
   setup() {
     const store = useStore();
     const items = computed(() => store.state.cart.items);
-    store.dispatch('cart/fetchCart');
     
     function deleteItem(item) {
       if (confirm("Are you sure to delete this item?")) {

@@ -24,8 +24,14 @@
             <div>
               <div class="flex justify-start mt-5">
                 <div class="rounded-md">
-                  <Sell></Sell>
-
+                  <Sell>
+                    <template v-slot:sell="{ openSidebar }">
+                      <button
+                        @click="openSidebar"
+                        class="flex items-center px-4 py-3 text-xl font-medium text-white bg-[#0C0D0D] rounded-md w-fit hover:bg-indigo-700 md:py-3 md:text-sm md:px-4"
+                      >Sell Now</button>
+                    </template>
+                  </Sell>
                   <img src="../assets/Group3.svg" class="h-24" alt="my-logo" />
                 </div>
               </div>
@@ -151,7 +157,7 @@ export default {
     const products = computed(() => store.state.products);
 
     store.dispatch("getProducts");
-   
+
 
     function openDevice(value) {
       open.value = true;
