@@ -13,7 +13,7 @@
     >
       <div class="md:grid md:grid-cols-1 md:gap-6">
         <div class="mt-5 md:mt-0 md:col-span-2">
-          <form>
+          <form @submit.prevent="submitBilling">
             <div class="grid grid-cols-6 gap-6">
               <div class="col-span-6 sm:col-span-3">
                 <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
@@ -22,6 +22,7 @@
                   type="text"
                   name="first-name"
                   id="first-name"
+                  required
                   autocomplete="given-name"
                   class="mt-1 focus:ring-[#0BADA2] focus:border-[#0BADA2] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                 />
@@ -35,6 +36,7 @@
                   name="last-name"
                   id="last-name"
                   autocomplete="family-name"
+                  required
                   class="mt-1 focus:ring-[#0BADA2] focus:border-[#0BADA2] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                 />
               </div>
@@ -50,6 +52,7 @@
                   name="email-address"
                   id="email-address"
                   autocomplete="email"
+                  required
                   class="mt-1 focus:ring-[#0BADA2] focus:border-[#0BADA2] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                 />
               </div>
@@ -57,6 +60,7 @@
               <div class="col-span-6 sm:col-span-3">
                 <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
                 <select
+                  required
                   id="country"
                   v-model="form.country_id"
                   name="country"
@@ -82,6 +86,7 @@
                   name="street-address"
                   id="street-address"
                   autocomplete="street-address"
+                  required
                   class="mt-1 focus:ring-[#0BADA2] focus:border-[#0BADA2] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                 />
               </div>
@@ -94,6 +99,7 @@
                   name="city"
                   id="city"
                   autocomplete="address-level2"
+                  required
                   class="mt-1 focus:ring-[#0BADA2] focus:border-[#0BADA2] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                 />
               </div>
@@ -106,6 +112,7 @@
                   v-model="form.state"
                   id="region"
                   autocomplete="address-level1"
+                  required
                   class="mt-1 focus:ring-[#0BADA2] focus:border-[#0BADA2] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                 />
               </div>
@@ -121,13 +128,13 @@
                   name="postal-code"
                   id="postal-code"
                   autocomplete="postal-code"
+                  required
                   class="mt-1 focus:ring-[#0BADA2] focus:border-[#0BADA2] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                 />
               </div>
             </div>
             <div class="flex justify-end mt-4">
               <button
-                @click.prevent="submitBilling"
                 type="submit"
                 class="flex items-center px-4 py-3 text-xl font-medium text-white bg-[#0C0D0D] rounded-md w-fit hover:bg-indigo-700 md:py-3 md:text-sm md:px-8"
               >Save</button>
@@ -158,7 +165,7 @@ const form = {
   zip: "",
 };
 function submitBilling() {
- store.dispatch("storeBillingData",form)
+  store.dispatch("storeBillingData", form)
 }
 store.dispatch("getCountries")
 </script>
