@@ -118,6 +118,11 @@ const store = createStore({
                 return res;
             });
         },
+        storeBillingData({ commit }, form) {
+            return axiosClient.post(`/address/store`, form).then((res) => {
+                return res;
+            });
+        },
         getSideBarState({ commit }, state) {
             commit("changeSideBarState", state);
         },

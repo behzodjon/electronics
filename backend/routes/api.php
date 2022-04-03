@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartItemController;
@@ -38,6 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
     Route::get('/cart/show', [CartController::class, 'showByUser']);
+Route::post('/address/store', [AddressController::class, 'store']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
