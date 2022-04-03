@@ -49,45 +49,49 @@ const actions = {
                 commit('setUser', res.data)
             })
     },
-    logout({ commit }) {
+    logout({ commit, rootState }) {
         return axiosClient.post('/logout')
             .then(response => {
                 commit('logout')
+                rootState.cart.items = []
+                rootState.cart.session_id = null
+                rootState.cart.user_id = null
+                localStorage.setItem('cart_sessionId', null)
                 return response;
             })
     },
-    register({ commit,dispatch }, user) {
+    register({ commit, dispatch }, user) {
         const sessionId = localStorage.getItem('cart_sessionId')
 
         return axiosClient.post('/register', { ...user, sessionId })
             .then(({ data }) => {
                 commit('setUser', data.user);
                 commit('setToken', data.token)
-                dispatch('cart/fetchCart', data.user, { root:true })
+                dispatch('cart/fetchCart', data.user, { root: true })
 
                 return data;
             })
     },
-    login({ commit,dispatch }, user) {
+    login({ commit, dispatch }, user) {
         const sessionId = localStorage.getItem('cart_sessionId')
 
         return axiosClient.post('/login', { ...user, sessionId })
             .then(({ data }) => {
                 commit('setUser', data.user);
                 commit('setToken', data.token)
-                dispatch('cart/fetchCart', data.user, { root:true })
+                dispatch('cart/fetchCart', data.user, { root: true })
 
                 return data;
             })
     },
-    loginWithGoogle({ commit,dispatch }, token) {
+    loginWithGoogle({ commit, dispatch }, token) {
         const sessionId = localStorage.getItem('cart_sessionId')
 
-        return axiosClient.post(`/google/callback`,{token, sessionId })
+        return axiosClient.post(`/google/callback`, { token, sessionId })
             .then(({ data }) => {
                 commit('setUser', data.user);
                 commit('setToken', data.token)
-                dispatch('cart/fetchCart', data.user, { root:true })
+                dispatch('cart/fetchCart', data.user, { root: true })
                 return data;
             })
     },

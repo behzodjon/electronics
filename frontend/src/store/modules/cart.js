@@ -19,22 +19,21 @@ const mutations = {
 const actions = {
     async fetchCart({ commit }, user = null) {
         try {
-            console.log("user",user)
 
             const sessionId = localStorage.getItem('cart_sessionId')
+
             if (user) {
                 const cart = await axiosClient.get(`/cart/show`)
-                console.log("cart",cart.data.data)
                 localStorage.setItem('cart_sessionId', cart.data.data.session_id)
                 commit('SET_DATA', cart.data)
             }
-            else if (sessionId) {
-                const cart = await axiosClient.get(`/cart/${sessionId}`)
+            else if (!!sessionId) {
+                const cart = await axiosClient.post('/cart/store')
+                localStorage.setItem('cart_sessionId', cart.data.session_id)
                 commit('SET_DATA', cart.data)
             }
             else {
-                const cart = await axiosClient.post('/cart/store')
-                localStorage.setItem('cart_sessionId', cart.data.session_id)
+                const cart = await axiosClient.get(`/cart/${sessionId}`)
                 commit('SET_DATA', cart.data)
             }
         } catch (err) {
