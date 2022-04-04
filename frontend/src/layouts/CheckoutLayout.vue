@@ -13,13 +13,13 @@
                                     :key="step.name"
                                     class="flex items-center"
                                 >
-                                    <a
+                                    <router-link
                                         v-if="step.status === 'current'"
-                                        :href="step.href"
+                                        :to="step.to"
                                         aria-current="page"
                                         class="text-[#0BADA2]"
-                                    >{{ step.name }}</a>
-                                    <a v-else :href="step.href">{{ step.name }}</a>
+                                    >{{ step.name }}</router-link>
+                                    <router-link v-else :to="step.to">{{ step.name }}</router-link>
                                     <ChevronRightIcon
                                         v-if="stepIdx !== steps.length - 1"
                                         class="w-5 h-5 ml-2 text-gray-300"
@@ -36,6 +36,7 @@
                     <component :is="Component"></component>
                 </transition>
             </router-view>
+            <Notification />
         </div>
 
         <div class="max-w-5xl px-4 pb-10 mx-auto mt-6 sm:px-6 lg:px-8">
@@ -48,7 +49,7 @@
                                 class="rounded-md border border-transparent bg-[#0C0D0D] px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-[#0C0D0D] focus:outline-none focus:ring-2 focus:ring-[#0C0D0D] focus:ring-offset-2"
                             >Next Step</button>
                         </div>
-                        <Sell class="w-full">
+                        <Sell v-if="route.path == '/checkout'" class="w-full">
                             <template v-slot:sell="{ openSidebar }">
                                 <button
                                     @click="openSidebar"
@@ -67,17 +68,18 @@
 <script>
 import { useStore } from "vuex";
 import { computed } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { ChevronRightIcon, ChevronUpIcon } from '@heroicons/vue/solid'
 import { Popover, PopoverButton, PopoverOverlay, PopoverPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import Sell from "../views/Sell.vue";
+import Notification from "../components/common/Notification.vue";
 
 const steps = [
-    { name: 'Wallet', href: '#', status: 'current' },
-    { name: 'Billing Information', href: '#', status: 'upcoming' },
-    { name: 'Payment Method', href: '#', status: 'upcoming' },
-    { name: 'Delivery Method', href: '#', status: 'upcoming' },
-    { name: 'Confirmation', href: '#', status: 'upcoming' },
+    { name: 'Wallet', to: '/checkout', status: 'current' },
+    { name: 'Billing Information', to: '/cart-info', status: 'upcoming' },
+    { name: 'Payment Method', to: '#', status: 'upcoming' },
+    { name: 'Delivery Method', to: '#', status: 'upcoming' },
+    { name: 'Confirmation', to: '#', status: 'upcoming' },
 ]
 
 export default {
@@ -91,11 +93,13 @@ export default {
         ChevronRightIcon,
         ChevronUpIcon,
         Sell,
-
+        Notification
     },
+
     setup() {
         const isLoggedIn = computed(() => store.getters['user/isAuthenticated']);
         const router = useRouter();
+        const route = useRoute();
         const store = useStore();
 
         function nextStep() {
@@ -113,7 +117,8 @@ export default {
         return {
             steps,
             nextStep,
-            isLoggedIn
+            isLoggedIn,
+            route
         }
     },
 }

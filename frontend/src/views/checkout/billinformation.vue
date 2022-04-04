@@ -13,17 +13,15 @@
     >
       <div class="md:grid md:grid-cols-1 md:gap-6">
         <div class="mt-5 md:mt-0 md:col-span-2">
-          <form @submit.prevent="submitBilling">
+          <form ref="form_bill" @submit.prevent="submitBilling">
             <div class="grid grid-cols-6 gap-6">
               <div class="col-span-6 sm:col-span-3">
                 <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
                 <input
                   v-model="form.first_name"
                   type="text"
-                  name="first-name"
                   id="first-name"
                   required
-                  autocomplete="given-name"
                   class="mt-1 focus:ring-[#0BADA2] focus:border-[#0BADA2] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                 />
               </div>
@@ -149,10 +147,11 @@
 <script setup>
 import { ChevronRightIcon, ChevronUpIcon } from '@heroicons/vue/solid'
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 
 const countries = computed(() => store.state.countries);
 const store = useStore();
+const form_bill = ref(null)
 
 const form = {
   first_name: "",
@@ -165,9 +164,19 @@ const form = {
   zip: "",
 };
 function submitBilling() {
-  store.dispatch("storeBillingData", form)
+  store.dispatch("storeBillingData", form).then(() => {
+    form_bill.value.reset()
+    store.commit("notify", {
+      type: "success",
+      message: "Your data was saved!",
+    });
+  });
+
 }
 store.dispatch("getCountries")
+
+
+
 </script>
 
 

@@ -32,9 +32,22 @@ const store = createStore({
                 condition_id: null,
                 price: null
             },
+            notification: {
+                show: false,
+                type: null,
+                message: null
+            }
         }
     },
     mutations: {
+        notify: (state, { message, type }) => {
+            state.notification.show = true;
+            state.notification.type = type;
+            state.notification.message = message;
+            setTimeout(() => {
+                state.notification.show = false;
+            }, 3000)
+        },
         setStorageList(state, payload) {
             state.storageList = payload
         },

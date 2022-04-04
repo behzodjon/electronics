@@ -165,6 +165,7 @@ export default {
       store.dispatch("setDirectOpen", open.value);
       store.dispatch("getProductStorages", value);
     }
+ 
 
     return {
       products,
