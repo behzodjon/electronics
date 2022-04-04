@@ -103,6 +103,7 @@ export default {
         const store = useStore();
 
         function nextStep() {
+            steps[1].status = 'current'
             if (!isLoggedIn.value) {
                 router.push({
                     name: "Login", query: { redirect: '/cart-info' }
