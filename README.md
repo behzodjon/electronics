@@ -8,7 +8,7 @@ in backend folder:
  composer install
 ```
 ```bash
-php artisan db:seed
+php artisan migrate:fresh --seed
 ```
 ```bash
 php artisan serve
