@@ -15,16 +15,6 @@ use App\Http\Controllers\ProductPriceController;
 use App\Http\Controllers\ProductStorageController;
 use App\Http\Controllers\RestorePasswordController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
 Route::get('/test', [TestController::class, 'index']);
 
@@ -39,7 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
     Route::get('/cart/show', [CartController::class, 'showByUser']);
-Route::post('/address/store', [AddressController::class, 'store']);
+    Route::post('/address/store', [AddressController::class, 'store']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 

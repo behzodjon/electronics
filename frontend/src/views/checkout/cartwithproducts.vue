@@ -34,7 +34,7 @@
             </th>
           </tr>
         </thead>
-        <tbody >
+        <tbody>
           <tr v-for="(item, index) in items" :key="index">
             <td
               :class="[index === 0 ? '' : 'border-t border-transparent', 'relative py-4 pl-4 sm:pl-6 pr-3 text-sm']"
@@ -66,7 +66,7 @@
               :class="[index === 0 ? '' : 'border-t border-transparent', 'relative py-3.5 pl-3 pr-4 sm:pr-6 text-right text-sm font-medium']"
             >
               <button
-                @click="deleteItem(item)"
+                @click="showModal(item)"
                 type="button"
                 class="inline-flex items-center rounded-md bg-[#FDF2F2] px-3 py-2 text-sm font-medium leading-4 text-[#EA3E3E] shadow-sm focus:outline-none disabled:cursor-not-allowed disabled:opacity-30 hover:text-[#FDF2F2] hover:bg-[#EA3E3E]"
               >
@@ -80,37 +80,41 @@
       </table>
       <div class="flex justify-center py-4" v-else>No data...</div>
     </div>
+    <Modal
+      :isDeleteModalVisible="isDeleteModalVisible"
+      @remove-record="removeRecord"
+      @close-modal="closeModal"
+      :cartItem="cartItem"
+    />
   </div>
 </template>
 
-<script>
+<script setup>
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { ChevronRightIcon, ChevronUpIcon } from '@heroicons/vue/solid'
+import Modal from "../../components/common/Modal.vue";
+const store = useStore();
+const items = computed(() => store.state.cart.items);
+const isDeleteModalVisible = ref(false)
+const cartItem = ref(null)
 
-
-export default {
-  components: {
-    ChevronRightIcon,
-    ChevronUpIcon,
-  },
-  setup() {
-    const store = useStore();
-    const items = computed(() => store.state.cart.items);
-    
-    function deleteItem(item) {
-      if (confirm("Are you sure to delete this item?")) {
-        store.dispatch('cart/deleteItem', item).then(() => {
-          store.dispatch("cart/fetchCart");
-        });
-      }
-    }
-    return {
-      items,
-      deleteItem,
-    }
-  },
+function showModal(item) {
+  isDeleteModalVisible.value = true
+  cartItem.value = item
 }
+
+function closeModal(item) {
+  isDeleteModalVisible.value = false
+}
+
+function removeRecord(item) {
+  store.dispatch('cart/deleteItem', item).then(() => {
+    isDeleteModalVisible.value = false
+    store.dispatch("cart/fetchCart");
+  });
+}
+
 
 
 </script>
