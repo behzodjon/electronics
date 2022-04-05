@@ -52,7 +52,7 @@
                                     <div class="mt-2">
                                         <p
                                             class="text-sm text-gray-500"
-                                        >Are you sure you want to remove the device from your cart?</p>
+                                        >Are you sure you want to remove this device from your cart?</p>
                                     </div>
                                 </div>
                             </div>

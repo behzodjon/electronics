@@ -7,6 +7,7 @@ import RestorePassword from '../views/restore-password.vue'
 import checkout from "../views/checkout/cartwithproducts.vue"
 import billinformation from "../views/checkout/billinformation.vue"
 import CheckoutLayout from "../layouts/CheckoutLayout.vue"
+import store from '../store';
 
 const routes = [
 
@@ -15,13 +16,20 @@ const routes = [
   { path: '/signup', name: 'Signup', component: Signup },
   { path: '/restore-password', name: 'RestorePassword', component: RestorePassword },
   { path: '/Sell', name: 'Sell', component: Sell },
-  
+
   {
     path: '/',
     component: CheckoutLayout,
     children: [
-      { path: '/checkout', name: 'Checkout', component: checkout },
-      { path: '/cart-info', name: 'Cartinfo', component: billinformation },
+      {
+        path: '/checkout', name: 'Checkout',
+        component: checkout
+      },
+      {
+        path: '/cart-info', name: 'Cartinfo',
+        meta: { requiresAuth: true },
+        component: billinformation
+      },
     ]
   },
 ];
@@ -31,14 +39,12 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//   if (to.meta.requiresAuth && !store.state.user.token) {
-//     next({ name: "Login" });
-//   } else if (store.state.user.token && to.meta.isGuest) {
-//     next({ name: "Dashboard" });
-//   } else {
-//     next();
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !store.state.user.token) {
+    next({ name: "Login" });
+  } else {
+    next();
+  }
+});
 
 export default router;
