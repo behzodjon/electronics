@@ -9,19 +9,13 @@
                         <nav aria-label="Progress" class>
                             <ol role="list" class="flex space-x-4">
                                 <li
-                                    v-for="(step, stepIdx) in steps"
-                                    :key="step.name"
+                                    v-for="(step, index) in steps"
+                                    :key="index"
                                     class="flex items-center"
                                 >
-                                    <router-link
-                                        v-if="step.status === 'current'"
-                                        :to="step.to"
-                                        aria-current="page"
-                                        class="text-[#0BADA2]"
-                                    >{{ step.name }}</router-link>
-                                    <router-link v-else :to="step.to">{{ step.name }}</router-link>
+                                    <router-link :to="step.to">{{ step.name }}</router-link>
                                     <ChevronRightIcon
-                                        v-if="stepIdx !== steps.length - 1"
+                                        v-if="index !== steps.length - 1"
                                         class="w-5 h-5 ml-2 text-gray-300"
                                         aria-hidden="true"
                                     />
@@ -65,7 +59,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { useStore } from "vuex";
 import { computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
@@ -75,58 +69,28 @@ import Sell from "../views/Sell.vue";
 import Notification from "../components/common/Notification.vue";
 
 const steps = [
-    { name: 'Wallet', to: '/checkout', status: 'current' },
-    { name: 'Billing Information', to: '/cart-info', status: 'upcoming' },
-    { name: 'Payment Method', to: '#', status: 'upcoming' },
-    { name: 'Delivery Method', to: '#', status: 'upcoming' },
-    { name: 'Confirmation', to: '#', status: 'upcoming' },
+    { name: 'Wallet', to: '/checkout', },
+    { name: 'Billing Information', to: '/cart-info', },
+    { name: 'Payment Method', to: '/payment', },
+    { name: 'Delivery Method', to: '/delivery', },
+    { name: 'Confirmation', to: '/confirmation', },
 ]
+const router = useRouter();
+const route = useRoute();
+const store = useStore();
 
-export default {
-    components: {
-        Popover,
-        PopoverButton,
-        PopoverOverlay,
-        PopoverPanel,
-        TransitionChild,
-        TransitionRoot,
-        ChevronRightIcon,
-        ChevronUpIcon,
-        Sell,
-        Notification
-    },
 
-    setup() {
-        const isLoggedIn = computed(() => store.getters['user/isAuthenticated']);
-        const router = useRouter();
-        const route = useRoute();
-        const store = useStore();
-
-        function nextStep() {
-            steps[1].status = 'current'
-            if (!isLoggedIn.value) {
-                router.push({
-                    name: "Login", query: { redirect: '/cart-info' }
-                });
-            } else {
-                router.push({
-                    name: "Cartinfo",
-                });
-            }
-        }
-
-        return {
-            steps,
-            nextStep,
-            isLoggedIn,
-            route
-        }
-    },
+function nextStep() {
+    router.push({
+        name: "Cartinfo",
+    });
 }
-
-
 </script>
-
+<style scoped>
+.active-link {
+    color: #0bada2;
+}
+</style>
 
 
 

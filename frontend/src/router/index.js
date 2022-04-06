@@ -37,11 +37,12 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  linkActiveClass: 'active-link'
 });
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !store.state.user.token) {
-    next({ name: "Login" });
+    next({ name: "Login", query: { redirect: '/cart-info' } });
   } else {
     next();
   }
