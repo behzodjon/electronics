@@ -185,6 +185,7 @@ const form = {
 
 function dataChange() {
   isEmpty.value = Object.values(form).every(x => x === null || x === '');
+  
 }
 function submitBilling() {
 
@@ -203,10 +204,7 @@ function submitBilling() {
 }
 </script>
 <style scoped>
-.inactive{
-  background-color: #cccccc;
-  pointer-events: none;
-}
+
 </style>
 
 

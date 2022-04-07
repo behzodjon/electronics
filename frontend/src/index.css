@@ -26,3 +26,8 @@
     transition: all 0.16s ease-in;
   
   } 
+
+  .inactive{
+    background-color: #cccccc;
+    pointer-events: none;
+  }
