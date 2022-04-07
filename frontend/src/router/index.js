@@ -7,6 +7,8 @@ import RestorePassword from '../views/restore-password.vue'
 import checkout from "../views/checkout/cartwithproducts.vue"
 import billinformation from "../views/checkout/billinformation.vue"
 import PaymentMethod from "../views/checkout/payment-method.vue"
+import DeliveryMethod from "../views/checkout/delivery-method.vue"
+import Confirmation from "../views/checkout/confirmation.vue"
 import CheckoutLayout from "../layouts/CheckoutLayout.vue"
 import store from '../store';
 
@@ -35,6 +37,16 @@ const routes = [
         path: '/payment', name: 'PaymentMethod',
         meta: { requiresAuth: true },
         component: PaymentMethod
+      },
+      {
+        path: '/delivery', name: 'DeliveryMethod',
+        meta: { requiresAuth: true },
+        component: DeliveryMethod
+      },
+      {
+        path: '/confirmation', name: 'Confirmation',
+        meta: { requiresAuth: true },
+        component: Confirmation
       },
     ]
   },

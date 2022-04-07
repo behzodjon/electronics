@@ -91,7 +91,7 @@ function formChange(form) {
 }
 function submitData() {
       router.push({
-      name: "PaymentMethod",
+      name: "DeliveryMethod",
     });
 }
 </script>
