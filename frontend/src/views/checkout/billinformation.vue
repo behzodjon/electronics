@@ -8,16 +8,17 @@
         >Please fill in the below questions. Once complete, click next.</p>
       </div>
     </div>
-    <div
-      class="-mx-4 lg:-mx-0 px-6 py-4 rounded-none lg:rounded-lg bg-white border border-[#D5D6D7]"
-    >
-      <div class="md:grid md:grid-cols-1 md:gap-6">
-        <div class="mt-5 md:mt-0 md:col-span-2">
-          <form ref="form_bill" @submit.prevent="submitBilling">
+    <form ref="form_bill" @submit.prevent="submitBilling">
+      <div
+        class="-mx-4 lg:-mx-0 px-6 py-4 rounded-none lg:rounded-lg bg-white border border-[#D5D6D7]"
+      >
+        <div class="md:grid md:grid-cols-1 md:gap-6">
+          <div class="mt-5 md:mt-0 md:col-span-2">
             <div class="grid grid-cols-6 gap-6">
               <div class="col-span-6 sm:col-span-3">
                 <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
                 <input
+                  @change="dataChange"
                   v-model="form.first_name"
                   type="text"
                   id="first-name"
@@ -29,6 +30,7 @@
               <div class="col-span-6 sm:col-span-3">
                 <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
                 <input
+                  @change="dataChange"
                   v-model="form.last_name"
                   type="text"
                   name="last-name"
@@ -46,6 +48,7 @@
                 >Email address</label>
                 <input
                   type="text"
+                  @change="dataChange"
                   v-model="form.email"
                   name="email-address"
                   id="email-address"
@@ -60,6 +63,7 @@
                 <select
                   required
                   id="country"
+                  @change="dataChange"
                   v-model="form.country_id"
                   name="country"
                   autocomplete="country-name"
@@ -81,6 +85,7 @@
                 <input
                   v-model="form.street_address"
                   type="text"
+                  @change="dataChange"
                   name="street-address"
                   id="street-address"
                   autocomplete="street-address"
@@ -95,6 +100,7 @@
                   v-model="form.city"
                   type="text"
                   name="city"
+                  @change="dataChange"
                   id="city"
                   autocomplete="address-level2"
                   required
@@ -107,6 +113,7 @@
                 <input
                   type="text"
                   name="region"
+                  @change="dataChange"
                   v-model="form.state"
                   id="region"
                   autocomplete="address-level1"
@@ -123,6 +130,7 @@
                 <input
                   v-model="form.zip"
                   type="text"
+                  @change="dataChange"
                   name="postal-code"
                   id="postal-code"
                   autocomplete="postal-code"
@@ -131,27 +139,38 @@
                 />
               </div>
             </div>
-            <div class="flex justify-end mt-4">
-              <button
-                type="submit"
-                class="flex items-center px-4 py-3 text-xl font-medium text-white bg-[#0C0D0D] rounded-md w-fit hover:bg-indigo-700 md:py-3 md:text-sm md:px-8"
-              >Save</button>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
+      <CheckoutBottom class="lg:px-0">
+        <div class="shrink-0">
+          <button
+            :disabled="isEmpty"
+          :class="{ inactive: isEmpty }"
+            type="submit"
+            @click="nextStep"
+            class="rounded-md border border-transparent bg-[#0C0D0D] px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-[#0C0D0D] focus:outline-none focus:ring-2 focus:ring-[#0C0D0D] focus:ring-offset-2"
+          >Next Step</button>
+        </div>
+      </CheckoutBottom>
+    </form>
   </div>
 </template>
 
 <script setup>
+import CheckoutBottom from "../../components/common/CheckoutBottom.vue";
 import { ChevronRightIcon, ChevronUpIcon } from '@heroicons/vue/solid'
 import { useStore } from "vuex";
 import { computed, ref } from "vue";
-
+import { useRouter, useRoute } from "vue-router";
+const router = useRouter();
 const countries = computed(() => store.state.countries);
 const store = useStore();
+
 const form_bill = ref(null)
+const isEmpty = ref(true)
+
+store.dispatch("getCountries")
 
 const form = {
   first_name: "",
@@ -163,9 +182,18 @@ const form = {
   state: "",
   zip: "",
 };
+
+function dataChange() {
+  isEmpty.value = Object.values(form).every(x => x === null || x === '');
+}
 function submitBilling() {
+
   store.dispatch("storeBillingData", form).then(() => {
     form_bill.value.reset()
+    store.commit('cart/SET_BILL_INFO', true)
+    router.push({
+      name: "PaymentMethod",
+    });
     store.commit("notify", {
       type: "success",
       message: "Your data was saved!",
@@ -173,11 +201,13 @@ function submitBilling() {
   });
 
 }
-store.dispatch("getCountries")
-
-
-
 </script>
+<style scoped>
+.inactive{
+  background-color: #cccccc;
+  pointer-events: none;
+}
+</style>
 
 
 

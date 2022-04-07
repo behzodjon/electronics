@@ -78,7 +78,7 @@
           </tr>
         </tbody>
       </table>
-      <div class="flex justify-center py-4" v-else>No data...</div>
+      <div class="flex justify-center py-4" v-else>No devices...</div>
     </div>
     <Modal
       :isDeleteModalVisible="isDeleteModalVisible"
@@ -86,6 +86,24 @@
       @close-modal="closeModal"
       :cartItem="cartItem"
     />
+    <CheckoutBottom>
+      <div v-if="items.length" class="shrink-0">
+        <button
+          type="submit"
+          @click="nextStep"
+          class="rounded-md border border-transparent bg-[#0C0D0D] px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-[#0C0D0D] focus:outline-none focus:ring-2 focus:ring-[#0C0D0D] focus:ring-offset-2"
+        >Next Step</button>
+      </div>
+      <Sell  class="w-full">
+        <template v-slot:sell="{ openSidebar }">
+          <button
+            @click="openSidebar"
+            type="button"
+            class="px-4 py-2 text-sm font-medium text-black underline border border-transparent rounded-md focus:outline-none focus:ring-offset-2 sm:w-auto"
+          >Add Another Device</button>
+        </template>
+      </Sell>
+    </CheckoutBottom>
   </div>
 </template>
 
@@ -94,7 +112,13 @@ import { useStore } from "vuex";
 import { computed, ref } from "vue";
 import { ChevronRightIcon, ChevronUpIcon } from '@heroicons/vue/solid'
 import Modal from "../../components/common/Modal.vue";
+import CheckoutBottom from "../../components/common/CheckoutBottom.vue";
+import Sell from "../Sell.vue"
+import { useRouter, useRoute } from "vue-router";
+const router = useRouter();
+const route = useRoute();
 const store = useStore();
+
 const items = computed(() => store.state.cart.items);
 const isDeleteModalVisible = ref(false)
 const cartItem = ref(null)
@@ -114,9 +138,11 @@ function removeRecord(item) {
     store.dispatch("cart/fetchCart");
   });
 }
-
-
-
+function nextStep() {
+    router.push({
+        name: "Cartinfo",
+    });
+}
 </script>
 
 

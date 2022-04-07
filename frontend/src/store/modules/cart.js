@@ -6,13 +6,17 @@ import axiosClient from "../../axios";
 const state = {
     session_id: null,
     user_id: null,
-    items: []
+    items: [],
+    billInformation: false
 }
 const mutations = {
     SET_DATA(state, { data }) {
         state.session_id = data.session_id
         state.user_id = data.user_id
         state.items = data.items
+    },
+    SET_BILL_INFO(state, value) {
+        state.billInformation = value
     },
 }
 

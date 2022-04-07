@@ -6,6 +6,7 @@ import Sell from '../views/Sell.vue'
 import RestorePassword from '../views/restore-password.vue'
 import checkout from "../views/checkout/cartwithproducts.vue"
 import billinformation from "../views/checkout/billinformation.vue"
+import PaymentMethod from "../views/checkout/payment-method.vue"
 import CheckoutLayout from "../layouts/CheckoutLayout.vue"
 import store from '../store';
 
@@ -30,6 +31,11 @@ const routes = [
         meta: { requiresAuth: true },
         component: billinformation
       },
+      {
+        path: '/payment', name: 'PaymentMethod',
+        meta: { requiresAuth: true },
+        component: PaymentMethod
+      },
     ]
   },
 ];
@@ -43,7 +49,10 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !store.state.user.token) {
     next({ name: "Login", query: { redirect: '/cart-info' } });
-  } else {
+  } else if (to.path == '/payment' && !store.state.cart.billInformation) {
+    next({ name: "Cartinfo" });;
+  }
+  else {
     next();
   }
 });
