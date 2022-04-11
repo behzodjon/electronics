@@ -11,12 +11,18 @@ import DeliveryMethod from "../views/checkout/delivery-method.vue"
 import Confirmation from "../views/checkout/confirmation.vue"
 import CheckoutLayout from "../layouts/CheckoutLayout.vue"
 import HomeLayout from "../layouts/HomeLayout.vue"
-import Dashboard from "../views/admin/dashboard.vue"
+import AdminLayout from "../layouts/AdminLayout.vue"
+import AdminDashboard from "../views/admin/dashboard.vue"
 import store from '../store';
 
 const routes = [
-
-  { path: '/admin/dashboard', name: 'AdminDashboard', component: Dashboard },
+  {
+    path: '/admin',
+    component: AdminLayout,
+    children:[
+      { path: '/admin', name: 'AdminDashboard', component: AdminDashboard },
+    ]
+  },
 
   {
     path: '/',
