@@ -138,7 +138,11 @@ function removeRecord(item) {
     store.dispatch("cart/fetchCart");
   });
 }
+  store.commit('cart/SET_ROUTE_ACTIVE', false)
+
 function nextStep() {
+          store.commit('cart/SET_ROUTE_ACTIVE', true)
+
     router.push({
         name: "Cartinfo",
     });

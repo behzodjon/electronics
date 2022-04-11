@@ -13,7 +13,7 @@
                                     :key="index"
                                     class="flex items-center"
                                 >
-                                    <router-link    :to="step.to">{{ step.name }}</router-link>
+                                    <router-link     :to="step.to">{{ step.name }}</router-link>
                                     <ChevronRightIcon
                                         v-if="index !== steps.length - 1"
                                         class="w-5 h-5 ml-2 text-gray-300"
@@ -40,6 +40,11 @@
 import { ChevronRightIcon, ChevronUpIcon } from '@heroicons/vue/solid'
 import { Popover, PopoverButton, PopoverOverlay, PopoverPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import Notification from "../components/common/Notification.vue";
+import { useStore } from "vuex";
+import { computed, ref } from "vue";
+
+const store = useStore();
+const activeRoute = computed(() => store.state.cart.activeRoute);
 
 const steps = [
     { name: 'Wallet', status: 'completed', to: '/checkout', },

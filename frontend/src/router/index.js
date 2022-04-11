@@ -36,17 +36,40 @@ const routes = [
       {
         path: '/payment', name: 'PaymentMethod',
         meta: { requiresAuth: true },
-        component: PaymentMethod
+        component: PaymentMethod,
+        beforeEnter: (to, from) => {
+          // reject the navigation
+          if (!store.state.cart.activeRoute) {
+            return false
+          }
+          return true
+        },
       },
       {
         path: '/delivery', name: 'DeliveryMethod',
         meta: { requiresAuth: true },
-        component: DeliveryMethod
+        component: DeliveryMethod,
+        beforeEnter: (to, from) => {
+          // reject the navigation
+          if (!store.state.cart.activeRoute) {
+            return false
+          }
+          return true
+
+        },
       },
       {
         path: '/confirmation', name: 'Confirmation',
         meta: { requiresAuth: true },
-        component: Confirmation
+        component: Confirmation,
+        beforeEnter: (to, from) => {
+          // reject the navigation
+          if (!store.state.cart.activeRoute) {
+            return false
+          }
+          return true
+
+        },
       },
     ]
   },
@@ -61,8 +84,6 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !store.state.user.token) {
     next({ name: "Login", query: { redirect: '/cart-info' } });
-  } else if (to.path == '/payment' && !store.state.cart.billInformation) {
-    next({ name: "Cartinfo" });;
   }
   else {
     next();

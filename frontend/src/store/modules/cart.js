@@ -7,7 +7,7 @@ const state = {
     session_id: null,
     user_id: null,
     items: [],
-    billInformation: false
+    activeRoute:false
 }
 const mutations = {
     SET_DATA(state, { data }) {
@@ -15,8 +15,9 @@ const mutations = {
         state.user_id = data.user_id
         state.items = data.items
     },
-    SET_BILL_INFO(state, value) {
-        state.billInformation = value
+ 
+    SET_ROUTE_ACTIVE(state, value) {
+        state.activeRoute = value
     },
 }
 
