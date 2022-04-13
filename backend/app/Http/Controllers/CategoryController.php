@@ -17,8 +17,36 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        $products = $category->products()->with('category')->get();
 
-        return ProductResource::collection($products);
+        return response()->json($category);
+    }
+
+    // public function show(Category $category)
+    // {
+    //     $products = $category->products()->with('category')->get();
+
+    //     return ProductResource::collection($products);
+    // }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'title' => ['required'],
+        ]);
+
+        Category::create($validatedData);
+
+        return response()->noContent();
+    }
+
+    public function update(Category $category, Request $request)
+    {
+        $validatedData = $request->validate([
+            'title' => ['required'],
+        ]);
+
+        $category->update($validatedData);
+
+        return response()->noContent();
     }
 }

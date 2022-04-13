@@ -35,7 +35,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/categories/{category}/products', [CategoryController::class, 'show']);
+Route::get('/categories/{category}', [CategoryController::class, 'show']);
+Route::put('/categories/{category}/update', [CategoryController::class, 'update']);
+// Route::get('/categories/{category}/products', [CategoryController::class, 'show']);
+Route::post('/categories/create', [CategoryController::class, 'store']);
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/conditions', [ConditionController::class, 'index']);
 Route::get('/product/{product}/storages', [ProductStorageController::class, 'index']);

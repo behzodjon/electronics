@@ -32,13 +32,13 @@
                         <nav class="flex-shrink-0 h-full mt-5 overflow-y-auto divide-y divide-cyan-800"
                             aria-label="Sidebar">
                             <div class="px-2 space-y-1">
-                                <a v-for="item in navigation" :key="item.name" :href="item.href"
+                                <router-link v-for="item in navigation" :key="item.name" :to="item.href"
                                     :class="[item.current ? 'bg-cyan-800 text-white' : 'text-cyan-100 hover:text-white hover:bg-cyan-600', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']"
                                     :aria-current="item.current ? 'page' : undefined">
                                     <component :is="item.icon" class="flex-shrink-0 w-6 h-6 mr-4 text-cyan-200"
                                         aria-hidden="true" />
                                     {{ item.name }}
-                                </a>
+                                </router-link>
                             </div>
                             <div class="pt-6 mt-6">
                                 <div class="px-2 space-y-1">
@@ -70,13 +70,13 @@
                 </div>
                 <nav class="flex flex-col flex-1 mt-5 overflow-y-auto divide-y divide-cyan-800" aria-label="Sidebar">
                     <div class="px-2 space-y-1">
-                        <a v-for="item in navigation" :key="item.name" :href="item.href"
+                        <router-link v-for="item in navigation" :key="item.name" :to="item.href"
                             :class="[item.current ? 'bg-cyan-800 text-white' : 'text-cyan-100 hover:text-white hover:bg-cyan-600', 'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md']"
                             :aria-current="item.current ? 'page' : undefined">
                             <component :is="item.icon" class="flex-shrink-0 w-6 h-6 mr-4 text-cyan-200"
                                 aria-hidden="true" />
                             {{ item.name }}
-                        </a>
+                        </router-link>
                     </div>
                     <div class="pt-6 mt-6">
                         <div class="px-2 space-y-1">
@@ -102,7 +102,7 @@
                 <!-- Search bar -->
                 <div class="flex justify-between flex-1 px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
                     <div class="flex flex-1">
-                       
+
                     </div>
                     <div class="flex items-center ml-4 md:ml-6">
                         <button type="button"
@@ -152,11 +152,11 @@
                     </div>
                 </div>
             </div>
-            <main class="flex-1 pb-8">
-             <router-view></router-view>
+            <main class="flex-1 px-10 py-8">
+                <router-view></router-view>
             </main>
         </div>
-  </div>
+    </div>
 </template>
 
 <script setup>
@@ -195,8 +195,8 @@ import {
 } from '@heroicons/vue/solid'
 
 const navigation = [
-    { name: 'Home', href: '#', icon: HomeIcon, current: true },
-    { name: 'History', href: '#', icon: ClockIcon, current: false },
+    { name: 'Home', href: '/admin', icon: HomeIcon, current: true },
+    { name: 'Categories', href: '/admin/categories', icon: ClockIcon, current: false },
     { name: 'Balances', href: '#', icon: ScaleIcon, current: false },
     { name: 'Cards', href: '#', icon: CreditCardIcon, current: false },
     { name: 'Recipients', href: '#', icon: UserGroupIcon, current: false },

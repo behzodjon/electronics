@@ -13,6 +13,9 @@ import CheckoutLayout from "../layouts/CheckoutLayout.vue"
 import HomeLayout from "../layouts/HomeLayout.vue"
 import AdminLayout from "../layouts/AdminLayout.vue"
 import AdminDashboard from "../views/admin/dashboard.vue"
+import AdminCategories from "../views/admin/categories/index.vue"
+import AdminCreateCategory from "../views/admin/categories/create.vue"
+import AdminEditCategory from "../views/admin/categories/edit.vue"
 import store from '../store';
 
 const routes = [
@@ -21,6 +24,9 @@ const routes = [
     component: AdminLayout,
     children:[
       { path: '/admin', name: 'AdminDashboard', component: AdminDashboard },
+      { path: '/admin/categories', name: 'AdminCategories', component: AdminCategories },
+      { path: '/admin/categories/create', name: 'AdminCreateCategory', component: AdminCreateCategory },
+      { path: '/admin/categories/:id/edit', name: 'AdminEditCategory', component: AdminEditCategory },
     ]
   },
 
