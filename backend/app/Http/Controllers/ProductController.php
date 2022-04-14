@@ -15,4 +15,11 @@ class ProductController extends Controller
 
         return ProductResource::collection($products);
     }
+
+    public function delete(Product $product)
+    {
+        $product->delete();
+
+        return response()->noContent();
+    }
 }

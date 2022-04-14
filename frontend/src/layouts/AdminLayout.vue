@@ -192,9 +192,10 @@ import Notification from "../components/common/Notification.vue";
 const navigation = [
     { name: 'Home', href: '/admin', icon: HomeIcon },
     { name: 'Categories', href: '/admin/categories', icon: ClockIcon, },
+    { name: 'Devices', href: '/admin/devices', icon: ClockIcon, },
 ]
 const secondaryNavigation = [
-    { name: 'Settings', href: '#', icon: CogIcon },
+    { name: 'Logout', href: '#', icon: CogIcon },
 ]
 
 const sidebarOpen = ref(false)

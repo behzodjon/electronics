@@ -14,6 +14,7 @@ import HomeLayout from "../layouts/HomeLayout.vue"
 import AdminLayout from "../layouts/AdminLayout.vue"
 import AdminDashboard from "../views/admin/dashboard.vue"
 import AdminCategories from "../views/admin/categories/index.vue"
+import AdminDevices from "../views/admin/devices/index.vue"
 import AdminCreateCategory from "../views/admin/categories/create.vue"
 import AdminEditCategory from "../views/admin/categories/edit.vue"
 import store from '../store';
@@ -27,6 +28,9 @@ const routes = [
       { path: '/admin/categories', name: 'AdminCategories', component: AdminCategories },
       { path: '/admin/categories/create', name: 'AdminCreateCategory', component: AdminCreateCategory },
       { path: '/admin/categories/:id/edit', name: 'AdminEditCategory', component: AdminEditCategory },
+
+      //devices
+      { path: '/admin/devices', name: 'AdminDevices', component: AdminDevices },
     ]
   },
 
@@ -39,6 +43,7 @@ const routes = [
       { path: '/signup', name: 'Signup', component: Signup },
       { path: '/restore-password', name: 'RestorePassword', component: RestorePassword },
       { path: '/Sell', name: 'Sell', component: Sell },
+
       //checkout
       {
         path: '/',

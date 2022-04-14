@@ -13,6 +13,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConditionController;
 use App\Http\Controllers\ProductPriceController;
 use App\Http\Controllers\ProductStorageController;
+use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\RestorePasswordController;
 
 
@@ -38,9 +39,10 @@ Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{category}', [CategoryController::class, 'show']);
 Route::put('/categories/{category}/update', [CategoryController::class, 'update']);
 Route::delete('/categories/{category}/delete', [CategoryController::class, 'delete']);
-// Route::get('/categories/{category}/products', [CategoryController::class, 'show']);
+Route::get('/categories/{category}/products', [CategoryProductController::class, 'index']);
 Route::post('/categories/create', [CategoryController::class, 'store']);
 Route::get('/products', [ProductController::class, 'index']);
+Route::delete('/products/{product}/delete', [ProductController::class, 'delete']);
 Route::get('/conditions', [ConditionController::class, 'index']);
 Route::get('/product/{product}/storages', [ProductStorageController::class, 'index']);
 Route::get('/products/{product}/{storage}/{condition}/price', [ProductPriceController::class, 'show']);
