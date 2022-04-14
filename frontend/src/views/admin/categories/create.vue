@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Create category</h1>
+        <h1 class="text-3xl">Create category</h1>
         <UpdateOrCreateCategory/>
     </div>
 </template>

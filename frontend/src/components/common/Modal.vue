@@ -48,11 +48,11 @@
                                     <DialogTitle
                                         as="h3"
                                         class="text-lg font-medium leading-6 text-gray-900"
-                                    >Remove device</DialogTitle>
+                                    >Remove item</DialogTitle>
                                     <div class="mt-2">
                                         <p
                                             class="text-sm text-gray-500"
-                                        >Are you sure you want to remove this device from your cart?</p>
+                                        >Are you sure you want to remove this item?</p>
                                     </div>
                                 </div>
                             </div>

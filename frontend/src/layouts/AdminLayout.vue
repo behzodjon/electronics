@@ -71,8 +71,8 @@
                 <nav class="flex flex-col flex-1 mt-5 overflow-y-auto divide-y divide-cyan-800" aria-label="Sidebar">
                     <div class="px-2 space-y-1">
                         <router-link v-for="item in navigation" :key="item.name" :to="item.href"
-                            :class="[item.current ? 'bg-cyan-800 text-white' : 'text-cyan-100 hover:text-white hover:bg-cyan-600', 'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md']"
-                            :aria-current="item.current ? 'page' : undefined">
+                            class="flex items-center px-2 py-2 text-sm font-medium leading-6 rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600 group"
+                           >
                             <component :is="item.icon" class="flex-shrink-0 w-6 h-6 mr-4 text-cyan-200"
                                 aria-hidden="true" />
                             {{ item.name }}
@@ -102,15 +102,8 @@
                 <!-- Search bar -->
                 <div class="flex justify-between flex-1 px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
                     <div class="flex flex-1">
-
                     </div>
                     <div class="flex items-center ml-4 md:ml-6">
-                        <button type="button"
-                            class="p-1 text-gray-400 bg-white rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
-                            <span class="sr-only">View notifications</span>
-                            <BellIcon class="w-6 h-6" aria-hidden="true" />
-                        </button>
-
                         <!-- Profile dropdown -->
                         <Menu as="div" class="relative ml-3">
                             <div>
@@ -197,21 +190,19 @@ import {
 import Notification from "../components/common/Notification.vue";
 
 const navigation = [
-    { name: 'Home', href: '/admin', icon: HomeIcon, current: true },
-    { name: 'Categories', href: '/admin/categories', icon: ClockIcon, current: false },
-    { name: 'Balances', href: '#', icon: ScaleIcon, current: false },
-    { name: 'Cards', href: '#', icon: CreditCardIcon, current: false },
-    { name: 'Recipients', href: '#', icon: UserGroupIcon, current: false },
-    { name: 'Reports', href: '#', icon: DocumentReportIcon, current: false },
+    { name: 'Home', href: '/admin', icon: HomeIcon },
+    { name: 'Categories', href: '/admin/categories', icon: ClockIcon, },
 ]
 const secondaryNavigation = [
     { name: 'Settings', href: '#', icon: CogIcon },
-    { name: 'Help', href: '#', icon: QuestionMarkCircleIcon },
-    { name: 'Privacy', href: '#', icon: ShieldCheckIcon },
 ]
-
 
 const sidebarOpen = ref(false)
 
-
 </script>
+
+<style  scoped>
+.router-link-exact-active {
+   @apply bg-cyan-800 text-white
+}
+</style>

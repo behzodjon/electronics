@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Edit category</h1>
+        <h1 class="text-3xl">Edit category</h1>
         <UpdateOrCreateCategory :category="category" />
     </div>
 </template>

@@ -1,8 +1,9 @@
 <template>
-    <form v-if="category" @submit.prevent="onSubmit" class="space-y-8 divide-y divide-gray-200">
+    <form v-if="category" @submit.prevent="onSubmit"
+        class="grid grid-cols-1 space-y-8 divide-y divide-gray-200 md:grid-cols-2">
         <div class="space-y-8 divide-y divide-gray-200">
             <div class="pt-8">
-                <div class="grid grid-cols-1 mt-6 gap-y-6 gap-x-4 sm:grid-cols-6">
+                <div class="grid grid-cols-1">
                     <div class="sm:col-span-3">
                         <label for="title" class="block text-sm font-medium text-gray-700">
                             Category title
@@ -12,16 +13,15 @@
                                 class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                         </div>
                     </div>
+                    <div class="pt-5 ">
+                        <div class="flex justify-end">
+                            <button type="submit"
+                                class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Save
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="pt-5">
-            <div class="flex justify-end">
-                <button type="submit"
-                    class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Save
-                </button>
             </div>
         </div>
     </form>
@@ -64,7 +64,4 @@ const onSubmit = async () => {
         console.log(err)
     }
 }
-
-
-
 </script>
