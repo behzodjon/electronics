@@ -31,7 +31,9 @@
 import axiosClient from "../../axios";
 import { toRef } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 
+const store = useStore();
 const router = useRouter();
 
 const props = defineProps({
@@ -54,6 +56,10 @@ const onSubmit = async () => {
             await axiosClient.post(`/categories/create`, form.value)
         }
         router.push({ name: "AdminCategories" });
+        store.commit("notify", {
+            type: "success",
+            message: "Successfully saved!",
+        });
     } catch (err) {
         console.log(err)
     }

@@ -49,4 +49,12 @@ class CategoryController extends Controller
 
         return response()->noContent();
     }
+
+    public function delete(Category $category)
+    {
+
+        $category->delete();
+
+        return response()->noContent();
+    }
 }

@@ -82,7 +82,7 @@ import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } f
 import { ExclamationIcon } from '@heroicons/vue/outline'
 
 const props = defineProps({
-    cartItem: Object,
+    item: Object,
     isDeleteModalVisible: Boolean
 })
 
@@ -91,7 +91,7 @@ const emit = defineEmits(['removeRecord', 'closeModal'])
 
 
 function removeRecord() {
-    emit('removeRecord', props.cartItem)
+    emit('removeRecord', props.item)
 }
 function closeModal() {
     emit('closeModal')

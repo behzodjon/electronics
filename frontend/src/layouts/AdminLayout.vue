@@ -154,6 +154,7 @@
             </div>
             <main class="flex-1 px-10 py-8">
                 <router-view></router-view>
+                <Notification />
             </main>
         </div>
     </div>
@@ -193,6 +194,7 @@ import {
     OfficeBuildingIcon,
     SearchIcon,
 } from '@heroicons/vue/solid'
+import Notification from "../components/common/Notification.vue";
 
 const navigation = [
     { name: 'Home', href: '/admin', icon: HomeIcon, current: true },

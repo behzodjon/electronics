@@ -24,8 +24,9 @@
                                     Title
                                 </th>
 
-                                <th scope="col" class="relative px-6 py-3">
-                                    <span class="sr-only">Edit</span>
+                                <th scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    Actions
                                 </th>
                             </tr>
                         </thead>
@@ -38,24 +39,64 @@
                                     {{ category.title }}
                                 </td>
 
-                                <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                <td
+                                    class="flex items-center gap-4 px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     <router-link :to="`/admin/categories/${category.id}/edit`"
-                                        class="text-indigo-600 hover:text-indigo-900">Edit</router-link>
+                                        class="text-indigo-600 hover:text-indigo-900">
+                                        <PencilAltIcon class="w-6 h-6 text-green-500" />
+                                    </router-link>
+                                    <button @click="showModal(category)">
+                                        <TrashIcon class="w-6 h-6 text-red-500" />
+                                    </button>
                                 </td>
+
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
+        <Modal :isDeleteModalVisible="isDeleteModalVisible" @remove-record="removeRecord" @close-modal="closeModal"
+            :item="category" />
     </div>
 </template>
 
 <script setup>
+import Modal from "../../../components/common/Modal.vue";
+import { PencilAltIcon } from '@heroicons/vue/solid'
+import { TrashIcon } from '@heroicons/vue/solid'
+import { useStore } from "vuex";
 import { onMounted, ref } from "vue";
 import axiosClient from "../../../axios";
+
+const store = useStore();
+
+const isDeleteModalVisible = ref(false)
 const categories = ref(null)
 
+const category = ref(null)
+
+function showModal(item) {
+    isDeleteModalVisible.value = true
+    category.value = item
+}
+
+function closeModal() {
+    isDeleteModalVisible.value = false
+}
+
+const removeRecord = async (category) => {
+    await axiosClient.delete(`/categories/${category.id}/delete`)
+    isDeleteModalVisible.value = false
+      store.commit("notify", {
+        type: "success",
+        message: "Successfully deleted!",
+    });
+    const { data } = await axiosClient.get(`/categories`)
+    categories.value = data
+  
+}
 onMounted(async () => {
     const { data } = await axiosClient.get(`/categories`)
     categories.value = data
