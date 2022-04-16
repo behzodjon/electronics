@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductResource extends JsonResource
+class ProductShowResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,16 +14,15 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
-        $oldPrice = $this->pivot ? $this->pivot->price : null;
-        $newPrice = $oldPrice ? $oldPrice + ($oldPrice * 10 / 100) : null;
-
+        $prices = $this->storages->groupBy('id');
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'image' => url("/storage/images/{$this->image}"),
-            'oldPrice' => $oldPrice,
-            'newPrice' => $newPrice,
-            'category' => new CategoryResource($this->whenLoaded('category')),
+            'category_id' => $this->category_id,
+            // 'prices' => ProductPricesResource::collection($prices)
+            'prices' => [
+                // 'storage_id'=>
+            ]
         ];
     }
 }

@@ -24,7 +24,7 @@ class Product extends Model
 
     public function storages()
     {
-        return $this->belongsToMany(Storage::class, 'products_prices');
+        return $this->belongsToMany(Storage::class, 'products_prices')->withPivot('price', 'condition_id');
     }
 
     public function conditions()

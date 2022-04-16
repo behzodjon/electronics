@@ -9,7 +9,7 @@
 import UpdateOrCreateCategory from "../../../components/admin/UpdateOrCreateCategory.vue";
 import axiosClient from "../../../axios";
 import { ref, onMounted } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import {  useRoute } from "vue-router";
 const route = useRoute();
 
 const category = ref(null)

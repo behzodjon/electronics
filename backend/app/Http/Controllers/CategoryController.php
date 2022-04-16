@@ -17,16 +17,9 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-
         return response()->json($category);
     }
 
-    // public function show(Category $category)
-    // {
-    //     $products = $category->products()->with('category')->get();
-
-    //     return ProductResource::collection($products);
-    // }
 
     public function store(Request $request)
     {

@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="onSubmit" class="space-y-8 divide-y divide-gray-200">
+    <form v-if="product" @submit.prevent="onSubmit" class="space-y-8 divide-y divide-gray-200">
         <div class="space-y-8 divide-y divide-gray-200">
             <div class="pt-8">
                 <div class="grid grid-cols-1 mt-6 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -36,7 +36,7 @@
                         </button></div>
                 </div>
                 <div v-for="(price, index) in form.prices" :key="price.id">
-                    <PriceFormEditor @change="priceChange"   @deletePrice="deletePrice" :index="index" :price="price" />
+                    <PriceFormEditor @change="priceChange" @deletePrice="deletePrice" :index="index" :price="price" />
                 </div>
             </div>
         </div>
@@ -58,23 +58,39 @@ import Multiselect from '@vueform/multiselect'
 import { PlusIcon } from '@heroicons/vue/solid'
 import axiosClient from "../../axios";
 import { toRef, ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import PriceFormEditor from "./PriceFormEditor.vue";
 
 const store = useStore();
 const router = useRouter();
+const route = useRoute();
 
-let form = ref({
-    title: "",
-    category_id: null,
-    prices: [],
-});
+const props = defineProps({
+    product: {
+        type: Object,
+        default() {
+            return {
+                title: "",
+                category_id: null,
+                prices: [],
+            }
+        }
+    },
+})
+
+console.log(props.product)
+const form = toRef(props, 'product')
+
+// const form = ref(JSON.parse(JSON.stringify(props.product)))
+console.log(form)
+
 
 const categories = ref(null);
 
 
 function addPrice(index) {
+    console.log(  form.value)
     const newPrice = {
         id: uuidv4(),
         storage_id: '',
@@ -108,6 +124,8 @@ function deletePrice(price) {
     form.value.prices = form.value.prices.filter((item) => item !== price);
 }
 onMounted(async () => {
+    // const productData = await axiosClient.get(`/products/${route.params.id}`)
+
     const categoriesData = await axiosClient.get(`/categories`)
     categories.value = categoriesData.data
 })

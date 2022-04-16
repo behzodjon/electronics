@@ -14,8 +14,8 @@ class TestController extends Controller
 {
     public function index()
     {
-        $oldCart = Cart::whereSessionId("IC8HZ7JHT3LU4fM1CzB1FboBnzZ53hH7Y59MJl9E")->first()->user_id ?? null;
-
-        dd( auth()->id());
+        $product=Product::whereId(6)->with(['storages'])->first();
+        $data=$product->storages->groupBy('id');
+        dd($data[7]);
     }
 }
