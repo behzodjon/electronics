@@ -16,6 +16,15 @@ class ProductController extends Controller
         return ProductResource::collection($products);
     }
 
+
+    public function store(Request $request)
+    {
+        info($request->all());
+
+
+        return response()->noContent();
+    }
+
     public function delete(Product $product)
     {
         $product->delete();

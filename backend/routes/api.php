@@ -8,6 +8,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StorageController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConditionController;
@@ -34,18 +35,29 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-
+//categories
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{category}', [CategoryController::class, 'show']);
 Route::put('/categories/{category}/update', [CategoryController::class, 'update']);
 Route::delete('/categories/{category}/delete', [CategoryController::class, 'delete']);
 Route::get('/categories/{category}/products', [CategoryProductController::class, 'index']);
 Route::post('/categories/create', [CategoryController::class, 'store']);
+
+//products
 Route::get('/products', [ProductController::class, 'index']);
+Route::post('/products/create', [ProductController::class, 'store']);
 Route::delete('/products/{product}/delete', [ProductController::class, 'delete']);
-Route::get('/conditions', [ConditionController::class, 'index']);
 Route::get('/product/{product}/storages', [ProductStorageController::class, 'index']);
 Route::get('/products/{product}/{storage}/{condition}/price', [ProductPriceController::class, 'show']);
+
+//conditions
+Route::get('/conditions', [ConditionController::class, 'index']);
+
+//storages
+Route::get('/storages', [StorageController::class, 'index']);
+
+
+//cart
 Route::get('/cart/{sessionId}', [CartController::class, 'showBySession']);
 Route::post('/cart/store', [CartController::class, 'store']);
 Route::post('/cartItems/store', [CartItemController::class, 'store']);

@@ -1,10 +1,10 @@
 <template>
     <div>
-        <h1 class="text-3xl">Create category</h1>
-        <UpdateOrCreateCategory/>
+        <h1 class="text-3xl">Create device</h1>
+        <UpdateOrCreateDevice/>
     </div>
 </template>
 
 <script setup>
-import UpdateOrCreateCategory from "../../../components/admin/UpdateOrCreateCategory.vue";
+import UpdateOrCreateDevice from "../../../components/admin/UpdateOrCreateDevice.vue";
 </script>

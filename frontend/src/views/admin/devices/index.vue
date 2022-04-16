@@ -3,7 +3,7 @@
         <div class="flex items-center justify-between">
             <div class="py-4 text-3xl">Devices</div>
             <div>
-                <router-link :to="{ name: 'AdminCreateCategory' }"
+                <router-link :to="{ name: 'AdminCreateDevice' }"
                     class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Add device
                 </router-link>

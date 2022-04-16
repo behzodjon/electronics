@@ -17,6 +17,8 @@ import AdminCategories from "../views/admin/categories/index.vue"
 import AdminDevices from "../views/admin/devices/index.vue"
 import AdminCreateCategory from "../views/admin/categories/create.vue"
 import AdminEditCategory from "../views/admin/categories/edit.vue"
+import AdminCreateDevice from "../views/admin/devices/create.vue"
+import AdminEditDevice from "../views/admin/devices/edit.vue"
 import store from '../store';
 
 const routes = [
@@ -31,6 +33,9 @@ const routes = [
 
       //devices
       { path: '/admin/devices', name: 'AdminDevices', component: AdminDevices },
+      { path: '/admin/devices/create', name: 'AdminCreateDevice', component: AdminCreateDevice },
+      { path: '/admin/devices/:id/edit', name: 'AdminEditDevice', component: AdminEditDevice },
+
     ]
   },
 

@@ -1629,6 +1629,11 @@
   "resolved" "https://registry.npmjs.org/@vue/shared/-/shared-3.2.29.tgz"
   "version" "3.2.29"
 
+"@vueform/multiselect@^2.3.3":
+  "integrity" "sha512-CLhtUZJwRGLyPqcgwuRrODOjT3Yqu6KNs5vV1O12kNOR/8c8ecX5vJyTcD0Mv1SJvnrslZgENmvYRRPpb5Cnjg=="
+  "resolved" "https://registry.npmjs.org/@vueform/multiselect/-/multiselect-2.3.3.tgz"
+  "version" "2.3.3"
+
 "@webassemblyjs/ast@1.11.1":
   "integrity" "sha512-ukBh14qFLjxTQNTXocdyksN5QdM28S1CxHt2rdskFyL+xFV7VremuBLVbmCePj+URalXBENx/9Lm7lnhihtCSw=="
   "resolved" "https://registry.npmjs.org/@webassemblyjs/ast/-/ast-1.11.1.tgz"
@@ -3752,6 +3757,11 @@
   "integrity" "sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8="
   "resolved" "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz"
   "version" "1.0.2"
+
+"uuid@^8.3.2":
+  "integrity" "sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg=="
+  "resolved" "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
+  "version" "8.3.2"
 
 "vite-plugin-components@^0.13.3":
   "integrity" "sha512-6vLWPrEqFSW7REYvux/WVwxsytg/DcstVhdgAT806cZi/KGiQgB8dyFnLkrkFawxUQruuGkLWfS99Z/64mMC0w=="
