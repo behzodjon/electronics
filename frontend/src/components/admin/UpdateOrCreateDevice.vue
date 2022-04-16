@@ -36,7 +36,7 @@
                         </button></div>
                 </div>
                 <div v-for="(price, index) in form.prices" :key="price.id">
-                    <PriceFormEditor @change="priceChange" :index="index" :price="price" />
+                    <PriceFormEditor @change="priceChange"   @deletePrice="deletePrice" :index="index" :price="price" />
                 </div>
             </div>
         </div>
@@ -84,8 +84,6 @@ function addPrice(index) {
 }
 
 function priceChange(price) {
-    // Important to explicitelly assign question.data.options, because otherwise it is a Proxy object
-    // and it is lost in JSON.stringify()
     form.value.prices = form.value.prices.map((item) => {
         if (item.id === price.id) {
             return JSON.parse(JSON.stringify(price));
@@ -104,6 +102,10 @@ const onSubmit = async () => {
     } catch (err) {
         console.log(err)
     }
+}
+
+function deletePrice(price) {
+    form.value.prices = form.value.prices.filter((item) => item !== price);
 }
 onMounted(async () => {
     const categoriesData = await axiosClient.get(`/categories`)

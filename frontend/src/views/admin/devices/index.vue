@@ -27,10 +27,7 @@
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     Title
                                 </th>
-                                 <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Price
-                                </th>
+                                
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     Actions
@@ -48,13 +45,10 @@
                                   <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                                     {{ device.model }}
                                 </td>
-                                  <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                    {{ device.oldPrice }}
-                                </td>
 
                                 <td
                                     class="flex items-center gap-4 px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                    <router-link :to="`/admin/categories/${device.id}/edit`"
+                                    <router-link :to="`/admin/devices/${device.id}/edit`"
                                         class="text-indigo-600 hover:text-indigo-900">
                                         <PencilAltIcon class="w-6 h-6 text-green-500" />
                                     </router-link>
