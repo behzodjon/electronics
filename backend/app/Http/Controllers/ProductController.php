@@ -36,10 +36,10 @@ class ProductController extends Controller
             'category_id' => $data['category_id'],
         ]);
 
+        //attach new values
         collect($data['prices'])->each(function ($price) use ($product) {
-            $priceValues = collect($price['values']);
-            $priceValues->each(function ($value, $key) use ($price, $product) {
-                    $product->storages()->attach($price['storage_id'], ['condition_id' => $key+1, 'price' => $value]);
+            collect($price['values'])->each(function ($value, $key) use ($price, $product) {
+                $product->storages()->attach($price['storage_id'], ['condition_id' => $key + 1, 'price' => $value]);
             });
         });
 
@@ -54,11 +54,13 @@ class ProductController extends Controller
             'title' => $data['title'],
             'category_id' => $data['category_id'],
         ]);
+
+        //remove old values to update
         $product->storages()->detach();
 
+        //attach new updated values
         collect($data['prices'])->each(function ($price) use ($product) {
-            $priceValues = collect($price['values']);
-            $priceValues->each(function ($value, $key) use ($price, $product) {
+            collect($price['values'])->each(function ($value, $key) use ($price, $product) {
                 $product->storages()->attach($price['storage_id'], ['condition_id' => $key + 1, 'price' => $value]);
             });
         });

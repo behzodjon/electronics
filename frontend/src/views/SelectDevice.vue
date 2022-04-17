@@ -52,7 +52,7 @@
                       'block text-sm lg:text-base font-medium',
                     ]"
                   >
-                    {{ item.model }}
+                    {{ item.title }}
                   </RadioGroupLabel>
                   <RadioGroupDescription
                     as="span"
@@ -61,7 +61,7 @@
                       'block text-sm',
                     ]"
                   >
-                    {{ item.brand.title }}
+                    {{ item.category.title }}
                   </RadioGroupDescription>
                 </div>
               </div>

@@ -10,7 +10,7 @@ class ProductStorageController extends Controller
 {
     public function index(Product $product)
     {
-        $storages = $product->storages()->get();
+        $storages = $product->storages->unique("id");
 
         return StorageResource::collection($storages);
     }

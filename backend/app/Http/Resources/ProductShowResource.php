@@ -17,6 +17,7 @@ class ProductShowResource extends JsonResource
     public function toArray($request)
     {
         $storages = $this->storages->groupBy('id');
+
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -28,6 +29,7 @@ class ProductShowResource extends JsonResource
     public function getPrices($storages)
     {
         $prices = [];
+        
         foreach ($storages as $key => $value) {
             $prices[] = [
                 'id' => Str::uuid(),
