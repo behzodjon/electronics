@@ -38,9 +38,27 @@ class ProductController extends Controller
         collect($data['prices'])->each(function ($price) use ($product) {
             $priceValues = collect($price['values']);
             $priceValues->each(function ($value, $key) use ($price, $product) {
-                if ($value) {
-                    $product->storages()->attach($price['storage_id'], ['condition_id' => $key, 'price' => $value]);
-                }
+                    $product->storages()->attach($price['storage_id'], ['condition_id' => $key+1, 'price' => $value]);
+            });
+        });
+
+        return response()->noContent();
+    }
+
+    public function update(Product $product, Request $request)
+    {
+        $data = $request->all();
+
+        $product->update([
+            'title' => $data['title'],
+            'category_id' => $data['category_id'],
+        ]);
+        $product->storages()->detach();
+
+        collect($data['prices'])->each(function ($price) use ($product) {
+            $priceValues = collect($price['values']);
+            $priceValues->each(function ($value, $key) use ($price, $product) {
+                $product->storages()->attach($price['storage_id'], ['condition_id' => $key + 1, 'price' => $value]);
             });
         });
 

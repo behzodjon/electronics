@@ -16,7 +16,6 @@ const product = ref(null)
 
 onMounted(async () => {
     const productData = await axiosClient.get(`/products/${route.params.id}`)
-    console.log(productData.data.data)
     product.value = productData.data.data
 })
 </script>

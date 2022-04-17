@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductShowResource extends JsonResource
@@ -28,9 +30,10 @@ class ProductShowResource extends JsonResource
         $prices = [];
         foreach ($storages as $key => $value) {
             $prices[] = [
+                'id' => Str::uuid(),
                 'storage_id' => $key,
                 'values' => $value->map(function ($item) use ($key) {
-                    return [$item->pivot->condition_id => $item->pivot->price];
+                    return  $item->pivot->price;
                 })
             ];
         }

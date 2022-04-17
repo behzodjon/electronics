@@ -36,7 +36,8 @@
                         </button></div>
                 </div>
                 <div v-for="(price, index) in form.prices" :key="price.id">
-                    <PriceFormEditor @change="priceChange" @deletePrice="deletePrice" :index="index" :price="price" />
+                    <PriceFormEditor @change="priceChange" @deletePrice="deletePrice" :index="parseInt(index)"
+                        :price="price" />
                 </div>
             </div>
         </div>
@@ -79,7 +80,6 @@ const categories = ref(null);
 
 
 function addPrice(index) {
-    console.log(form.value)
     const newPrice = {
         id: uuidv4(),
         storage_id: null,
@@ -99,7 +99,11 @@ function priceChange(price) {
 
 const onSubmit = async () => {
     try {
-        await axiosClient.post(`/products/create`, form.value)
+        if (route.params.id) {
+            await axiosClient.post(`/products/${route.params.id}/update`, form.value)
+        } else {
+            await axiosClient.post(`/products/create`, form.value)
+        }
         store.commit("notify", {
             type: "success",
             message: "Successfully saved!",
@@ -116,6 +120,9 @@ onMounted(async () => {
     if (route.params.id) {
         const productData = await axiosClient.get(`/products/${route.params.id}`)
         product.value = productData.data.data
+        form.value.title = productData.data.data.title
+        form.value.category_id = productData.data.data.category_id
+        form.value.prices = [...productData.data.data.prices]
     }
 
     const categoriesData = await axiosClient.get(`/categories`)

@@ -47,6 +47,7 @@ Route::post('/categories/create', [CategoryController::class, 'store']);
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{product}', [ProductController::class, 'show']);
 Route::post('/products/create', [ProductController::class, 'store']);
+Route::post('/products/{product}/update', [ProductController::class, 'update']);
 Route::delete('/products/{product}/delete', [ProductController::class, 'delete']);
 Route::get('/product/{product}/storages', [ProductStorageController::class, 'index']);
 Route::get('/products/{product}/{storage}/{condition}/price', [ProductPriceController::class, 'show']);
