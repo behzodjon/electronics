@@ -4,15 +4,13 @@
     <h2 class="sr-only">Our Process</h2>
     <div class="mx-auto mt-6 max-w-7xl sm:px-0 lg:px-0">
       <div class="grid max-w-2xl grid-cols-1 px-4 mx-auto gap-y-2 gap-x-2">
-        <h1
-          class="
+        <h1 class="
             font-bold
             text-xl
             underline
             decoration-4 decoration-[#00c389]
             text-center
-          "
-        >
+          ">
           Here's How It Works.
         </h1>
         <p class="mb-2 text-sm text-center lg:text-base">
@@ -38,7 +36,9 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import store from "../store";
+
 const perks = [
   {
     name: "Select your device, answer some questions.",
@@ -62,17 +62,9 @@ const perks = [
       "Once we have your device, we will do our internal testing and pay you according.",
   },
 ];
-import store from "../store";
 
-export default {
-  setup() {
-    store.dispatch("changeSelectedValue", 1);
-    store.commit("setSectionTitle", "How It Works");
-    store.commit("setLoadingValue", false)
+store.dispatch("changeSelectedValue", 1);
+store.commit("setSectionTitle", "How It Works");
+store.commit("setLoadingValue", false)
 
-    return {
-      perks,
-    };
-  },
-};
 </script>

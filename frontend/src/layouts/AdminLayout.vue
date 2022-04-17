@@ -166,36 +166,25 @@ import {
     TransitionRoot,
 } from '@headlessui/vue'
 import {
-    BellIcon,
-    ClockIcon,
-    CogIcon,
-    CreditCardIcon,
-    DocumentReportIcon,
+    DeviceMobileIcon,
     HomeIcon,
     MenuAlt1Icon,
-    QuestionMarkCircleIcon,
-    ScaleIcon,
-    ShieldCheckIcon,
-    UserGroupIcon,
     XIcon,
+    ViewGridIcon,
+    LogoutIcon
 } from '@heroicons/vue/outline'
 import {
-    CashIcon,
-    CheckCircleIcon,
     ChevronDownIcon,
-    ChevronRightIcon,
-    OfficeBuildingIcon,
-    SearchIcon,
 } from '@heroicons/vue/solid'
 import Notification from "../components/common/Notification.vue";
 
 const navigation = [
     { name: 'Home', href: '/admin', icon: HomeIcon },
-    { name: 'Categories', href: '/admin/categories', icon: ClockIcon, },
-    { name: 'Devices', href: '/admin/devices', icon: ClockIcon, },
+    { name: 'Categories', href: '/admin/categories', icon: ViewGridIcon, },
+    { name: 'Devices', href: '/admin/devices', icon: DeviceMobileIcon, },
 ]
 const secondaryNavigation = [
-    { name: 'Logout', href: '#', icon: CogIcon },
+    { name: 'Logout', href: '#', icon: LogoutIcon },
 ]
 
 const sidebarOpen = ref(false)

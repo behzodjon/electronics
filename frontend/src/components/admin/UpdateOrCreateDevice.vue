@@ -24,6 +24,18 @@
                             </Multiselect>
                         </div>
                     </div>
+
+                      <div class="sm:col-span-6">
+            <label for="photo" class="block text-sm font-medium text-gray-700">
+              Device image
+            </label>
+            <div class="flex items-center mt-1">
+              <PhotographIcon class="w-16 h-16 ml-3 text-gray-700" />
+              <button type="button" class="px-3 py-2 ml-5 text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Change
+              </button>
+            </div>
+          </div>
                 </div>
                 <div class="flex items-center justify-between mt-8">
                     <div>
@@ -35,6 +47,7 @@
                             <PlusIcon class="w-4 h-4 ml-3 text-white" />
                         </button></div>
                 </div>
+                
                 <div v-for="(price, index) in form.prices" :key="price.id">
                     <PriceFormEditor @change="priceChange" @deletePrice="deletePrice" :index="parseInt(index)"
                         :price="price" />
@@ -57,8 +70,9 @@
 import { v4 as uuidv4 } from "uuid";
 import Multiselect from '@vueform/multiselect'
 import { PlusIcon } from '@heroicons/vue/solid'
+import { PhotographIcon } from '@heroicons/vue/outline'
 import axiosClient from "../../axios";
-import { toRef, ref, onMounted } from "vue";
+import {  ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import PriceFormEditor from "./PriceFormEditor.vue";

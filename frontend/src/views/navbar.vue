@@ -42,7 +42,7 @@
   </header>
 </template>
 
-<script>
+<script setup>
 import store from "../store";
 import { computed } from "vue";
 import { useRouter } from "vue-router";
@@ -55,8 +55,6 @@ const navigation = [
   { name: "Solutions", href: "#" },
 ];
 
-export default {
-  setup() {
     const isLoggedIn = computed(() => store.getters['user/isAuthenticated']);
     const user = computed(() => store.state.user.data);
     const router = useRouter();
@@ -68,15 +66,7 @@ export default {
         });
       });
     }
-    return {
-      logout,
-      navigation,
-      user,
-      isLoggedIn,
-    };
-  },
-};
-
+   
 
 </script>
 

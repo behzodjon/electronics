@@ -146,7 +146,6 @@ export default {
     PhoneIcon,
     XIcon,
     VTypical,
-    tabs,
     navbar,
     incentives,
   },
@@ -192,7 +191,6 @@ import Signup from "./Signup.vue";
 import Sell from "./Sell.vue";
 import { MailIcon, PhoneIcon } from "@heroicons/vue/solid";
 import VTypical from "vue-typical";
-import tabs from "./tabs.vue";
 import navbar from "./navbar.vue";
 import incentives from "./incentives.vue";
 </script>
