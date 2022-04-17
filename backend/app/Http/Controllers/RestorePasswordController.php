@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SetNewPasswordRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\RestorePassword;
@@ -33,26 +34,21 @@ class RestorePasswordController extends Controller
         return response()->noContent();
     }
 
-    public function setNewPassword(Request $request)
+    public function setNewPassword(SetNewPasswordRequest $request)
     {
-        $request->validate([
-            'password' => ['required', 'confirmed', Password::min(8)],
-            'code' => ['required', 'min:6'],
-            'email' => 'required',
-        ]);
+        $data = $request->validated();
 
-
-        $user = User::where('email', $request->email)->whereHas('passwordReset', function ($query) use ($request) {
-            $query->where('token', $request->code);
+        $user = User::where('email', $data['email'])->whereHas('passwordReset', function ($query) use ($data) {
+            $query->where('token',  $data['code']);
         })->first();
 
         if (!$user) {
             throw ValidationException::withMessages(['code' => 'Invalid code...']);
         }
 
-        $user->update(['password' => bcrypt($request->password)]);
+        $user->update(['password' => bcrypt($data['password'])]);
         $user->passwordReset()->delete();
-        
+
         return response()->noContent();
     }
 }

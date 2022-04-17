@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryStoreRequest;
 use App\Models\Storage;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::with('products')->get();
+
         return response()->json($categories);
     }
 
@@ -21,22 +23,18 @@ class CategoryController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(CategoryStoreRequest $request)
     {
-        $validatedData = $request->validate([
-            'title' => ['required'],
-        ]);
+        $validatedData = $request->validated();
 
         Category::create($validatedData);
 
         return response()->noContent();
     }
 
-    public function update(Category $category, Request $request)
+    public function update(Category $category, CategoryStoreRequest $request)
     {
-        $validatedData = $request->validate([
-            'title' => ['required'],
-        ]);
+        $validatedData = $request->validated();
 
         $category->update($validatedData);
 
@@ -45,7 +43,6 @@ class CategoryController extends Controller
 
     public function delete(Category $category)
     {
-
         $category->delete();
 
         return response()->noContent();

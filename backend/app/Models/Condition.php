@@ -20,7 +20,6 @@ class Condition extends Model
         return $this->belongsToMany(Storage::class, 'products_prices')->withPivot('price');
     }
 
-
     /**
      * @return HasMany
      */

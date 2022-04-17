@@ -11,6 +11,7 @@ class AddressController extends Controller
     public function store(StoreBillingFormRequest $request)
     {
         $data = $request->validated();
+        
         $data['user_id'] = auth()->user()->id;
 
         Address::create($data);

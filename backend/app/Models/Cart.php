@@ -22,8 +22,6 @@ class Cart extends Model
         return $this->hasMany(CartItem::class);
     }
 
-
-   
     public static function createCart()
     {
         return self::create([

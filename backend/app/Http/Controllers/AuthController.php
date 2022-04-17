@@ -25,16 +25,16 @@ class AuthController extends Controller
             ]
         ]);
 
-        /** @var \App\Models\User $user */
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password'])
         ]);
+
         $token = $user->createToken('main')->plainTextToken;
 
-
         $oldCart = Cart::whereSessionId($request->sessionId)->first() ?? null;
+
         if (is_null($oldCart->user_id)) {
             $oldCart->user_id = $user->id;
             $oldCart->save();
@@ -63,7 +63,9 @@ class AuthController extends Controller
                 'error' => 'The Provided credentials are not correct'
             ], 422);
         }
+
         $user = Auth::user();
+
         $token = $user->createToken('main')->plainTextToken;
 
 
@@ -84,8 +86,8 @@ class AuthController extends Controller
 
     public function logout()
     {
-        /** @var User $user */
         $user = Auth::user();
+
         // Revoke the token that was used to authenticate the current request...
         $user->currentAccessToken()->delete();
 
@@ -137,6 +139,7 @@ class AuthController extends Controller
                 'user' => $user,
                 'token' => $token,
             ]);
+            
         } catch (\Throwable $th) {
             throw $th;
         }
