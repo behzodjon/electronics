@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 class="text-3xl">Edit device</h1>
-        <UpdateOrCreateDevice :product="product"/>
+        <UpdateOrCreateDevice />
     </div>
 </template>
 

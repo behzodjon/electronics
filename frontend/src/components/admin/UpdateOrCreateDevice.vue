@@ -1,5 +1,5 @@
 <template>
-    <form v-if="product" @submit.prevent="onSubmit" class="space-y-8 divide-y divide-gray-200">
+    <form @submit.prevent="onSubmit" class="space-y-8 divide-y divide-gray-200">
         <div class="space-y-8 divide-y divide-gray-200">
             <div class="pt-8">
                 <div class="grid grid-cols-1 mt-6 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -66,34 +66,23 @@ const store = useStore();
 const router = useRouter();
 const route = useRoute();
 
-const props = defineProps({
-    product: {
-        type: Object,
-        default() {
-            return {
-                title: "",
-                category_id: null,
-                prices: [],
-            }
-        }
-    },
+
+const form = ref({
+    title: "",
+    category_id: null,
+    prices: [],
 })
 
-console.log(props.product)
-const form = toRef(props, 'product')
-
-// const form = ref(JSON.parse(JSON.stringify(props.product)))
-console.log(form)
-
+const product = ref(null)
 
 const categories = ref(null);
 
 
 function addPrice(index) {
-    console.log(  form.value)
+    console.log(form.value)
     const newPrice = {
         id: uuidv4(),
-        storage_id: '',
+        storage_id: null,
         values: []
     };
     form.value.prices.splice(index, 0, newPrice);
@@ -124,7 +113,10 @@ function deletePrice(price) {
     form.value.prices = form.value.prices.filter((item) => item !== price);
 }
 onMounted(async () => {
-    // const productData = await axiosClient.get(`/products/${route.params.id}`)
+    if (route.params.id) {
+        const productData = await axiosClient.get(`/products/${route.params.id}`)
+        product.value = productData.data.data
+    }
 
     const categoriesData = await axiosClient.get(`/categories`)
     categories.value = categoriesData.data

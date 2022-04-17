@@ -14,8 +14,17 @@ class TestController extends Controller
 {
     public function index()
     {
-        $product=Product::whereId(6)->with(['storages'])->first();
-        $data=$product->storages->groupBy('id');
-        dd($data[7]);
+        $product = Product::whereId(6)->with(['storages'])->first();
+        $storages = $product->storages->groupBy('id');
+        $prices = [];
+        foreach ($storages as $key => $value) {
+            $prices[] = [
+                'storage_id' => $key,
+                'values' => $value->map(function ($item) use ($key) {
+                    return [$item->pivot->condition_id => $item->pivot->price];
+                })
+            ];
+        }
+        dd($prices);
     }
 }

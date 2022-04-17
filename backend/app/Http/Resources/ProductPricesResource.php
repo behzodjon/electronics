@@ -15,7 +15,6 @@ class ProductPricesResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'product_id' => $this->pivot->product_id,
             'condition_id' => $this->pivot->condition_id,
             // 'values' =>  PricesResource::collection(),
         ];
