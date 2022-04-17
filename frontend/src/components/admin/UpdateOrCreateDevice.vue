@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center justify-between mt-4">
+                <div class="flex items-center justify-between mt-8">
                     <div>
                         <h1 class="text-2xl font-medium text-gray-700">Prices</h1>
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Product;
 use App\Models\Condition;
 use Illuminate\Http\Request;
@@ -45,9 +46,9 @@ class ProductController extends Controller
         return response()->noContent();
     }
 
-    public function update(Product $product, Request $request)
+    public function update(Product $product, ProductUpdateRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
 
         $product->update([
             'title' => $data['title'],
