@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductShowResource extends JsonResource
@@ -21,6 +22,7 @@ class ProductShowResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'image_url' => $this->image ? URL::to($this->image) : null,
             'category_id' => $this->category_id,
             'prices' => $this->getPrices($storages)
         ];

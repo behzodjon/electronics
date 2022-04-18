@@ -25,17 +25,22 @@
                         </div>
                     </div>
 
-                      <div class="sm:col-span-6">
-            <label for="photo" class="block text-sm font-medium text-gray-700">
-              Device image
-            </label>
-            <div class="flex items-center mt-1">
-              <PhotographIcon class="w-16 h-16 ml-3 text-gray-700" />
-              <button type="button" class="px-3 py-2 ml-5 text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Change
-              </button>
-            </div>
-          </div>
+                    <div class="sm:col-span-6">
+                        <label for="photo" class="block text-sm font-medium text-gray-700">
+                            Device image
+                        </label>
+                        <div class="flex items-center mt-1 ">
+                            <img v-if="form.image_url" :src="form.image_url" :alt="form.title"
+                                class="object-cover w-64 h-48" />
+                            <PhotographIcon v-else class="w-16 h-16 ml-3 text-gray-700" />
+                            <button type="button"
+                                class="relative px-3 py-2 ml-5 text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <input type="file" @change="onImageChoose"
+                                    class="absolute top-0 bottom-0 left-0 right-0 opacity-0 cursor-pointer" />
+                                Change
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="flex items-center justify-between mt-8">
                     <div>
@@ -47,7 +52,7 @@
                             <PlusIcon class="w-4 h-4 ml-3 text-white" />
                         </button></div>
                 </div>
-                
+
                 <div v-for="(price, index) in form.prices" :key="price.id">
                     <PriceFormEditor @change="priceChange" @deletePrice="deletePrice" :index="parseInt(index)"
                         :price="price" />
@@ -72,7 +77,7 @@ import Multiselect from '@vueform/multiselect'
 import { PlusIcon } from '@heroicons/vue/solid'
 import { PhotographIcon } from '@heroicons/vue/outline'
 import axiosClient from "../../axios";
-import {  ref, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import PriceFormEditor from "./PriceFormEditor.vue";
@@ -85,6 +90,8 @@ const route = useRoute();
 const form = ref({
     title: "",
     category_id: null,
+    image: null,
+    image_url: null,
     prices: [],
 })
 
@@ -92,6 +99,18 @@ const product = ref(null)
 
 const categories = ref(null);
 
+function onImageChoose(ev) {
+    const file = ev.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+        // The field to send on backend and apply validations
+        form.value.image = reader.result;
+        // The field to display here
+        form.value.image_url = reader.result;
+        ev.target.value = "";
+    };
+    reader.readAsDataURL(file);
+}
 
 function addPrice(index) {
     const newPrice = {
@@ -136,6 +155,7 @@ onMounted(async () => {
         product.value = productData.data.data
         form.value.title = productData.data.data.title
         form.value.category_id = productData.data.data.category_id
+        form.value.image_url = productData.data.data.image_url
         form.value.prices = [...productData.data.data.prices]
     }
 
