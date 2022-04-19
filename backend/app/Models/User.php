@@ -48,4 +48,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(PasswordReset::class, 'email', 'email');
     }
+
+    public function isAdmin()
+    {
+        return $this->is_admin;
+        
+    }
+
 }

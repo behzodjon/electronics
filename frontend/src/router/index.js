@@ -13,6 +13,7 @@ import CheckoutLayout from "../layouts/CheckoutLayout.vue"
 import HomeLayout from "../layouts/HomeLayout.vue"
 import AdminLayout from "../layouts/AdminLayout.vue"
 import AdminDashboard from "../views/admin/dashboard.vue"
+import AdminLogin from "../views/admin/login.vue"
 import AdminCategories from "../views/admin/categories/index.vue"
 import AdminDevices from "../views/admin/devices/index.vue"
 import AdminCreateCategory from "../views/admin/categories/create.vue"
@@ -23,9 +24,16 @@ import store from '../store';
 
 const routes = [
   {
+    path: '/admin/login', name: 'AdminLogin', component: AdminLogin
+  },
+  {
     path: '/admin',
+    meta: {
+      requiresAuth: true,
+      admin: true
+    },
     component: AdminLayout,
-    children:[
+    children: [
       { path: '/admin', name: 'AdminDashboard', component: AdminDashboard },
       { path: '/admin/categories', name: 'AdminCategories', component: AdminCategories },
       { path: '/admin/categories/create', name: 'AdminCreateCategory', component: AdminCreateCategory },
@@ -111,11 +119,32 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth && !store.state.user.token) {
-    next({ name: "Login", query: { redirect: '/cart-info' } });
-  }
-  else {
-    next();
+  const loggedIn = store.state.user.token;
+  const isAdmin = store.state.user.data.is_admin;
+  if (to.meta.admin) {
+    if (to.meta.requiresAuth) {
+      if (!loggedIn) {
+        next({ name: "Login" });
+      } else {
+        next()
+      }
+    } else {
+      if (!loggedIn) {
+        next()
+      } else if (loggedIn) {
+        if (isAdmin) {
+          next({ name: "AdminDashboard" });
+        } else {
+          next()
+        }
+      }
+    }
+  } else {
+    if (to.meta.requiresAuth && !loggedIn) {
+      next({ name: "Login", query: { redirect: '/cart-info' } });
+    } else {
+      next();
+    }
   }
 });
 

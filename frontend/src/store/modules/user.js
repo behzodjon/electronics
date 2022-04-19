@@ -14,6 +14,7 @@ const state = {
 const getters = {
     isAuthenticated: state => !!state.token,
     userData: state => state.data,
+    isAdmin: state => state.data.isAdmin,
 }
 const mutations = {
     logout: (state) => {

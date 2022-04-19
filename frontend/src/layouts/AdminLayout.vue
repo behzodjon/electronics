@@ -155,6 +155,8 @@
 
 <script setup>
 import { ref } from 'vue'
+import { computed } from "vue";
+import { useStore } from "vuex";
 import {
     Dialog,
     DialogOverlay,
@@ -188,6 +190,14 @@ const secondaryNavigation = [
 ]
 
 const sidebarOpen = ref(false)
+
+const store = useStore();
+const isLoggedIn = computed(() => store.getters['user/isAuthenticated']);
+
+// if (isLoggedIn.value) {
+  store.dispatch("user/getUser");
+// }
+
 
 </script>
 
