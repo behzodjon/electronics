@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\ProductSeeder;
 use Database\Seeders\StorageSeeder;
 use Database\Seeders\CategorySeeder;
+use Database\Seeders\AdminUserSeeder;
 use Database\Seeders\ConditionSeeder;
 use Database\Seeders\ProductPriceSeeder;
 
@@ -20,11 +21,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CategorySeeder::class,
-            ProductSeeder::class,
+            // ProductSeeder::class,
             StorageSeeder::class,
             ConditionSeeder::class,
-            ProductPriceSeeder::class,
-            CountriesTableSeeder::class
+            // ProductPriceSeeder::class,
+            CountriesTableSeeder::class,
+            AdminUserSeeder::class
         ]);
     }
 }

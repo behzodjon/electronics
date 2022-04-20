@@ -36,6 +36,13 @@
               class="px-4 pt-1 pb-2 text-white border rounded-full text-md font-baseline hover:border-2"
             >Checkout</router-link>
           </div>
+            <div class="ml-4">
+            <router-link
+            v-if="user.is_admin"
+              to="/admin"
+              class="px-4 pt-1 pb-2 text-white border rounded-full text-md font-baseline hover:border-2"
+            >Admin panel</router-link>
+          </div>
         </div>
       </div>
     </nav>

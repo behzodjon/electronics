@@ -83,7 +83,7 @@
 
 <script setup>
 import { useStore } from "vuex";
-import { computed, ref } from "vue";
+import { computed, ref,onMounted } from "vue";
 import { ChevronRightIcon, ChevronUpIcon } from '@heroicons/vue/solid'
 import Modal from "../../components/common/Modal.vue";
 import CheckoutBottom from "../../components/common/CheckoutBottom.vue";
@@ -112,7 +112,6 @@ function removeRecord(item) {
     store.dispatch("cart/fetchCart");
   });
 }
-store.commit('cart/SET_ROUTE_ACTIVE', false)
 
 function nextStep() {
   store.commit('cart/SET_ROUTE_ACTIVE', true)
@@ -120,6 +119,10 @@ function nextStep() {
     name: "Cartinfo",
   });
 }
+
+onMounted(async () => {
+  
+})
 </script>
 
 

@@ -14,7 +14,7 @@ const state = {
 const getters = {
     isAuthenticated: state => !!state.token,
     userData: state => state.data,
-    isAdmin: state => state.data.isAdmin,
+    isAdmin: state => state.data.is_admin,
 }
 const mutations = {
     logout: (state) => {
@@ -83,7 +83,6 @@ const actions = {
                 commit('setUser', data.user);
                 commit('setToken', data.token)
                 dispatch('cart/fetchCart', data.user, { root: true })
-
                 return data;
             })
     },

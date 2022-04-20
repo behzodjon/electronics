@@ -137,6 +137,8 @@ const onSubmit = async () => {
         } else {
             await axiosClient.post(`/products/create`, form.value)
         }
+        router.push({ name: "AdminDevices" });
+
         store.commit("notify", {
             type: "success",
             message: "Successfully saved!",

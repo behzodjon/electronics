@@ -74,7 +74,7 @@
               >
                 <div class="flex-col flex-none p-4">
                   <img
-                    class="flex-shrink-0 mx-auto rounded-none w-28 h-28"
+                    class="flex-shrink-0 object-cover mx-auto rounded-none w-28 h-28"
                     :src="product.image"
                     alt
                   />

@@ -194,9 +194,9 @@ const sidebarOpen = ref(false)
 const store = useStore();
 const isLoggedIn = computed(() => store.getters['user/isAuthenticated']);
 
-// if (isLoggedIn.value) {
+if (isLoggedIn.value) {
   store.dispatch("user/getUser");
-// }
+}
 
 
 </script>

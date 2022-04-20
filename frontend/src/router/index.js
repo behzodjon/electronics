@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
+import isAdmin from '../middleware/isAdmin'
+import auth from '../middleware/auth'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
@@ -28,13 +30,16 @@ const routes = [
   },
   {
     path: '/admin',
-    meta: {
-      requiresAuth: true,
-      admin: true
-    },
     component: AdminLayout,
+    meta: {
+      middleware: [
+        isAdmin
+      ]
+    },
     children: [
-      { path: '/admin', name: 'AdminDashboard', component: AdminDashboard },
+      {
+        path: '/admin', name: 'AdminDashboard', component: AdminDashboard
+      },
       { path: '/admin/categories', name: 'AdminCategories', component: AdminCategories },
       { path: '/admin/categories/create', name: 'AdminCreateCategory', component: AdminCreateCategory },
       { path: '/admin/categories/:id/edit', name: 'AdminEditCategory', component: AdminEditCategory },
@@ -68,8 +73,18 @@ const routes = [
           },
           {
             path: '/cart-info', name: 'Cartinfo',
-            meta: { requiresAuth: true },
-            component: billinformation
+            meta: {
+              middleware: [
+                auth
+              ]
+            },
+            component: billinformation,
+            beforeEnter: (to, from) => {
+              if (!store.state.cart.items.length) {
+                return false
+              }
+              return true
+            },
           },
           {
             path: '/payment', name: 'PaymentMethod',
@@ -119,33 +134,21 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const loggedIn = store.state.user.token;
-  const isAdmin = store.state.user.data.is_admin;
-  if (to.meta.admin) {
-    if (to.meta.requiresAuth) {
-      if (!loggedIn) {
-        next({ name: "Login" });
-      } else {
-        next()
-      }
-    } else {
-      if (!loggedIn) {
-        next()
-      } else if (loggedIn) {
-        if (isAdmin) {
-          next({ name: "AdminDashboard" });
-        } else {
-          next()
-        }
-      }
-    }
-  } else {
-    if (to.meta.requiresAuth && !loggedIn) {
-      next({ name: "Login", query: { redirect: '/cart-info' } });
-    } else {
-      next();
-    }
+  if (!to.meta.middleware) {
+    return next()
   }
-});
+  const middleware = to.meta.middleware
+  const context = {
+    to,
+    from,
+    next,
+    store
+  }
+  return middleware[0]({
+    ...context
+  })
+
+}
+);
 
 export default router;
