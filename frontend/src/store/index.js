@@ -127,7 +127,7 @@ const store = createStore({
         },
         getProductStorages({ commit }, value) {
             return axiosClient.get(`/product/${value}/storages`).then((res) => {
-                commit("setStorageList", res.data);
+                commit("setStorageList", res.data.data);
                 return res;
             });
         },

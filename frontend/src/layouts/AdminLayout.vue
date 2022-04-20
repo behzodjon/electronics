@@ -42,12 +42,12 @@
                             </div>
                             <div class="pt-6 mt-6">
                                 <div class="px-2 space-y-1">
-                                    <a v-for="item in secondaryNavigation" :key="item.name" :href="item.href"
+                                    <router-link @click="logout" to="#"
                                         class="flex items-center px-2 py-2 text-base font-medium rounded-md group text-cyan-100 hover:text-white hover:bg-cyan-600">
-                                        <component :is="item.icon" class="w-6 h-6 mr-4 text-cyan-200"
+                                        <component :is="LogoutIcon" class="w-6 h-6 mr-4 text-cyan-200"
                                             aria-hidden="true" />
-                                        {{ item.name }}
-                                    </a>
+                                        Logout
+                                    </router-link>
                                 </div>
                             </div>
                         </nav>
@@ -71,8 +71,7 @@
                 <nav class="flex flex-col flex-1 mt-5 overflow-y-auto divide-y divide-cyan-800" aria-label="Sidebar">
                     <div class="px-2 space-y-1">
                         <router-link v-for="item in navigation" :key="item.name" :to="item.href"
-                            class="flex items-center px-2 py-2 text-sm font-medium leading-6 rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600 group"
-                           >
+                            class="flex items-center px-2 py-2 text-sm font-medium leading-6 rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600 group">
                             <component :is="item.icon" class="flex-shrink-0 w-6 h-6 mr-4 text-cyan-200"
                                 aria-hidden="true" />
                             {{ item.name }}
@@ -80,11 +79,12 @@
                     </div>
                     <div class="pt-6 mt-6">
                         <div class="px-2 space-y-1">
-                            <a v-for="item in secondaryNavigation" :key="item.name" :href="item.href"
-                                class="flex items-center px-2 py-2 text-sm font-medium leading-6 rounded-md group text-cyan-100 hover:text-white hover:bg-cyan-600">
-                                <component :is="item.icon" class="w-6 h-6 mr-4 text-cyan-200" aria-hidden="true" />
-                                {{ item.name }}
-                            </a>
+                                <button @click="logout" 
+                                        class="flex items-center w-full px-2 py-2 text-base font-medium rounded-md group text-cyan-100 hover:text-white hover:bg-cyan-600">
+                                        <component :is="LogoutIcon" class="w-6 h-6 mr-4 text-cyan-200"
+                                            aria-hidden="true" />
+                                        Logout
+                                </button>
                         </div>
                     </div>
                 </nav>
@@ -157,6 +157,8 @@
 import { ref } from 'vue'
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+
 import {
     Dialog,
     DialogOverlay,
@@ -179,6 +181,7 @@ import {
     ChevronDownIcon,
 } from '@heroicons/vue/solid'
 import Notification from "../components/common/Notification.vue";
+    const router = useRouter();
 
 const navigation = [
     { name: 'Home', href: '/admin', icon: HomeIcon },
@@ -195,14 +198,21 @@ const store = useStore();
 const isLoggedIn = computed(() => store.getters['user/isAuthenticated']);
 
 if (isLoggedIn.value) {
-  store.dispatch("user/getUser");
+    store.dispatch("user/getUser");
 }
 
+function logout() {
+    store.dispatch("user/logout").then(() => {
+        router.push({
+            name: "Home",
+        });
+    });
+}
 
 </script>
 
 <style  scoped>
 .router-link-exact-active {
-   @apply bg-cyan-800 text-white
+    @apply bg-cyan-800 text-white
 }
 </style>

@@ -2,12 +2,12 @@
   <div>
     <RadioGroup v-model="selected">
       <RadioGroupLabel class="sr-only"> Privacy setting </RadioGroupLabel>
-      <div v-if="storagesList.data" class="animate__animated animate__lightSpeedInRight">
+      <div v-if="storagesList" class="animate__animated animate__lightSpeedInRight">
         <div class="-space-y-px bg-white rounded-none">
           <p v-if="!selected && clickedState" class="py-2 text-center text-red-500">
             Please, select a storage!
           </p>
-          <RadioGroupOption as="template" v-for="(item, index) in storagesList.data" :key="index" :value="item.id"
+          <RadioGroupOption as="template" v-for="(item, index) in storagesList" :key="index" :value="item.id"
             @click="getStorageId(item)" v-slot="{ checked, active }">
             <div :class="[
               index === 0 ? 'rounded-none' : '',
@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import { computed,ref } from "vue";
+import { computed, ref, onMounted } from "vue";
 import store from "../store";
 import DeviceFormSpinner from "../components/common/DeviceFormSpinner.vue";
 
@@ -75,12 +75,16 @@ const storagesList = computed(() => store.state.storageList);
 store.dispatch("changeSelectedValue", selected.value);
 store.dispatch("changeClickedValue", false);
 store.commit("setSectionTitle", "Select The Storage");
-store.dispatch("getProductStorages", productId.value);
 
 function getStorageId(value) {
   store.commit("setStorageId", value.id);
   store.dispatch("changeSelectedValue", selected.value);
 }
 
+onMounted(() => {
+  if (productId.value) {
+    store.dispatch("getProductStorages", productId.value);
+  }
+})
 </script>
 

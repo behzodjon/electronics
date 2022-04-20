@@ -159,10 +159,9 @@ export default {
 
 
     function openDevice(value) {
-      open.value = true;
-      store.dispatch("getSideBarState", open.value);
-      store.dispatch("setDirectOpen", open.value);
-      store.dispatch("getProductStorages", value);
+      store.dispatch("getSideBarState", true);
+      store.dispatch("setDirectOpen", true);
+      store.dispatch("getProductStorages", value.id);
     }
  
 
