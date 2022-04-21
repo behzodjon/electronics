@@ -46,9 +46,9 @@ Route::post('/categories/create', [CategoryController::class, 'store'])->middlew
 //products
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{product}', [ProductController::class, 'show']);
-Route::post('/products/create', [ProductController::class, 'store']);
-Route::post('/products/{product}/update', [ProductController::class, 'update']);
-Route::delete('/products/{product}/delete', [ProductController::class, 'delete']);
+Route::post('/products/create', [ProductController::class, 'store'])->middleware('auth:sanctum');
+Route::post('/products/{product}/update', [ProductController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('/products/{product}/delete', [ProductController::class, 'delete'])->middleware('auth:sanctum');
 Route::get('/product/{product}/storages', [ProductStorageController::class, 'index']);
 Route::get('/products/{product}/{storage}/{condition}/price', [ProductPriceController::class, 'show']);
 
