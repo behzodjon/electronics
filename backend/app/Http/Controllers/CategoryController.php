@@ -25,6 +25,8 @@ class CategoryController extends Controller
 
     public function store(CategoryStoreRequest $request)
     {
+        $this->authorize('create', Category::class);
+
         $validatedData = $request->validated();
 
         Category::create($validatedData);
@@ -34,6 +36,8 @@ class CategoryController extends Controller
 
     public function update(Category $category, CategoryStoreRequest $request)
     {
+        $this->authorize('update', Category::class);
+
         $validatedData = $request->validated();
 
         $category->update($validatedData);
@@ -41,8 +45,10 @@ class CategoryController extends Controller
         return response()->noContent();
     }
 
-    public function delete(Category $category)
+    public function destroy(Category $category)
     {
+        $this->authorize('delete', Category::class);
+
         $category->delete();
 
         return response()->noContent();

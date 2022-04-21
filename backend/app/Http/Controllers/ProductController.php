@@ -31,8 +31,10 @@ class ProductController extends Controller
 
     public function store(ProductStoreRequest $request)
     {
+        $this->authorize('create', Product::class);
+
         $data = $request->validated();
-        info($data);
+
         // Check if image was given and save on local file system
         if (isset($data['image'])) {
             $relativePath  = $this->saveImage($data['image']);
@@ -57,10 +59,12 @@ class ProductController extends Controller
 
     public function update(Product $product, ProductUpdateRequest $request)
     {
+        $this->authorize('update', Product::class);
+
         $data = $request->validated();
 
-          // Check if image was given and save on local file system
-          if (isset($data['image'])) {
+        // Check if image was given and save on local file system
+        if (isset($data['image'])) {
             $relativePath = $this->saveImage($data['image']);
             $data['image'] = $relativePath;
 

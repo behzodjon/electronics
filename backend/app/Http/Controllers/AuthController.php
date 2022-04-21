@@ -53,6 +53,8 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        //TODO show validation error in frontend
+        
         $credentials = $request->validate([
             'email' => 'required|email|string|exists:users,email',
             'password' => 'required',

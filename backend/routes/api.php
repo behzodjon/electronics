@@ -38,10 +38,10 @@ Route::middleware('auth:sanctum')->group(function () {
 //categories
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{category}', [CategoryController::class, 'show']);
-Route::put('/categories/{category}/update', [CategoryController::class, 'update']);
-Route::delete('/categories/{category}/delete', [CategoryController::class, 'delete']);
+Route::put('/categories/{category}/update', [CategoryController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('/categories/{category}/delete', [CategoryController::class, 'destroy'])->middleware('auth:sanctum');
 Route::get('/categories/{category}/products', [CategoryProductController::class, 'index']);
-Route::post('/categories/create', [CategoryController::class, 'store']);
+Route::post('/categories/create', [CategoryController::class, 'store'])->middleware('auth:sanctum');
 
 //products
 Route::get('/products', [ProductController::class, 'index']);
