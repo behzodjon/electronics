@@ -9,7 +9,13 @@
                         </label>
                         <div class="mt-1">
                             <input type="text" v-model="form.title" id="title"
+                                :class="{ 'border-red-500': errors['title'] }"
                                 class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                            <div v-if="errors.hasOwnProperty('title')" class="mt-2 text-sm text-red-500">
+                                <div v-for="(error, errorIndex) in errors['title']" :key="`name-${errorIndex}`">
+                                    <div>* {{ error }}</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -18,10 +24,19 @@
                             Category
                         </label>
                         <div class="mt-1">
-                            <Multiselect placeholder="Select category" valueProp="id" track-by="title" label="title"
-                                v-model="form.category_id" :close-on-select="true" :create-option="true"
-                                :options="categories">
-                            </Multiselect>
+                            <select :class="{ 'border-red-500': errors['category_id'] }"
+                                class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                v-model="form.category_id" id="">
+                                <option v-for="category in categories" :key="category.id" :value="category.id">
+                                    {{ category.title }}
+                                </option>
+                            </select>
+                            <div v-if="errors.hasOwnProperty('category_id')" class="mt-2 text-sm text-red-500">
+                                <div v-for="(error, errorIndex) in errors['category_id']" :key="`name-${errorIndex}`">
+                                    <div>* {{ error }}</div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -51,11 +66,16 @@
                             price
                             <PlusIcon class="w-4 h-4 ml-3 text-white" />
                         </button></div>
-                </div>
 
+                </div>
+                <div v-if="errors.hasOwnProperty('prices')" class="mt-2 text-sm text-red-500">
+                    <div v-for="(error, errorIndex) in errors['prices']" :key="`name-${errorIndex}`">
+                        <div>* {{ error }}</div>
+                    </div>
+                </div>
                 <div v-for="(price, index) in form.prices" :key="price.id">
-                    <PriceFormEditor @change="priceChange" @deletePrice="deletePrice" :index="parseInt(index)"
-                        :price="price" />
+                    <PriceFormEditor :errors="errors" @change="priceChange" @deletePrice="deletePrice"
+                        :index="parseInt(index)" :price="price" />
                 </div>
             </div>
         </div>
@@ -73,7 +93,6 @@
 </template>
 <script setup>
 import { v4 as uuidv4 } from "uuid";
-import Multiselect from '@vueform/multiselect'
 import { PlusIcon } from '@heroicons/vue/solid'
 import { PhotographIcon } from '@heroicons/vue/outline'
 import axiosClient from "../../axios";
@@ -98,6 +117,8 @@ const form = ref({
 const product = ref(null)
 
 const categories = ref(null);
+
+const errors = ref({});
 
 function onImageChoose(ev) {
     const file = ev.target.files[0];
@@ -143,8 +164,10 @@ const onSubmit = async () => {
             type: "success",
             message: "Successfully saved!",
         });
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        if (error.response.status === 422) {
+            errors.value = error.response.data.errors;
+        }
     }
 }
 

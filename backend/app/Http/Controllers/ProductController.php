@@ -17,14 +17,14 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with(['category'])->get();
+        $products = Product::with('category')->get();
 
         return ProductResource::collection($products);
     }
 
     public function show(Product $product)
     {
-        $product->load(['storages']);
+        $product->load('storages');
 
         return ProductShowResource::make($product);
     }
@@ -96,6 +96,8 @@ class ProductController extends Controller
 
     public function delete(Product $product)
     {
+        $this->authorize('delete', Product::class);
+
         $product->delete();
 
         return response()->noContent();

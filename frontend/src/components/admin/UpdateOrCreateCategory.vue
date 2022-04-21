@@ -29,7 +29,7 @@
 
 <script setup>
 import axiosClient from "../../axios";
-import { toRef } from "vue";
+import { toRef,ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
@@ -47,6 +47,7 @@ const props = defineProps({
 
 const form = toRef(props, 'category')
 
+const errors = ref({});
 
 const onSubmit = async () => {
     try {
@@ -60,8 +61,10 @@ const onSubmit = async () => {
             type: "success",
             message: "Successfully saved!",
         });
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        if (error.response.status === 422) {
+            errors.value = error.response.data.errors;
+        }
     }
 }
 </script>
