@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import isAdmin from '../middleware/isAdmin'
 import auth from '../middleware/auth'
+import guest from '../middleware/guest'
+import middlewarePipeline from "./middlewarePipeline";
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
@@ -23,6 +25,7 @@ import AdminEditCategory from "../views/admin/categories/edit.vue"
 import AdminCreateDevice from "../views/admin/devices/create.vue"
 import AdminEditDevice from "../views/admin/devices/edit.vue"
 import store from '../store';
+import billing from "../middleware/billing";
 
 const routes = [
   {
@@ -57,8 +60,20 @@ const routes = [
     component: HomeLayout,
     children: [
       { path: '/', name: 'Home', component: Home },
-      { path: '/login', name: 'Login', component: Login },
-      { path: '/signup', name: 'Signup', component: Signup },
+      {
+        path: '/login', meta: {
+          middleware: [
+            guest
+          ]
+        }, name: 'Login', component: Login
+      },
+      {
+        path: '/signup', meta: {
+          middleware: [
+            guest
+          ]
+        }, name: 'Signup', component: Signup
+      },
       { path: '/restore-password', name: 'RestorePassword', component: RestorePassword },
       { path: '/Sell', name: 'Sell', component: Sell },
 
@@ -75,16 +90,11 @@ const routes = [
             path: '/cart-info', name: 'Cartinfo',
             meta: {
               middleware: [
-                auth
+                billing
               ]
             },
             component: billinformation,
-            beforeEnter: (to, from) => {
-              if (!store.state.cart.items.length) {
-                return false
-              }
-              return true
-            },
+           
           },
           {
             path: '/payment', name: 'PaymentMethod',
@@ -138,16 +148,19 @@ router.beforeEach((to, from, next) => {
     return next()
   }
   const middleware = to.meta.middleware
+
   const context = {
     to,
     from,
     next,
     store
   }
-  return middleware[0]({
-    ...context
-  })
 
+
+  return middleware[0]({
+    ...context,
+    next: middlewarePipeline(context, middleware, 1)
+  })
 }
 );
 

@@ -6,6 +6,7 @@ import axiosClient from "../../axios";
 const state = {
     data: {},
     token: sessionStorage.getItem("TOKEN"),
+    isAdmin:sessionStorage.getItem("isAdmin"),
     restorePassword: {
         email: null,
         mode: null,
@@ -13,14 +14,14 @@ const state = {
 }
 const getters = {
     isAuthenticated: state => !!state.token,
-    userData: state => state.data,
-    isAdmin: state => state.data.is_admin,
+    isAdmin: state => state.isAdmin
 }
 const mutations = {
     logout: (state) => {
         state.token = null;
         state.data = {};
         sessionStorage.removeItem("TOKEN");
+        sessionStorage.removeItem("isAdmin");
     },
     setUser: (state, user) => {
         state.data = user;
@@ -28,6 +29,10 @@ const mutations = {
     setToken: (state, token) => {
         state.token = token;
         sessionStorage.setItem('TOKEN', token);
+    },
+    setAdmin: (state, data) => {
+        state.isAdmin = data;
+        sessionStorage.setItem('isAdmin', data);
     },
     setRestorePasswordEmail(state, email) {
         state.restorePassword.email = email
@@ -82,6 +87,7 @@ const actions = {
             .then(({ data }) => {
                 commit('setUser', data.user);
                 commit('setToken', data.token)
+                commit('setAdmin', data.user.is_admin)
                 dispatch('cart/fetchCart', data.user, { root: true })
                 return data;
             })
