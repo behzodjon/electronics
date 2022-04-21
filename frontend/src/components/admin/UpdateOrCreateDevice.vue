@@ -114,7 +114,6 @@ const form = ref({
     prices: [],
 })
 
-const product = ref(null)
 
 const categories = ref(null);
 
@@ -177,7 +176,6 @@ function deletePrice(price) {
 onMounted(async () => {
     if (route.params.id) {
         const productData = await axiosClient.get(`/products/${route.params.id}`)
-        product.value = productData.data.data
         form.value.title = productData.data.data.title
         form.value.category_id = productData.data.data.category_id
         form.value.image_url = productData.data.data.image_url

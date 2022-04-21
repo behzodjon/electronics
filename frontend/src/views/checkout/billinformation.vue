@@ -13,59 +13,101 @@
             <div class="grid grid-cols-6 gap-6">
               <div class="col-span-6 sm:col-span-3">
                 <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
-                <input @change="dataChange" v-model="form.first_name" type="text" id="first-name" required
+                <input @change="dataChange" v-model="form.first_name" type="text" id="first-name"
+                  :class="{ 'border-red-500': errors['first_name'] }"
                   class="mt-1 focus:ring-[#0BADA2] focus:border-[#0BADA2] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                <div v-if="errors.hasOwnProperty('title')" class="mt-2 text-sm text-red-500">
+                  <div v-for="(error, errorIndex) in errors['title']" :key="`name-${errorIndex}`">
+                    <div>* {{ error }}</div>
+                  </div>
+                </div>
               </div>
 
               <div class="col-span-6 sm:col-span-3">
                 <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
-                <input @change="dataChange" v-model="form.last_name" type="text" name="last-name" id="last-name"
-                  autocomplete="family-name" required
+                <input :class="{ 'border-red-500': errors['last_name'] }" @change="dataChange" v-model="form.last_name"
+                  type="text" name="last-name" id="last-name"
                   class="mt-1 focus:ring-[#0BADA2] focus:border-[#0BADA2] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                <div v-if="errors.hasOwnProperty('last_name')" class="mt-2 text-sm text-red-500">
+                  <div v-for="(error, errorIndex) in errors['last_name']" :key="`name-${errorIndex}`">
+                    <div>* {{ error }}</div>
+                  </div>
+                </div>
               </div>
 
               <div class="col-span-6 sm:col-span-4">
                 <label for="email-address" class="block text-sm font-medium text-gray-700">Email address</label>
-                <input type="text" @change="dataChange" v-model="form.email" name="email-address" id="email-address"
-                  autocomplete="email" required
+                <input :class="{ 'border-red-500': errors['email'] }" type="text" @change="dataChange"
+                  v-model="form.email" name="email-address" id="email-address" autocomplete="email"
                   class="mt-1 focus:ring-[#0BADA2] focus:border-[#0BADA2] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                <div v-if="errors.hasOwnProperty('email')" class="mt-2 text-sm text-red-500">
+                  <div v-for="(error, errorIndex) in errors['email']" :key="`name-${errorIndex}`">
+                    <div>* {{ error }}</div>
+                  </div>
+                </div>
               </div>
 
               <div class="col-span-6 sm:col-span-3">
                 <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
-                <select required id="country" @change="dataChange" v-model="form.country_id" name="country"
-                  autocomplete="country-name"
+                <select id="country" @change="dataChange" v-model="form.country_id"
+                  :class="{ 'border-red-500': errors['country_id'] }" name="country" autocomplete="country-name"
                   class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#0BADA2] focus:border-[#0BADA2] sm:text-sm">
                   <option v-for="country in countries" :key="country.id" :value="country.id">{{ country.name }}</option>
                 </select>
+                <div v-if="errors.hasOwnProperty('country_id')" class="mt-2 text-sm text-red-500">
+                  <div v-for="(error, errorIndex) in errors['country_id']" :key="`name-${errorIndex}`">
+                    <div>* {{ error }}</div>
+                  </div>
+                </div>
               </div>
 
               <div class="col-span-6">
                 <label for="street-address" class="block text-sm font-medium text-gray-700">Street address</label>
                 <input v-model="form.street_address" type="text" @change="dataChange" name="street-address"
-                  id="street-address" autocomplete="street-address" required
+                  :class="{ 'border-red-500': errors['street_address'] }" id="street-address"
+                  autocomplete="street-address"
                   class="mt-1 focus:ring-[#0BADA2] focus:border-[#0BADA2] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                <div v-if="errors.hasOwnProperty('street_address')" class="mt-2 text-sm text-red-500">
+                  <div v-for="(error, errorIndex) in errors['street_address']" :key="`name-${errorIndex}`">
+                    <div>* {{ error }}</div>
+                  </div>
+                </div>
               </div>
 
               <div class="col-span-6 sm:col-span-6 lg:col-span-2">
                 <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-                <input v-model="form.city" type="text" name="city" @change="dataChange" id="city"
-                  autocomplete="address-level2" required
+                <input :class="{ 'border-red-500': errors['city'] }" v-model="form.city" type="text" name="city"
+                  @change="dataChange" id="city"
                   class="mt-1 focus:ring-[#0BADA2] focus:border-[#0BADA2] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                <div v-if="errors.hasOwnProperty('city')" class="mt-2 text-sm text-red-500">
+                  <div v-for="(error, errorIndex) in errors['city']" :key="`name-${errorIndex}`">
+                    <div>* {{ error }}</div>
+                  </div>
+                </div>
               </div>
 
               <div class="col-span-6 sm:col-span-3 lg:col-span-2">
                 <label for="region" class="block text-sm font-medium text-gray-700">State / Province</label>
-                <input type="text" name="region" @change="dataChange" v-model="form.state" id="region"
-                  autocomplete="address-level1" required
+                <input :class="{ 'border-red-500': errors['state'] }" type="text" name="region" @change="dataChange"
+                  v-model="form.state" id="region"
                   class="mt-1 focus:ring-[#0BADA2] focus:border-[#0BADA2] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                <div v-if="errors.hasOwnProperty('state')" class="mt-2 text-sm text-red-500">
+                  <div v-for="(error, errorIndex) in errors['state']" :key="`name-${errorIndex}`">
+                    <div>* {{ error }}</div>
+                  </div>
+                </div>
               </div>
 
               <div class="col-span-6 sm:col-span-3 lg:col-span-2">
                 <label for="postal-code" class="block text-sm font-medium text-gray-700">ZIP / Postal code</label>
-                <input v-model="form.zip" type="text" @change="dataChange" name="postal-code" id="postal-code"
-                  autocomplete="postal-code" required
+                <input :class="{ 'border-red-500': errors['zip'] }" v-model="form.zip" type="text" @change="dataChange"
+                  name="postal-code" id="postal-code"
                   class="mt-1 focus:ring-[#0BADA2] focus:border-[#0BADA2] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                <div v-if="errors.hasOwnProperty('zip')" class="mt-2 text-sm text-red-500">
+                  <div v-for="(error, errorIndex) in errors['zip']" :key="`name-${errorIndex}`">
+                    <div>* {{ error }}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -109,24 +151,31 @@ const form = {
   zip: "",
 };
 
+const errors = ref({});
+
+
 function dataChange() {
   isEmpty.value = Object.values(form).every(x => x === null || x === '');
-
 }
-function submitBilling() {
 
-  store.dispatch("storeBillingData", form).then(() => {
+const submitBilling = async () => {
+  try {
+    await store.dispatch("storeBillingData", form)
     form_bill.value.reset()
     store.commit('cart/SET_ROUTE_ACTIVE', true)
     router.push({
       name: "PaymentMethod",
     });
+
     store.commit("notify", {
       type: "success",
-      message: "Your data was saved!",
+      message: "Successfully saved!",
     });
-  });
-
+  } catch (error) {
+    if (error.response.status === 422) {
+      errors.value = error.response.data.errors;
+    }
+  }
 }
 </script>
 <style scoped>
