@@ -113,7 +113,7 @@
                                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                         alt="" />
                                     <span class="hidden ml-3 text-sm font-medium text-gray-700 lg:block"><span
-                                            class="sr-only">Open user menu for </span>Emilia Birch</span>
+                                            class="sr-only">Open user menu for </span>Admin</span>
                                     <ChevronDownIcon class="flex-shrink-0 hidden w-5 h-5 ml-1 text-gray-400 lg:block"
                                         aria-hidden="true" />
                                 </MenuButton>
